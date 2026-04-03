@@ -1,17 +1,16 @@
 import PortfolioHeader from '@/components/dashboard/PortfolioHeader';
 import MetricsCards from '@/components/dashboard/MetricsCards';
 import PerformanceChart from '@/components/dashboard/PerformanceChart';
-import { getPortfolioMetrics, getBenchmarkChartPoints } from '@/lib/getPortfolioMetrics';
+import AutoRefresh from '@/components/AutoRefresh';
+import { getPortfolioMetrics, getHistoricalChartData } from '@/lib/getPortfolioMetrics';
 
 export const dynamic = 'force-dynamic';
 export const runtime = 'nodejs';
 
 export default async function DashboardPage() {
-  let portfolio;
-  try {
-    portfolio = await getPortfolioMetrics();
-  } catch {
-    portfolio = {
+  // Fetch current metrics and historical chart data in parallel
+  const [portfolio, chartData] = await Promise.all([
+    getPortfolioMetrics().catch(() => ({
       totalValue: 100000,
       totalCost: 100000,
       totalPnL: 0,
@@ -23,18 +22,21 @@ export default async function DashboardPage() {
       positions: [],
       cashEUR: 0,
       lastUpdated: new Date().toISOString(),
-    };
-  }
-
-  const chartData = getBenchmarkChartPoints();
+    })),
+    getHistoricalChartData().catch(() => []),
+  ]);
 
   return (
     <div className="flex flex-col gap-6">
-      <div>
-        <h1 className="text-2xl font-bold text-white mb-1">Dashboard</h1>
-        <p className="text-gray-400 text-sm">
-          Clermont Student Fund — Prix en temps réel
-        </p>
+      {/* Header row */}
+      <div className="flex items-start justify-between">
+        <div>
+          <h1 className="text-2xl font-bold text-white mb-1">Dashboard</h1>
+          <p className="text-gray-400 text-sm">
+            Clermont Student Fund — Prix en temps réel
+          </p>
+        </div>
+        <AutoRefresh intervalMs={300_000} />
       </div>
 
       <PortfolioHeader
@@ -52,7 +54,7 @@ export default async function DashboardPage() {
         totalValue={portfolio.totalValue}
       />
 
-      {chartData.length > 0 && <PerformanceChart data={chartData} />}
+      {chartData.length >= 2 && <PerformanceChart data={chartData} />}
 
       <div className="bg-surface border border-border rounded-xl p-5">
         <h2 className="text-base font-semibold text-white mb-3">
