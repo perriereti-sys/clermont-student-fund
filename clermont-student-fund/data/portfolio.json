@@ -9,7 +9,7 @@
       "quantity": 139,
       "avgBuyPrice": 7.28,
       "currency": "USD",
-      "buyDate": "2025-01-01"
+      "buyDate": "2026-01-01"
     },
     {
       "id": "2",
@@ -20,7 +20,7 @@
       "quantity": 30,
       "avgBuyPrice": 36.15,
       "currency": "USD",
-      "buyDate": "2025-01-01"
+      "buyDate": "2026-01-01"
     },
     {
       "id": "3",
@@ -31,7 +31,7 @@
       "quantity": 12,
       "avgBuyPrice": 89.67,
       "currency": "USD",
-      "buyDate": "2025-01-01"
+      "buyDate": "2026-01-01"
     },
     {
       "id": "4",
@@ -42,7 +42,7 @@
       "quantity": 135,
       "avgBuyPrice": 32.907,
       "currency": "EUR",
-      "buyDate": "2025-01-01"
+      "buyDate": "2026-01-01"
     },
     {
       "id": "5",
@@ -53,7 +53,7 @@
       "quantity": 60,
       "avgBuyPrice": 73.56,
       "currency": "EUR",
-      "buyDate": "2025-01-01"
+      "buyDate": "2026-01-01"
     },
     {
       "id": "6",
@@ -75,7 +75,7 @@
       "quantity": 1,
       "avgBuyPrice": 4331.29,
       "currency": "USD",
-      "buyDate": "2025-01-01"
+      "buyDate": "2026-01-01"
     },
     {
       "id": "8",
@@ -91,6 +91,6 @@
   ],
   "cashUSD": 73575,
   "initialValueUSD": 100000,
-  "startDate": "2025-01-01",
+  "startDate": "2026-01-01",
   "baseCurrency": "USD"
 }

@@ -63,7 +63,7 @@ export default async function DashboardPage() {
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 text-sm">
           <div>
             <p className="text-gray-400 text-xs mb-1">Date de création</p>
-            <p className="text-white font-medium">01/01/2025</p>
+            <p className="text-white font-medium">01/01/2026</p>
           </div>
           <div>
             <p className="text-gray-400 text-xs mb-1">Capital initial</p>

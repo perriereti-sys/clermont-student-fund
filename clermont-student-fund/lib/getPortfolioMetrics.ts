@@ -48,7 +48,7 @@ interface HistoricalDataResult {
 }
 
 async function fetchAllHistoricalData(): Promise<HistoricalDataResult> {
-  const START_TS = Math.floor(new Date('2025-01-01').getTime() / 1000);
+  const START_TS = Math.floor(new Date('2026-01-01').getTime() / 1000);
   const END_TS = Math.floor(Date.now() / 1000);
 
   const positions = portfolioData.positions;
@@ -76,7 +76,7 @@ async function fetchAllHistoricalData(): Promise<HistoricalDataResult> {
     Object.keys(m).forEach((d) => allDatesSet.add(d))
   );
   const dates = Array.from(allDatesSet)
-    .filter((d) => d >= '2025-01-01')
+    .filter((d) => d >= '2026-01-01')
     .sort();
 
   // Forward-fill each ticker
@@ -216,7 +216,7 @@ export async function getPortfolioMetrics(): Promise<PortfolioMetrics> {
 
 /**
  * Returns weekly chart data: CSF portfolio vs MSCI World vs Nasdaq 100,
- * all indexed to base 100 on 2025-01-01.
+ * all indexed to base 100 on 2026-01-01.
  */
 export async function getHistoricalChartData(): Promise<ChartPoint[]> {
   try {

@@ -2,7 +2,7 @@
   "movements": [
     {
       "id": "1",
-      "date": "2025-01-01",
+      "date": "2026-01-01",
       "type": "BUY",
       "ticker": "KRKNF",
       "name": "Kraken Robotics",
@@ -14,7 +14,7 @@
     },
     {
       "id": "2",
-      "date": "2025-01-01",
+      "date": "2026-01-01",
       "type": "BUY",
       "ticker": "IONQ",
       "name": "IonQ",
@@ -26,7 +26,7 @@
     },
     {
       "id": "3",
-      "date": "2025-01-01",
+      "date": "2026-01-01",
       "type": "BUY",
       "ticker": "ASTS",
       "name": "AST SpaceMobile",
@@ -38,7 +38,7 @@
     },
     {
       "id": "4",
-      "date": "2025-01-01",
+      "date": "2026-01-01",
       "type": "BUY",
       "ticker": "PAASI.PA",
       "name": "Amundi PEA Asie Émergente",
@@ -50,7 +50,7 @@
     },
     {
       "id": "5",
-      "date": "2025-01-01",
+      "date": "2026-01-01",
       "type": "BUY",
       "ticker": "SGO.PA",
       "name": "Saint-Gobain",
@@ -74,7 +74,7 @@
     },
     {
       "id": "7",
-      "date": "2025-01-01",
+      "date": "2026-01-01",
       "type": "BUY",
       "ticker": "GC=F",
       "name": "Or (Gold)",

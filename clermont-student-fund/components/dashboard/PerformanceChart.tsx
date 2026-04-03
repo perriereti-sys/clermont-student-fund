@@ -38,7 +38,7 @@ export default function PerformanceChart({ data }: Props) {
     <div className="bg-surface border border-border rounded-xl p-6">
       <div className="flex items-center justify-between mb-6">
         <h2 className="text-lg font-semibold text-white">Performance (base 100)</h2>
-        <div className="text-xs text-gray-500">Depuis le 01/10/2025</div>
+        <div className="text-xs text-gray-500">Depuis le 01/01/2026</div>
       </div>
 
       <ResponsiveContainer width="100%" height={320}>
