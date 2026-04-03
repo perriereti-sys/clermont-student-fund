@@ -1,37 +1,34 @@
-import { Suspense } from 'react';
 import PositionsTable from '@/components/positions/PositionsTable';
 import AllocationCharts from '@/components/positions/AllocationCharts';
 import AlertsPanel from '@/components/positions/AlertsPanel';
 import AddPositionModal from '@/components/positions/AddPositionModal';
-import { PortfolioMetrics, Alert } from '@/lib/types';
+import { Alert } from '@/lib/types';
 import { computeAlerts } from '@/lib/calculations';
+import { getPortfolioMetrics } from '@/lib/getPortfolioMetrics';
 
-async function getPortfolioData(): Promise<PortfolioMetrics> {
+export const dynamic = 'force-dynamic';
+export const runtime = 'nodejs';
+
+export default async function PositionsPage() {
+  let portfolio;
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_URL ?? 'http://localhost:3000'}/api/portfolio`, {
-      cache: 'no-store',
-    });
-    if (!res.ok) throw new Error('API error');
-    return res.json();
+    portfolio = await getPortfolioMetrics();
   } catch {
-    return {
-      totalValue: 90600,
-      totalCost: 92600,
-      totalPnL: -2000,
-      totalPnLPercent: -2.16,
+    portfolio = {
+      totalValue: 100000,
+      totalCost: 100000,
+      totalPnL: 0,
+      totalPnLPercent: 0,
       sharpeRatio: 0,
       beta: 1.0,
       var95: 0,
       maxDrawdown: 0,
       positions: [],
-      cashEUR: 68100,
+      cashEUR: 0,
       lastUpdated: new Date().toISOString(),
     };
   }
-}
 
-export default async function PositionsPage() {
-  const portfolio = await getPortfolioData();
   const alerts: Alert[] = computeAlerts(portfolio.positions, portfolio.totalValue);
 
   return (

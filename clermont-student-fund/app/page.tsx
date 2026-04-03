@@ -1,52 +1,32 @@
-import { Suspense } from 'react';
 import PortfolioHeader from '@/components/dashboard/PortfolioHeader';
 import MetricsCards from '@/components/dashboard/MetricsCards';
 import PerformanceChart from '@/components/dashboard/PerformanceChart';
-import { PortfolioMetrics, ChartPoint } from '@/lib/types';
+import { getPortfolioMetrics, getBenchmarkChartPoints } from '@/lib/getPortfolioMetrics';
 
-async function getPortfolioData(): Promise<PortfolioMetrics> {
+export const dynamic = 'force-dynamic';
+export const runtime = 'nodejs';
+
+export default async function DashboardPage() {
+  let portfolio;
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_URL ?? 'http://localhost:3000'}/api/portfolio`, {
-      cache: 'no-store',
-    });
-    if (!res.ok) throw new Error('API error');
-    return res.json();
+    portfolio = await getPortfolioMetrics();
   } catch {
-    // Fallback data
-    return {
-      totalValue: 90600,
-      totalCost: 92600,
-      totalPnL: -2000,
-      totalPnLPercent: -2.16,
+    portfolio = {
+      totalValue: 100000,
+      totalCost: 100000,
+      totalPnL: 0,
+      totalPnLPercent: 0,
       sharpeRatio: 0,
       beta: 1.0,
       var95: 0,
       maxDrawdown: 0,
       positions: [],
-      cashEUR: 68100,
+      cashEUR: 0,
       lastUpdated: new Date().toISOString(),
     };
   }
-}
 
-async function getBenchmarkData(): Promise<ChartPoint[]> {
-  try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_URL ?? 'http://localhost:3000'}/api/benchmarks`, {
-      cache: 'no-store',
-    });
-    if (!res.ok) throw new Error('API error');
-    const data = await res.json();
-    return data.chartPoints;
-  } catch {
-    return [];
-  }
-}
-
-export default async function DashboardPage() {
-  const [portfolio, chartData] = await Promise.all([
-    getPortfolioData(),
-    getBenchmarkData(),
-  ]);
+  const chartData = getBenchmarkChartPoints();
 
   return (
     <div className="flex flex-col gap-6">
