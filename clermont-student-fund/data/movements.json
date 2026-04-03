@@ -1,0 +1,100 @@
+{
+  "movements": [
+    {
+      "id": "1",
+      "date": "2025-01-01",
+      "type": "BUY",
+      "ticker": "KRKNF",
+      "name": "Kraken Robotics",
+      "quantity": 139,
+      "price": 7.28,
+      "currency": "USD",
+      "totalEUR": 937,
+      "justification": "Entrée sur Kraken Robotics, leader canadien des systèmes de défense sous-marine et robotique autonome. Forte croissance des contrats gouvernementaux OTAN dans un contexte de réarmement naval. Valorisation attractive pour une small cap en forte croissance."
+    },
+    {
+      "id": "2",
+      "date": "2025-01-01",
+      "type": "BUY",
+      "ticker": "IONQ",
+      "name": "IonQ",
+      "quantity": 30,
+      "price": 36.15,
+      "currency": "USD",
+      "totalEUR": 1004,
+      "justification": "Position sur IonQ, acteur de référence de l'informatique quantique coté NYSE. Technologie piégée à ions, supérieure en termes de fidélité des qubits. Pari long terme sur la disruption du calcul intensif : cryptographie, optimisation, simulation moléculaire."
+    },
+    {
+      "id": "3",
+      "date": "2025-01-01",
+      "type": "BUY",
+      "ticker": "ASTS",
+      "name": "AST SpaceMobile",
+      "quantity": 12,
+      "price": 89.67,
+      "currency": "USD",
+      "totalEUR": 997,
+      "justification": "AST SpaceMobile développe le premier réseau broadband spatial accessible directement depuis les smartphones standards. Partenariats avec AT&T, Vodafone et Rakuten. Potentiel de connecter 5 milliards de personnes non couvertes, avec une phase de déploiement commercial en cours."
+    },
+    {
+      "id": "4",
+      "date": "2025-01-01",
+      "type": "BUY",
+      "ticker": "PAASI.PA",
+      "name": "Amundi PEA Asie Émergente",
+      "quantity": 135,
+      "price": 32.907,
+      "currency": "EUR",
+      "totalEUR": 4442,
+      "justification": "ETF Amundi éligible PEA offrant une exposition diversifiée à l'Asie émergente (Inde, ASEAN, hors Chine majoritaire). Thèse : dynamique démographique favorable, montée en gamme industrielle et consommation intérieure croissante. Diversification géographique à faible coût."
+    },
+    {
+      "id": "5",
+      "date": "2025-01-01",
+      "type": "BUY",
+      "ticker": "SGO.PA",
+      "name": "Saint-Gobain",
+      "quantity": 60,
+      "price": 73.56,
+      "currency": "EUR",
+      "totalEUR": 4414,
+      "justification": "Saint-Gobain comme proxy sur la rénovation énergétique des bâtiments en Europe. Principal bénéficiaire des réglementations RE2020 et du plan de rénovation thermique. Valorisation raisonnable malgré la transition réussie vers les matériaux haute performance."
+    },
+    {
+      "id": "6",
+      "date": "2026-02-17",
+      "type": "BUY",
+      "ticker": "EL.PA",
+      "name": "EssilorLuxottica",
+      "quantity": 20,
+      "price": 248.90,
+      "currency": "EUR",
+      "totalEUR": 4978,
+      "justification": "EssilorLuxottica, leader mondial de l'optique avec un quasi-monopole sur la chaîne de valeur (verres + montures + distribution). Pricing power structurel, expansion en Asie et lancement des lunettes connectées (Ray-Ban Meta). Correction récente jugée excessive."
+    },
+    {
+      "id": "7",
+      "date": "2025-01-01",
+      "type": "BUY",
+      "ticker": "GC=F",
+      "name": "Or (Gold)",
+      "quantity": 1,
+      "price": 4331.29,
+      "currency": "USD",
+      "totalEUR": 4010,
+      "justification": "L'or comme valeur refuge et couverture contre l'inflation persistante et les risques géopolitiques. Demande soutenue des banques centrales (achats nets record). Corrélation négative avec les actifs risqués, améliore le ratio risque/rendement du portefeuille global."
+    },
+    {
+      "id": "8",
+      "date": "2026-02-02",
+      "type": "BUY",
+      "ticker": "BTC-USD",
+      "name": "Bitcoin",
+      "quantity": 0.0484,
+      "price": 82387,
+      "currency": "USD",
+      "totalEUR": 3692,
+      "justification": "Allocation Bitcoin limitée à ~4% du portefeuille. Réserve de valeur numérique avec adoption institutionnelle croissante et offre plafonnée à 21M d'unités. Quatrième halving passé, historiquement favorable à moyen terme. Exposition asymétrique à la classe d'actifs crypto."
+    }
+  ]
+}

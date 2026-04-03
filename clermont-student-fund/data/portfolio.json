@@ -1,0 +1,96 @@
+{
+  "positions": [
+    {
+      "id": "1",
+      "name": "Kraken Robotics",
+      "ticker": "KRKNF",
+      "type": "action",
+      "sector": "Défense & Robotique",
+      "quantity": 139,
+      "avgBuyPrice": 7.28,
+      "currency": "USD",
+      "buyDate": "2025-01-01"
+    },
+    {
+      "id": "2",
+      "name": "IonQ",
+      "ticker": "IONQ",
+      "type": "action",
+      "sector": "Technologie",
+      "quantity": 30,
+      "avgBuyPrice": 36.15,
+      "currency": "USD",
+      "buyDate": "2025-01-01"
+    },
+    {
+      "id": "3",
+      "name": "AST SpaceMobile",
+      "ticker": "ASTS",
+      "type": "action",
+      "sector": "Technologie",
+      "quantity": 12,
+      "avgBuyPrice": 89.67,
+      "currency": "USD",
+      "buyDate": "2025-01-01"
+    },
+    {
+      "id": "4",
+      "name": "Amundi PEA Asie Émergente",
+      "ticker": "PAASI.PA",
+      "type": "etf",
+      "sector": "Asie émergente",
+      "quantity": 135,
+      "avgBuyPrice": 32.907,
+      "currency": "EUR",
+      "buyDate": "2025-01-01"
+    },
+    {
+      "id": "5",
+      "name": "Saint-Gobain",
+      "ticker": "SGO.PA",
+      "type": "action",
+      "sector": "Matériaux",
+      "quantity": 60,
+      "avgBuyPrice": 73.56,
+      "currency": "EUR",
+      "buyDate": "2025-01-01"
+    },
+    {
+      "id": "6",
+      "name": "EssilorLuxottica",
+      "ticker": "EL.PA",
+      "type": "action",
+      "sector": "Santé",
+      "quantity": 20,
+      "avgBuyPrice": 248.90,
+      "currency": "EUR",
+      "buyDate": "2026-02-17"
+    },
+    {
+      "id": "7",
+      "name": "Or (Gold)",
+      "ticker": "GC=F",
+      "type": "or",
+      "sector": "Matières premières",
+      "quantity": 1,
+      "avgBuyPrice": 4331.29,
+      "currency": "USD",
+      "buyDate": "2025-01-01"
+    },
+    {
+      "id": "8",
+      "name": "Bitcoin",
+      "ticker": "BTC-USD",
+      "type": "crypto",
+      "sector": "Crypto",
+      "quantity": 0.0484,
+      "avgBuyPrice": 82387,
+      "currency": "USD",
+      "buyDate": "2026-02-02"
+    }
+  ],
+  "cashUSD": 73575,
+  "initialValueUSD": 100000,
+  "startDate": "2025-01-01",
+  "baseCurrency": "USD"
+}
