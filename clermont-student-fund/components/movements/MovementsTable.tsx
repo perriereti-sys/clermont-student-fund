@@ -3,113 +3,95 @@
 import { useState } from 'react';
 import { Movement } from '@/lib/types';
 
-interface Props {
-  movements: Movement[];
-}
+interface Props { movements: Movement[] }
 
-const TYPE_CONFIG: Record<string, { label: string; style: string }> = {
-  BUY:      { label: 'ACHAT',  style: 'bg-gain/10 text-gain border-gain/20' },
-  SELL:     { label: 'VENTE',  style: 'bg-loss/10 text-loss border-loss/20' },
-  DIVIDEND: { label: 'DIV',    style: 'bg-blue-500/10 text-blue-400 border-blue-500/20' },
+const TYPE_CFG: Record<string, { label: string; badge: string }> = {
+  BUY:      { label: 'Achat',    badge: 'badge-gain'  },
+  SELL:     { label: 'Vente',    badge: 'badge-loss'  },
+  DIVIDEND: { label: 'Dividende',badge: 'badge-blue'  },
 };
 
 export default function MovementsTable({ movements }: Props) {
   const [expandedId, setExpandedId] = useState<string | null>(null);
 
-  const sorted = [...movements].sort(
-    (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
+  const sorted = [...movements].sort((a, b) =>
+    new Date(b.date).getTime() - new Date(a.date).getTime()
   );
 
-  const fmtUsd = (n: number) =>
-    new Intl.NumberFormat('en-US', {
-      style: 'currency',
-      currency: 'USD',
-      maximumFractionDigits: 0,
-    }).format(n);
-
-  const fmtDate = (s: string) =>
-    new Date(s).toLocaleDateString('fr-FR', {
-      day: '2-digit',
-      month: 'short',
-      year: 'numeric',
-    });
+  const fmtUsd  = (n: number) => new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(n);
+  const fmtPrice= (n: number) => new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 2 }).format(n);
+  const fmtDate = (s: string) => new Date(s).toLocaleDateString('fr-FR', { day: '2-digit', month: 'short', year: 'numeric' });
 
   return (
-    <div className="relative overflow-hidden rounded-xl border border-border bg-surface shadow-card">
-      {/* Gold top accent */}
-      <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-gold/30 to-transparent" />
+    <div className="card-static relative overflow-hidden rounded-2xl">
+      <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-gold/20 to-transparent" />
 
-      <div className="px-5 py-4 border-b border-border flex items-center justify-between">
+      {/* Header */}
+      <div className="px-6 py-4 border-b border-navy-600 flex items-center justify-between">
         <div>
-          <h2 className="text-sm font-semibold text-white">Historique des opérations</h2>
-          <p className="text-[11px] text-gray-600 mt-0.5">Cliquez sur une ligne pour voir la thèse</p>
+          <h2 className="text-sm font-display font-semibold text-slate-100">Historique des opérations</h2>
+          <p className="text-xs mt-0.5" style={{ color: '#4A6080' }}>Cliquez sur une ligne pour voir la thèse d'investissement</p>
         </div>
-        <span className="text-[11px] text-gray-500 bg-surface-2 border border-border px-2.5 py-1 rounded-full">
-          {movements.length} opérations
-        </span>
+        <span className="badge badge-gray">{movements.length} opérations</span>
       </div>
 
-      <div className="divide-y divide-border/40">
+      {/* Table header */}
+      <div className="hidden sm:grid grid-cols-[180px_100px_1fr_1fr_140px_32px] gap-4 px-6 py-2.5 border-b border-navy-600"
+        style={{ background: 'rgba(9,15,26,0.4)' }}>
+        {['Actif', 'Type', 'Date', 'Montant', 'Détail', ''].map(h => (
+          <p key={h} className="section-label">{h}</p>
+        ))}
+      </div>
+
+      {/* Rows */}
+      <div className="divide-y divide-navy-600">
         {sorted.map((mov) => {
-          const cfg = TYPE_CONFIG[mov.type] ?? { label: mov.type, style: 'bg-gray-500/10 text-gray-400 border-gray-500/20' };
-          const isExpanded = expandedId === mov.id;
+          const cfg = TYPE_CFG[mov.type] ?? { label: mov.type, badge: 'badge-gray' };
+          const isOpen = expandedId === mov.id;
 
           return (
-            <div key={mov.id} className="group">
+            <div key={mov.id}>
               <button
-                className={`w-full text-left transition-colors duration-150 ${
-                  isExpanded ? 'bg-surface-2' : 'hover:bg-surface-2/60'
-                }`}
-                onClick={() => setExpandedId(isExpanded ? null : mov.id)}
+                onClick={() => setExpandedId(isOpen ? null : mov.id)}
+                className={`w-full text-left transition-colors duration-150 group ${isOpen ? 'bg-navy-700' : 'hover:bg-navy-700/60'}`}
               >
-                <div className="px-5 py-4 flex items-center gap-4">
-                  {/* Type badge */}
-                  <span className={`text-[10px] font-bold px-2.5 py-1 rounded-full border min-w-[52px] text-center shrink-0 ${cfg.style}`}>
-                    {cfg.label}
-                  </span>
-
-                  {/* Asset info */}
-                  <div className="flex-1 min-w-0">
-                    <div className="flex items-center gap-2 flex-wrap">
-                      <p className="font-medium text-white text-sm group-hover:text-gold/90 transition-colors">
-                        {mov.name}
-                      </p>
-                      <span className="text-gray-600 text-[11px] font-mono">
-                        {mov.ticker}
-                      </span>
-                    </div>
-                    <p className="text-gray-600 text-[11px] mt-0.5">{fmtDate(mov.date)}</p>
-                  </div>
-
-                  {/* Amount */}
-                  <div className="text-right hidden sm:block shrink-0">
-                    <p className="text-white font-semibold text-sm">{fmtUsd(mov.totalEUR)}</p>
-                    <p className="text-gray-600 text-[11px] font-mono mt-0.5">
-                      {mov.quantity % 1 === 0 ? mov.quantity : mov.quantity.toFixed(4)}
-                      {' × '}
-                      {new Intl.NumberFormat('en-US', {
-                        style: 'currency',
-                        currency: 'USD',
-                        maximumFractionDigits: 2,
-                      }).format(mov.price)}
+                <div className="px-6 py-4 grid sm:grid-cols-[180px_100px_1fr_1fr_140px_32px] items-center gap-4">
+                  {/* Asset name */}
+                  <div>
+                    <p className="font-medium text-sm text-slate-100 group-hover:text-gold transition-colors duration-150 asset-name">
+                      {mov.name}
                     </p>
+                    <p className="font-mono text-2xs mt-0.5" style={{ color: '#4A6080' }}>{mov.ticker}</p>
                   </div>
-
-                  {/* Expand indicator */}
-                  <span className={`text-gray-600 text-xs ml-1 transition-transform duration-200 ${isExpanded ? 'rotate-180' : ''}`}>
+                  {/* Type badge */}
+                  <div>
+                    <span className={`badge ${cfg.badge}`}>{cfg.label}</span>
+                  </div>
+                  {/* Date */}
+                  <p className="text-sm" style={{ color: '#6B8099' }}>{fmtDate(mov.date)}</p>
+                  {/* Amount */}
+                  <p className="font-mono font-semibold text-sm text-slate-100">{fmtUsd(mov.totalEUR)}</p>
+                  {/* Price detail */}
+                  <p className="font-mono text-xs hidden sm:block" style={{ color: '#4A6080' }}>
+                    {mov.quantity % 1 === 0 ? mov.quantity : mov.quantity.toFixed(4)} × {fmtPrice(mov.price)}
+                  </p>
+                  {/* Expand icon */}
+                  <span className={`text-xs transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`}
+                    style={{ color: '#4A6080' }}>
                     ▾
                   </span>
                 </div>
               </button>
 
-              {/* Expanded thesis */}
-              {isExpanded && (
-                <div className="px-5 pb-4 ml-[68px]">
-                  <div className="bg-surface-3 border border-border rounded-lg p-4">
-                    <p className="text-[10px] text-gold/70 uppercase tracking-widest font-semibold mb-2">
+              {/* Thesis panel */}
+              {isOpen && (
+                <div className="px-6 pb-5 pt-1 border-t border-navy-600"
+                  style={{ background: 'rgba(9,15,26,0.3)' }}>
+                  <div className="rounded-xl p-4 border" style={{ background: '#0B1C2C', borderColor: 'rgba(212,175,55,0.15)' }}>
+                    <p className="section-label mb-2.5" style={{ color: 'rgba(212,175,55,0.6)' }}>
                       Thèse d'investissement
                     </p>
-                    <p className="text-gray-300 text-sm leading-relaxed">
+                    <p className="text-sm leading-relaxed text-slate-300">
                       {mov.justification}
                     </p>
                   </div>

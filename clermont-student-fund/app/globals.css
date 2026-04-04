@@ -1,108 +1,194 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+/* ── Google Fonts ─────────────────────────────────────────────────── */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@500;600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+/* ── CSS Variables ───────────────────────────────────────────────── */
 :root {
-  --background: #080d1a;
-  --gold: #c9a84c;
-  --gold-glow: rgba(201, 168, 76, 0.15);
+  --navy:       #0B1C2C;
+  --gold:       #D4AF37;
+  --gold-glow:  rgba(212, 175, 55, 0.15);
+  --gain:       #10B981;
+  --loss:       #EF4444;
 }
 
-* {
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+/* ── Base ────────────────────────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background-color: #080d1a;
-  color: white;
+  background-color: #090F1A;
+  color: #E2E8F0;
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-feature-settings: 'cv11', 'ss01';
 }
 
-/* Subtle grid background on body */
+/* Subtle dot-grid texture */
 body::before {
   content: '';
   position: fixed;
   inset: 0;
-  background-image:
-    linear-gradient(rgba(201,168,76,0.02) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(201,168,76,0.02) 1px, transparent 1px);
-  background-size: 40px 40px;
+  background-image: radial-gradient(circle, rgba(212,175,55,0.04) 1px, transparent 1px);
+  background-size: 32px 32px;
   pointer-events: none;
   z-index: 0;
 }
 
-main {
-  position: relative;
-  z-index: 1;
+/* ── Tabular numbers for financial data ──────────────────────────── */
+.tabular-nums,
+.font-mono,
+td {
+  font-variant-numeric: tabular-nums;
 }
 
-/* Scrollbar */
-::-webkit-scrollbar {
-  width: 5px;
-  height: 5px;
-}
-::-webkit-scrollbar-track {
-  background: #0d1425;
-}
-::-webkit-scrollbar-thumb {
-  background: #243450;
-  border-radius: 3px;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: #c9a84c;
-}
+/* ── Scrollbar ───────────────────────────────────────────────────── */
+::-webkit-scrollbar            { width: 4px; height: 4px; }
+::-webkit-scrollbar-track      { background: #0B1C2C; }
+::-webkit-scrollbar-thumb      { background: #1A3550; border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover{ background: #D4AF37; }
 
-/* Number animation */
-@keyframes countUp {
-  from { opacity: 0; transform: translateY(6px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-.animate-value {
-  animation: countUp 0.4s ease-out both;
-}
-
-/* Gold text gradient */
+/* ── Gold text gradient ──────────────────────────────────────────── */
 .text-gold-gradient {
-  background: linear-gradient(135deg, #c9a84c, #e4c06a, #c9a84c);
+  background: linear-gradient(135deg, #c9a840 0%, #e8c84a 40%, #d4af37 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
-/* Card top accent border */
-.card-accent-gold::before {
+/* ── Card system ─────────────────────────────────────────────────── */
+.card {
+  background: linear-gradient(160deg, #0F2235 0%, #0C1D2E 100%);
+  border: 1px solid #1A3550;
+  border-radius: 12px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.5);
+  transition: box-shadow 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+}
+.card:hover {
+  border-color: rgba(212,175,55,0.25);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.4), 0 0 0 1px rgba(212,175,55,0.15);
+}
+.card-static {
+  background: linear-gradient(160deg, #0F2235 0%, #0C1D2E 100%);
+  border: 1px solid #1A3550;
+  border-radius: 12px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.5);
+}
+
+/* ── Gold accent top border ──────────────────────────────────────── */
+.card-gold-top::before {
   content: '';
   position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 2px;
-  background: linear-gradient(90deg, transparent, #c9a84c, transparent);
-  border-radius: 12px 12px 0 0;
+  top: 0; left: 16px; right: 16px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(212,175,55,0.6), transparent);
 }
 
-/* Glowing dot */
-.glow-dot {
-  box-shadow: 0 0 6px 2px rgba(34, 197, 94, 0.5);
+/* ── Live dot ────────────────────────────────────────────────────── */
+.live-dot {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--gain);
+  box-shadow: 0 0 0 2px rgba(16,185,129,0.2);
+  animation: livePulse 2.5s ease-in-out infinite;
+}
+@keyframes livePulse {
+  0%, 100% { box-shadow: 0 0 0 2px rgba(16,185,129,0.2); }
+  50%       { box-shadow: 0 0 0 5px rgba(16,185,129,0); }
 }
 
-/* Table row highlight on hover */
-tr:hover .row-ticker {
-  color: #c9a84c;
-  transition: color 0.15s;
+/* ── Badge ───────────────────────────────────────────────────────── */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  border: 1px solid transparent;
+}
+.badge-gain  { background: rgba(16,185,129,0.1);  color: #10B981; border-color: rgba(16,185,129,0.2); }
+.badge-loss  { background: rgba(239,68,68,0.1);   color: #EF4444; border-color: rgba(239,68,68,0.2); }
+.badge-gold  { background: rgba(212,175,55,0.1);  color: #D4AF37; border-color: rgba(212,175,55,0.2); }
+.badge-blue  { background: rgba(59,130,246,0.1);  color: #3B82F6; border-color: rgba(59,130,246,0.2); }
+.badge-purple{ background: rgba(139,92,246,0.1);  color: #8B5CF6; border-color: rgba(139,92,246,0.2); }
+.badge-gray  { background: rgba(100,116,139,0.1); color: #64748B; border-color: rgba(100,116,139,0.2); }
+
+/* ── Section label ───────────────────────────────────────────────── */
+.section-label {
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #4A6080;
 }
 
-/* Nav active underline */
-.nav-active {
+/* ── Nav ─────────────────────────────────────────────────────────── */
+.nav-link {
   position: relative;
+  padding: 6px 14px;
+  border-radius: 6px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #6B8099;
+  transition: color 0.2s, background 0.2s;
 }
-.nav-active::after {
+.nav-link:hover {
+  color: #E2E8F0;
+  background: rgba(26,53,80,0.6);
+}
+.nav-link.active {
+  color: #D4AF37;
+}
+.nav-link.active::after {
   content: '';
   position: absolute;
   bottom: -1px;
-  left: 12px;
-  right: 12px;
+  left: 14px;
+  right: 14px;
   height: 2px;
-  background: linear-gradient(90deg, transparent, #c9a84c, transparent);
+  background: linear-gradient(90deg, transparent, #D4AF37, transparent);
+  border-radius: 2px;
+}
+
+/* ── Table ───────────────────────────────────────────────────────── */
+.data-table th {
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #4A6080;
+  padding: 10px 16px;
+  border-bottom: 1px solid #1A3550;
+  background: rgba(9,15,26,0.4);
+  white-space: nowrap;
+}
+.data-table td {
+  padding: 12px 16px;
+  font-size: 0.8125rem;
+  border-bottom: 1px solid rgba(26,53,80,0.5);
+}
+.data-table tbody tr {
+  transition: background 0.15s ease;
+}
+.data-table tbody tr:hover {
+  background: rgba(26,53,80,0.4);
+}
+.data-table tbody tr:hover .asset-name {
+  color: #D4AF37;
+}
+.data-table tbody tr:last-child td {
+  border-bottom: none;
 }

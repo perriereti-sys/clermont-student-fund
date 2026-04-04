@@ -7,16 +7,12 @@ export const metadata: Metadata = {
   description: 'Tableau de bord du portefeuille — Clermont Student Fund',
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="fr">
-      <body className="min-h-screen bg-bg text-white antialiased">
+      <body className="min-h-screen bg-bg text-slate-200 antialiased">
         <Navigation />
-        <main className="max-w-7xl mx-auto px-4 sm:px-6 py-8">
+        <main className="relative z-10 max-w-8xl mx-auto px-6 sm:px-8 py-10">
           {children}
         </main>
       </body>

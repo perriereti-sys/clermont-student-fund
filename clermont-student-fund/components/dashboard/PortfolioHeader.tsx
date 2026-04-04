@@ -5,86 +5,75 @@ interface Props {
   lastUpdated: string;
 }
 
-export default function PortfolioHeader({
-  totalValue,
-  totalPnL,
-  totalPnLPercent,
-  lastUpdated,
-}: Props) {
+export default function PortfolioHeader({ totalValue, totalPnL, totalPnLPercent, lastUpdated }: Props) {
   const isPositive = totalPnL >= 0;
 
   const fmt = (n: number) =>
-    new Intl.NumberFormat('en-US', {
-      style: 'currency',
-      currency: 'USD',
-      maximumFractionDigits: 0,
-    }).format(n);
+    new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(n);
 
-  const time = new Date(lastUpdated).toLocaleTimeString('fr-FR', {
-    hour: '2-digit',
-    minute: '2-digit',
-  });
+  const time = new Date(lastUpdated).toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' });
 
   return (
-    <div className="relative overflow-hidden rounded-xl border border-border bg-header-gradient shadow-card">
-      {/* Gold top accent */}
-      <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-gold/60 to-transparent" />
+    <div className="relative overflow-hidden rounded-2xl border border-navy-600 animate-fade-up"
+      style={{ background: 'linear-gradient(135deg, #0F2235 0%, #0B1C2C 60%, #0F2235 100%)' }}>
 
-      {/* Subtle radial glow */}
-      <div className="absolute -top-12 -right-12 w-48 h-48 rounded-full bg-gold/5 blur-3xl pointer-events-none" />
+      {/* Gold shimmer line on top */}
+      <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-gold to-transparent opacity-60" />
 
-      <div className="relative px-6 py-6">
-        <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-5">
+      {/* Decorative gold glow - top right */}
+      <div className="absolute -top-20 -right-20 w-64 h-64 rounded-full pointer-events-none"
+        style={{ background: 'radial-gradient(circle, rgba(212,175,55,0.08) 0%, transparent 70%)' }} />
 
-          {/* Main value block */}
+      <div className="relative px-8 py-8">
+        <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-8">
+
+          {/* ── Left: main value ── */}
           <div>
-            <p className="text-xs font-medium text-gray-500 uppercase tracking-widest mb-2">
-              Valeur totale du portefeuille
-            </p>
-            <p className="text-[2.75rem] font-bold leading-none text-gold-gradient animate-value">
-              {fmt(totalValue)}
-            </p>
+            <p className="section-label mb-3">Valeur totale du portefeuille</p>
 
-            <div className="flex items-center gap-3 mt-3 flex-wrap">
-              <span
-                className={`text-base font-semibold ${
-                  isPositive ? 'text-gain' : 'text-loss'
-                }`}
-              >
-                {isPositive ? '+' : ''}
-                {fmt(totalPnL)}
+            <div className="text-gold-gradient font-display font-bold leading-none"
+              style={{ fontSize: 'clamp(2.4rem, 5vw, 3.5rem)' }}>
+              {fmt(totalValue)}
+            </div>
+
+            <div className="flex flex-wrap items-center gap-3 mt-4">
+              <span className={`text-base font-semibold font-mono ${isPositive ? 'text-gain' : 'text-loss'}`}>
+                {isPositive ? '+' : ''}{fmt(totalPnL)}
               </span>
-              <span
-                className={`text-xs font-semibold px-2.5 py-1 rounded-full border ${
-                  isPositive
-                    ? 'bg-gain/10 text-gain border-gain/20'
-                    : 'bg-loss/10 text-loss border-loss/20'
-                }`}
-              >
-                {isPositive ? '+' : ''}
-                {totalPnLPercent.toFixed(2)}%
+
+              <span className={`badge ${isPositive ? 'badge-gain' : 'badge-loss'} text-xs`}>
+                {isPositive ? '▲' : '▼'} {isPositive ? '+' : ''}{totalPnLPercent.toFixed(2)}%
               </span>
-              <span className="text-gray-600 text-xs">depuis le début</span>
+
+              <span className="text-navy-500 text-xs" style={{ color: '#4A6080' }}>
+                depuis le début
+              </span>
             </div>
           </div>
 
-          {/* Right info block */}
-          <div className="flex flex-col items-start sm:items-end gap-2">
+          {/* ── Right: meta ── */}
+          <div className="flex flex-wrap gap-8 lg:text-right">
             {/* Live indicator */}
-            <div className="flex items-center gap-2 text-xs text-gray-500">
-              <span className="inline-block w-1.5 h-1.5 rounded-full bg-gain glow-dot animate-pulse" />
-              Temps réel · {time}
+            <div className="flex lg:flex-col items-center lg:items-end gap-2">
+              <div className="flex items-center gap-2">
+                <span className="live-dot" />
+                <span className="text-xs text-gain font-medium">En direct</span>
+              </div>
+              <span className="text-xs" style={{ color: '#4A6080' }}>{time}</span>
             </div>
 
-            {/* Stats */}
-            <div className="flex gap-6 text-right">
+            {/* Separator */}
+            <div className="hidden lg:block w-px bg-navy-600 self-stretch" />
+
+            {/* Capital stats */}
+            <div className="grid grid-cols-2 gap-6 lg:gap-8">
               <div>
-                <p className="text-[10px] text-gray-600 uppercase tracking-wide">Capital initial</p>
-                <p className="text-sm font-medium text-gray-400">{fmt(100000)}</p>
+                <p className="section-label mb-1">Capital initial</p>
+                <p className="text-slate-300 font-semibold font-mono text-sm">{fmt(100_000)}</p>
               </div>
               <div>
-                <p className="text-[10px] text-gray-600 uppercase tracking-wide">Performance</p>
-                <p className={`text-sm font-semibold ${isPositive ? 'text-gain' : 'text-loss'}`}>
+                <p className="section-label mb-1">Performance</p>
+                <p className={`font-semibold font-mono text-sm ${isPositive ? 'text-gain' : 'text-loss'}`}>
                   {isPositive ? '+' : ''}{totalPnLPercent.toFixed(2)}%
                 </p>
               </div>
@@ -93,8 +82,8 @@ export default function PortfolioHeader({
         </div>
       </div>
 
-      {/* Bottom subtle separator */}
-      <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-border-light/40 to-transparent" />
+      {/* Bottom line */}
+      <div className="absolute bottom-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-navy-600 to-transparent" />
     </div>
   );
 }
