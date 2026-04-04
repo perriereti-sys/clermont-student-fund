@@ -18,22 +18,18 @@ export default async function DashboardPage() {
   ]);
 
   return (
-    <div className="flex flex-col gap-7">
+    <div className="flex flex-col gap-6">
 
-      {/* ── Page header ── */}
-      <div className="flex items-start justify-between">
+      {/* Page title */}
+      <div className="flex items-center justify-between">
         <div>
-          <h1 className="font-display font-bold text-2xl text-slate-100 leading-tight">
-            Dashboard
-          </h1>
-          <p className="text-sm mt-1" style={{ color: '#4A6080' }}>
-            Clermont Student Fund · Prix en temps réel
-          </p>
+          <h1 className="text-xl font-semibold text-slate-100">Dashboard</h1>
+          <p className="text-xs mt-0.5" style={{ color: '#4A6080' }}>Clermont Student Fund</p>
         </div>
         <AutoRefresh intervalMs={300_000} />
       </div>
 
-      {/* ── Portfolio value hero ── */}
+      {/* Portfolio value */}
       <PortfolioHeader
         totalValue={portfolio.totalValue}
         totalPnL={portfolio.totalPnL}
@@ -41,7 +37,7 @@ export default async function DashboardPage() {
         lastUpdated={portfolio.lastUpdated}
       />
 
-      {/* ── Risk metrics ── */}
+      {/* Risk metrics */}
       <MetricsCards
         sharpeRatio={portfolio.sharpeRatio}
         beta={portfolio.beta}
@@ -50,27 +46,25 @@ export default async function DashboardPage() {
         totalValue={portfolio.totalValue}
       />
 
-      {/* ── Performance chart ── */}
+      {/* Chart */}
       {chartData.length >= 2 && <PerformanceChart data={chartData} />}
 
-      {/* ── Fund info ── */}
-      <div className="card-static relative overflow-hidden rounded-2xl">
-        <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-gold/20 to-transparent" />
-        <div className="px-6 py-5">
-          <p className="section-label mb-5">À propos du fonds</p>
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-6">
-            {[
-              { label: 'Création',           value: '01/01/2026' },
-              { label: 'Capital initial',    value: '$100 000'   },
-              { label: 'Stratégie',          value: 'Multi-actifs' },
-              { label: 'Devise de référence',value: 'USD'        },
-            ].map(({ label, value }) => (
-              <div key={label} className="border-l-2 pl-4" style={{ borderColor: 'rgba(212,175,55,0.25)' }}>
-                <p className="section-label mb-1.5">{label}</p>
-                <p className="text-sm font-semibold text-slate-200">{value}</p>
-              </div>
-            ))}
-          </div>
+      {/* Fund info */}
+      <div className="rounded-xl border border-navy-600 px-6 py-5"
+        style={{ background: '#0F2235' }}>
+        <p className="section-label mb-4">Informations</p>
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-5">
+          {[
+            { label: 'Création',    value: '01/01/2026'  },
+            { label: 'Capital',     value: '$100 000'    },
+            { label: 'Stratégie',   value: 'Multi-actifs'},
+            { label: 'Devise',      value: 'USD'         },
+          ].map(({ label, value }) => (
+            <div key={label}>
+              <p className="section-label mb-1">{label}</p>
+              <p className="text-sm text-slate-300">{value}</p>
+            </div>
+          ))}
         </div>
       </div>
 
