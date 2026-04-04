@@ -7,6 +7,12 @@ interface Props {
   movements: Movement[];
 }
 
+const TYPE_CONFIG: Record<string, { label: string; style: string }> = {
+  BUY:      { label: 'ACHAT',  style: 'bg-gain/10 text-gain border-gain/20' },
+  SELL:     { label: 'VENTE',  style: 'bg-loss/10 text-loss border-loss/20' },
+  DIVIDEND: { label: 'DIV',    style: 'bg-blue-500/10 text-blue-400 border-blue-500/20' },
+};
+
 export default function MovementsTable({ movements }: Props) {
   const [expandedId, setExpandedId] = useState<string | null>(null);
 
@@ -29,83 +35,89 @@ export default function MovementsTable({ movements }: Props) {
     });
 
   return (
-    <div className="bg-surface border border-border rounded-xl overflow-hidden">
-      <div className="p-5 border-b border-border flex items-center justify-between">
-        <h2 className="text-lg font-semibold text-white">
-          Historique des mouvements
-        </h2>
-        <span className="text-gray-400 text-sm">{movements.length} opérations</span>
+    <div className="relative overflow-hidden rounded-xl border border-border bg-surface shadow-card">
+      {/* Gold top accent */}
+      <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-gold/30 to-transparent" />
+
+      <div className="px-5 py-4 border-b border-border flex items-center justify-between">
+        <div>
+          <h2 className="text-sm font-semibold text-white">Historique des opérations</h2>
+          <p className="text-[11px] text-gray-600 mt-0.5">Cliquez sur une ligne pour voir la thèse</p>
+        </div>
+        <span className="text-[11px] text-gray-500 bg-surface-2 border border-border px-2.5 py-1 rounded-full">
+          {movements.length} opérations
+        </span>
       </div>
 
-      <div className="divide-y divide-border">
-        {sorted.map((mov) => (
-          <div key={mov.id}>
-            <button
-              className="w-full text-left hover:bg-surface-2 transition-colors"
-              onClick={() =>
-                setExpandedId(expandedId === mov.id ? null : mov.id)
-              }
-            >
-              <div className="px-5 py-4 flex items-center gap-4">
-                <span
-                  className={`text-xs font-bold px-2.5 py-1 rounded-full min-w-[40px] text-center ${
-                    mov.type === 'BUY'
-                      ? 'bg-gain/10 text-gain'
-                      : mov.type === 'SELL'
-                      ? 'bg-loss/10 text-loss'
-                      : 'bg-blue-500/10 text-blue-400'
-                  }`}
-                >
-                  {mov.type === 'BUY' ? 'ACH' : mov.type === 'SELL' ? 'VTE' : 'DIV'}
-                </span>
+      <div className="divide-y divide-border/40">
+        {sorted.map((mov) => {
+          const cfg = TYPE_CONFIG[mov.type] ?? { label: mov.type, style: 'bg-gray-500/10 text-gray-400 border-gray-500/20' };
+          const isExpanded = expandedId === mov.id;
 
-                <div className="flex-1 min-w-0">
-                  <div className="flex items-center gap-3">
-                    <p className="font-medium text-white text-sm">{mov.name}</p>
-                    <span className="text-gray-500 text-xs font-mono">
-                      {mov.ticker}
-                    </span>
+          return (
+            <div key={mov.id} className="group">
+              <button
+                className={`w-full text-left transition-colors duration-150 ${
+                  isExpanded ? 'bg-surface-2' : 'hover:bg-surface-2/60'
+                }`}
+                onClick={() => setExpandedId(isExpanded ? null : mov.id)}
+              >
+                <div className="px-5 py-4 flex items-center gap-4">
+                  {/* Type badge */}
+                  <span className={`text-[10px] font-bold px-2.5 py-1 rounded-full border min-w-[52px] text-center shrink-0 ${cfg.style}`}>
+                    {cfg.label}
+                  </span>
+
+                  {/* Asset info */}
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center gap-2 flex-wrap">
+                      <p className="font-medium text-white text-sm group-hover:text-gold/90 transition-colors">
+                        {mov.name}
+                      </p>
+                      <span className="text-gray-600 text-[11px] font-mono">
+                        {mov.ticker}
+                      </span>
+                    </div>
+                    <p className="text-gray-600 text-[11px] mt-0.5">{fmtDate(mov.date)}</p>
                   </div>
-                  <p className="text-gray-500 text-xs mt-0.5">{fmtDate(mov.date)}</p>
-                </div>
 
-                <div className="text-right hidden sm:block">
-                  <p className="text-white font-medium text-sm">
-                    {fmtUsd(mov.totalEUR)}
-                  </p>
-                  <p className="text-gray-500 text-xs">
-                    {mov.quantity % 1 === 0
-                      ? mov.quantity
-                      : mov.quantity.toFixed(4)}{' '}
-                    ×{' '}
-                    {new Intl.NumberFormat('en-US', {
-                      style: 'currency',
-                      currency: 'USD',
-                      maximumFractionDigits: 2,
-                    }).format(mov.price)}
-                  </p>
-                </div>
+                  {/* Amount */}
+                  <div className="text-right hidden sm:block shrink-0">
+                    <p className="text-white font-semibold text-sm">{fmtUsd(mov.totalEUR)}</p>
+                    <p className="text-gray-600 text-[11px] font-mono mt-0.5">
+                      {mov.quantity % 1 === 0 ? mov.quantity : mov.quantity.toFixed(4)}
+                      {' × '}
+                      {new Intl.NumberFormat('en-US', {
+                        style: 'currency',
+                        currency: 'USD',
+                        maximumFractionDigits: 2,
+                      }).format(mov.price)}
+                    </p>
+                  </div>
 
-                <span className="text-gray-500 text-xs ml-2">
-                  {expandedId === mov.id ? '▲' : '▼'}
-                </span>
-              </div>
-            </button>
-
-            {expandedId === mov.id && (
-              <div className="px-5 pb-4 ml-16">
-                <div className="bg-surface-2 rounded-lg p-4">
-                  <p className="text-xs text-gray-400 uppercase tracking-wide font-medium mb-2">
-                    Justification de l'opération
-                  </p>
-                  <p className="text-gray-300 text-sm leading-relaxed">
-                    {mov.justification}
-                  </p>
+                  {/* Expand indicator */}
+                  <span className={`text-gray-600 text-xs ml-1 transition-transform duration-200 ${isExpanded ? 'rotate-180' : ''}`}>
+                    ▾
+                  </span>
                 </div>
-              </div>
-            )}
-          </div>
-        ))}
+              </button>
+
+              {/* Expanded thesis */}
+              {isExpanded && (
+                <div className="px-5 pb-4 ml-[68px]">
+                  <div className="bg-surface-3 border border-border rounded-lg p-4">
+                    <p className="text-[10px] text-gold/70 uppercase tracking-widest font-semibold mb-2">
+                      Thèse d'investissement
+                    </p>
+                    <p className="text-gray-300 text-sm leading-relaxed">
+                      {mov.justification}
+                    </p>
+                  </div>
+                </div>
+              )}
+            </div>
+          );
+        })}
       </div>
     </div>
   );

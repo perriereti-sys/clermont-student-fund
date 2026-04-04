@@ -56,27 +56,23 @@ export default async function DashboardPage() {
 
       {chartData.length >= 2 && <PerformanceChart data={chartData} />}
 
-      <div className="bg-surface border border-border rounded-xl p-5">
-        <h2 className="text-base font-semibold text-white mb-3">
+      <div className="relative overflow-hidden rounded-xl border border-border bg-surface p-5">
+        <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-gold/20 to-transparent" />
+        <h2 className="text-xs font-semibold text-gray-500 uppercase tracking-widest mb-4">
           À propos du portefeuille
         </h2>
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 text-sm">
-          <div>
-            <p className="text-gray-400 text-xs mb-1">Date de création</p>
-            <p className="text-white font-medium">01/01/2026</p>
-          </div>
-          <div>
-            <p className="text-gray-400 text-xs mb-1">Capital initial</p>
-            <p className="text-white font-medium">100 000 $</p>
-          </div>
-          <div>
-            <p className="text-gray-400 text-xs mb-1">Stratégie</p>
-            <p className="text-white font-medium">Multi-actifs</p>
-          </div>
-          <div>
-            <p className="text-gray-400 text-xs mb-1">Devise de référence</p>
-            <p className="text-white font-medium">USD</p>
-          </div>
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-5">
+          {[
+            { label: 'Date de création', value: '01/01/2026' },
+            { label: 'Capital initial',  value: '$100 000' },
+            { label: 'Stratégie',        value: 'Multi-actifs' },
+            { label: 'Devise de référence', value: 'USD' },
+          ].map(({ label, value }) => (
+            <div key={label} className="border-l-2 border-gold/20 pl-3">
+              <p className="text-[10px] text-gray-600 uppercase tracking-widest mb-1">{label}</p>
+              <p className="text-white font-semibold text-sm">{value}</p>
+            </div>
+          ))}
         </div>
       </div>
     </div>

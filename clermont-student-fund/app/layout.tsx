@@ -3,8 +3,8 @@ import './globals.css';
 import Navigation from '@/components/Navigation';
 
 export const metadata: Metadata = {
-  title: 'Clermont Student Fund',
-  description: 'Portefeuille de placement fictif - Association étudiante',
+  title: 'CSF — Clermont Student Fund',
+  description: 'Tableau de bord du portefeuille — Clermont Student Fund',
 };
 
 export default function RootLayout({
@@ -14,9 +14,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="fr">
-      <body className="min-h-screen bg-bg text-white">
+      <body className="min-h-screen bg-bg text-white antialiased">
         <Navigation />
-        <main className="max-w-7xl mx-auto px-4 py-8">{children}</main>
+        <main className="max-w-7xl mx-auto px-4 sm:px-6 py-8">
+          {children}
+        </main>
       </body>
     </html>
   );
