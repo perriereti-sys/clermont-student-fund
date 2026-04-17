@@ -44,9 +44,9 @@ interface HistoricalDataResult {
 
 async function fetchAllHistoricalData(): Promise<HistoricalDataResult> {
   const START_TS = Math.floor(new Date('2026-01-01').getTime() / 1000);
-  const END_TS = Math.floor(Date.now() / 1000);
+  const END_TS   = Math.floor(Date.now() / 1000);
 
-  const positions = portfolioData.positions;
+  const positions    = portfolioData.positions;
   const tickersNeeded = [
     ...positions.map((p) => p.ticker),
     'EURUSD=X',
@@ -59,9 +59,7 @@ async function fetchAllHistoricalData(): Promise<HistoricalDataResult> {
   );
 
   const rawMaps: Record<string, Record<string, number>> = {};
-  tickersNeeded.forEach((t, i) => {
-    rawMaps[t] = barsToMap(results[i]);
-  });
+  tickersNeeded.forEach((t, i) => { rawMaps[t] = barsToMap(results[i]); });
 
   const allDatesSet = new Set<string>();
   Object.values(rawMaps).forEach((m) =>
@@ -79,33 +77,31 @@ async function fetchAllHistoricalData(): Promise<HistoricalDataResult> {
   return { prices: filled, dates };
 }
 
-// ─── Portfolio history reconstruction (all values in EUR) ────────────────
+// ─── Portfolio history reconstruction (all values in USD) ────────────────
 
 function buildPortfolioHistory(
   dates: string[],
   prices: Record<string, Record<string, number>>
 ): HistoryPoint[] {
   const positions = portfolioData.positions;
-  const cashUSD = portfolioData.cashUSD;
+  const cashUSD   = portfolioData.cashUSD;
 
   return dates.map((date) => {
     const eurUsd = prices['EURUSD=X']?.[date] ?? 1.09;
-    // Cash is in USD → convert to EUR
-    let value = cashUSD / eurUsd;
+    let value = cashUSD;
 
     for (const pos of positions) {
-      // Convert to EUR: EUR positions stay as-is, USD positions are divided by eurUsd
-      const toEur = pos.currency === 'EUR' ? 1 : (1 / eurUsd);
+      // EUR positions → multiply by EUR/USD to get USD
+      const toUsd = pos.currency === 'EUR' ? eurUsd : 1;
 
       if (date < pos.buyDate) {
-        // Not yet purchased → add cost basis as virtual cash (in EUR)
-        value += pos.quantity * pos.avgBuyPrice * toEur;
+        value += pos.quantity * pos.avgBuyPrice * toUsd;
       } else {
         const px = prices[pos.ticker]?.[date];
         if (px != null && px > 0) {
-          value += pos.quantity * px * toEur;
+          value += pos.quantity * px * toUsd;
         } else {
-          value += pos.quantity * pos.avgBuyPrice * toEur;
+          value += pos.quantity * pos.avgBuyPrice * toUsd;
         }
       }
     }
@@ -119,56 +115,45 @@ function buildPortfolioHistory(
 export async function getPortfolioMetrics(): Promise<PortfolioMetrics> {
   const eurUsd = await getEurUsdRate();
 
-  const tickers = portfolioData.positions.map((p) => p.ticker);
+  const tickers  = portfolioData.positions.map((p) => p.ticker);
   const priceMap = await fetchPrices(tickers);
 
-  // All position values computed in EUR
+  // All position values in USD
   const positions: EnrichedPosition[] = (portfolioData.positions as any[]).map((pos) => {
     const currentPrice = priceMap[pos.ticker] ?? pos.avgBuyPrice;
-    // EUR positions: ×1, USD positions: ÷eurUsd
-    const toEur = pos.currency === 'EUR' ? 1 : (1 / eurUsd);
-    const currentValueEUR = pos.quantity * currentPrice * toEur;
-    const costBasisEUR = pos.quantity * pos.avgBuyPrice * toEur;
-    const pnlEUR = currentValueEUR - costBasisEUR;
-    const pnlPercent = costBasisEUR > 0 ? (pnlEUR / costBasisEUR) * 100 : 0;
+    // EUR positions × eurUsd = USD value
+    const toUsd = pos.currency === 'EUR' ? eurUsd : 1;
+    const currentValueEUR = pos.quantity * currentPrice * toUsd;
+    const costBasisEUR    = pos.quantity * pos.avgBuyPrice * toUsd;
+    const pnlEUR          = currentValueEUR - costBasisEUR;
+    const pnlPercent      = costBasisEUR > 0 ? (pnlEUR / costBasisEUR) * 100 : 0;
 
-    return {
-      ...pos,
-      currentPrice,
-      currentValueEUR,
-      costBasisEUR,
-      pnlEUR,
-      pnlPercent,
-      weight: 0,
-    };
+    return { ...pos, currentPrice, currentValueEUR, costBasisEUR, pnlEUR, pnlPercent, weight: 0 };
   });
 
-  // Cash in EUR
-  const cashEUR = portfolioData.cashUSD / eurUsd;
+  const cashUSD      = portfolioData.cashUSD;
   const totalInvested = positions.reduce((s, p) => s + p.currentValueEUR, 0);
-  const totalValue = totalInvested + cashEUR;
+  const totalValue    = totalInvested + cashUSD;
 
   positions.forEach((p) => {
     p.weight = totalValue > 0 ? (p.currentValueEUR / totalValue) * 100 : 0;
   });
 
-  // Initial capital converted to EUR at today's rate
-  const totalCost = portfolioData.initialValueUSD / eurUsd;
-  const totalPnL = totalValue - totalCost;
+  const totalCost       = portfolioData.initialValueUSD;
+  const totalPnL        = totalValue - totalCost;
   const totalPnLPercent = (totalPnL / totalCost) * 100;
 
-  // Historical data — one fetch for both risk metrics AND chart
   let sharpeRatio = 0;
   let maxDrawdown = 0;
-  let var95 = 0;
-  let beta = 1.05;
+  let var95       = 0;
+  let beta        = 1.05;
   let chartData: ChartPoint[] = [];
 
   try {
     const { prices, dates } = await fetchAllHistoricalData();
     const history = buildPortfolioHistory(dates, prices);
 
-    // Anchor the last point to the actual live portfolio value
+    // Anchor last point to actual live value
     if (history.length > 0) {
       history[history.length - 1] = {
         date: history[history.length - 1].date,
@@ -179,7 +164,7 @@ export async function getPortfolioMetrics(): Promise<PortfolioMetrics> {
     if (history.length >= 5) {
       sharpeRatio = computeSharpeRatio(history);
       maxDrawdown = computeMaxDrawdown(history);
-      var95 = computeVaR95(history, totalValue);
+      var95       = computeVaR95(history, totalValue);
 
       const portfolioReturns = getDailyReturns(history);
       const urthValues = dates
@@ -194,11 +179,11 @@ export async function getPortfolioMetrics(): Promise<PortfolioMetrics> {
       }
     }
 
-    // Build chart — indexed to 100 from initial capital in EUR
+    // Build chart indexed to 100 from initial capital
     if (history.length > 0) {
       const portfolioBase = totalCost;
-      const urthBase = prices['URTH']?.[dates[0]];
-      const qqqBase  = prices['QQQ']?.[dates[0]];
+      const urthBase      = prices['URTH']?.[dates[0]];
+      const qqqBase       = prices['QQQ']?.[dates[0]];
 
       chartData = dates.map((date, i) => ({
         date,
@@ -225,14 +210,13 @@ export async function getPortfolioMetrics(): Promise<PortfolioMetrics> {
     var95,
     maxDrawdown,
     positions,
-    cashEUR,
+    cashEUR: cashUSD, // USD cash passed as cashEUR prop (field name kept for compat)
     chartData,
     lastUpdated: new Date().toISOString(),
   };
 }
 
 /**
- * Kept for backward compatibility with the benchmarks route.
  * @deprecated Use getPortfolioMetrics().chartData instead.
  */
 export async function getHistoricalChartData(): Promise<ChartPoint[]> {

@@ -33,7 +33,7 @@ export default function MetricsCards({ sharpeRatio, beta, var95, maxDrawdown }: 
     new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(n);
 
   return (
-    <div className="grid grid-cols-2 xl:grid-cols-4 gap-3">
+    <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
       <MetricCard
         label="Sharpe Ratio"
         value={sharpeRatio.toFixed(2)}

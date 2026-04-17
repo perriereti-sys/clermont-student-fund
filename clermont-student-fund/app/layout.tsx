@@ -12,7 +12,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="fr">
       <body className="min-h-screen bg-bg text-slate-200 antialiased">
         <Navigation />
-        <main className="relative z-10 max-w-8xl mx-auto px-6 sm:px-8 py-10">
+        <main className="relative z-10 max-w-8xl mx-auto px-4 sm:px-8 py-6 sm:py-10 pb-24 sm:pb-10">
           {children}
         </main>
       </body>

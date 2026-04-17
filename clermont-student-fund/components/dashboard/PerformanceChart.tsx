@@ -123,7 +123,7 @@ export default function PerformanceChart({ data }: Props) {
     >
       {/* Header */}
       <div
-        className="px-6 py-4 border-b flex items-center justify-between"
+        className="px-4 sm:px-6 py-4 border-b flex flex-col sm:flex-row sm:items-center gap-3 sm:justify-between"
         style={{ borderColor: '#1A3550' }}
       >
         <div className="flex items-center gap-4">
@@ -145,7 +145,7 @@ export default function PerformanceChart({ data }: Props) {
 
         {/* Period selector */}
         <div
-          className="flex items-center gap-0.5 rounded-lg p-0.5"
+          className="flex items-center gap-0.5 rounded-lg p-0.5 self-start sm:self-auto"
           style={{ background: '#0B1C2C' }}
         >
           {PERIODS.map(({ key, label }) => {
@@ -154,11 +154,11 @@ export default function PerformanceChart({ data }: Props) {
               <button
                 key={key}
                 onClick={() => setPeriod(key)}
-                className="px-3 py-1.5 text-xs font-medium rounded-md transition-all duration-150"
+                className="px-3 py-2 text-xs font-medium rounded-md transition-all duration-150 min-w-[40px] min-h-[36px]"
                 style={{
-                  background:    active ? GOLD           : 'transparent',
-                  color:         active ? '#0B1C2C'      : '#6B8099',
-                  fontWeight:    active ? 700            : 500,
+                  background:    active ? GOLD      : 'transparent',
+                  color:         active ? '#0B1C2C' : '#6B8099',
+                  fontWeight:    active ? 700       : 500,
                   letterSpacing: '0.02em',
                 }}
               >
@@ -170,8 +170,8 @@ export default function PerformanceChart({ data }: Props) {
       </div>
 
       {/* Chart */}
-      <div className="px-4 py-5">
-        <ResponsiveContainer width="100%" height={280}>
+      <div className="px-2 sm:px-4 py-4 sm:py-5">
+        <ResponsiveContainer width="100%" height={220} className="sm:!h-[280px]">
           <LineChart data={displayed} margin={{ top: 4, right: 12, left: -12, bottom: 0 }}>
             <CartesianGrid
               strokeDasharray="2 4"

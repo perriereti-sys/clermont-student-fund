@@ -14,9 +14,9 @@ export default function PortfolioHeader({ totalValue, totalPnL, totalPnLPercent,
   const time = new Date(lastUpdated).toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' });
 
   return (
-    <div className="rounded-xl border border-navy-600 px-7 py-6"
+    <div className="rounded-xl border border-navy-600 px-4 sm:px-7 py-5 sm:py-6"
       style={{ background: '#0F2235' }}>
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-5">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 sm:gap-5">
 
         {/* Left */}
         <div>

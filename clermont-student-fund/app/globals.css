@@ -170,13 +170,13 @@ td {
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: #4A6080;
-  padding: 10px 16px;
+  padding: 10px 12px;
   border-bottom: 1px solid #1A3550;
   background: rgba(9,15,26,0.4);
   white-space: nowrap;
 }
 .data-table td {
-  padding: 12px 16px;
+  padding: 14px 12px;
   font-size: 0.8125rem;
   border-bottom: 1px solid rgba(26,53,80,0.5);
 }
@@ -191,4 +191,22 @@ td {
 }
 .data-table tbody tr:last-child td {
   border-bottom: none;
+}
+
+/* ── Mobile touch targets ────────────────────────────────────────── */
+@media (max-width: 640px) {
+  .data-table th { padding: 8px 10px; }
+  .data-table td { padding: 12px 10px; font-size: 0.75rem; }
+  .badge { font-size: 0.6rem; padding: 2px 6px; }
+}
+
+/* ── Prevent text overflow on small screens ──────────────────────── */
+.asset-name {
+  max-width: 140px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+@media (min-width: 640px) {
+  .asset-name { max-width: none; }
 }

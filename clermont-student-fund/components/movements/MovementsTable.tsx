@@ -18,9 +18,19 @@ export default function MovementsTable({ movements }: Props) {
     new Date(b.date).getTime() - new Date(a.date).getTime()
   );
 
-  const fmtUsd  = (n: number) => new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(n);
-  const fmtPrice= (n: number) => new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 2 }).format(n);
-  const fmtDate = (s: string) => new Date(s).toLocaleDateString('fr-FR', { day: '2-digit', month: 'short', year: 'numeric' });
+  const fmtAmount = (n: number, currency: string) =>
+    new Intl.NumberFormat('en-US', {
+      style: 'currency',
+      currency: currency === 'EUR' ? 'EUR' : 'USD',
+      maximumFractionDigits: 0,
+    }).format(n);
+  const fmtPrice = (n: number, currency: string) =>
+    new Intl.NumberFormat('en-US', {
+      style: 'currency',
+      currency: currency === 'EUR' ? 'EUR' : 'USD',
+      maximumFractionDigits: 2,
+    }).format(n);
+  const fmtDate = (s: string) => new Date(s).toLocaleDateString('en-US', { day: '2-digit', month: 'short', year: 'numeric' });
 
   return (
     <div className="card-static relative overflow-hidden rounded-2xl">
@@ -70,10 +80,10 @@ export default function MovementsTable({ movements }: Props) {
                   {/* Date */}
                   <p className="text-sm" style={{ color: '#6B8099' }}>{fmtDate(mov.date)}</p>
                   {/* Amount */}
-                  <p className="font-mono font-semibold text-sm text-slate-100">{fmtUsd(mov.totalEUR)}</p>
+                  <p className="font-mono font-semibold text-sm text-slate-100">{fmtAmount(mov.totalEUR, mov.currency)}</p>
                   {/* Price detail */}
                   <p className="font-mono text-xs hidden sm:block" style={{ color: '#4A6080' }}>
-                    {mov.quantity % 1 === 0 ? mov.quantity : mov.quantity.toFixed(4)} × {fmtPrice(mov.price)}
+                    {mov.quantity % 1 === 0 ? mov.quantity : mov.quantity.toFixed(4)} × {fmtPrice(mov.price, mov.currency)}
                   </p>
                   {/* Expand icon */}
                   <span className={`text-xs transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`}
