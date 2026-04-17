@@ -103,7 +103,9 @@ export default function PerformanceChart({ data }: Props) {
     const cfg = PERIODS.find((p) => p.key === period)!;
     const cutoff = cutoffDate(cfg.days);
     const filtered = cutoff ? data.filter((pt) => pt.date >= cutoff!) : data;
-    return rebase(filtered);
+    // For ALL: data is already indexed to base 100 from initial capital — no rebase needed.
+    // For sub-periods: rebase to 100 at the start of that window.
+    return cfg.key === 'ALL' ? filtered : rebase(filtered);
   }, [data, period]);
 
   // Compute period performance for CSF

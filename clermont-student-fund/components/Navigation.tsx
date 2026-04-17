@@ -97,8 +97,8 @@ export default function Navigation() {
             );
           })}
         </div>
-        {/* Bottom safe area for iOS */}
-        <div className="h-safe-bottom" style={{ height: 'env(safe-area-inset-bottom)' }} />
+        {/* iOS home bar safe area */}
+        <div style={{ height: 'env(safe-area-inset-bottom)', background: 'rgba(11,28,44,0.97)' }} />
       </nav>
     </>
   );

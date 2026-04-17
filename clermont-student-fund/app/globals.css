@@ -21,6 +21,7 @@
 
 html {
   scroll-behavior: smooth;
+  overflow-x: hidden;
 }
 
 body {
@@ -30,6 +31,9 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-feature-settings: 'cv11', 'ss01';
+  overflow-x: hidden;
+  /* iOS Safari: prevent text size adjustment on rotation */
+  -webkit-text-size-adjust: 100%;
 }
 
 /* Subtle dot-grid texture */
