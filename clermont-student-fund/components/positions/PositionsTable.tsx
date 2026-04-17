@@ -55,7 +55,14 @@ export default function PositionsTable({ positions, cashEUR }: Props) {
                   {/* Actif */}
                   <td className="text-left">
                     <div>
-                      <p className="font-medium text-slate-100 asset-name text-sm">{pos.name}</p>
+                      <div className="flex items-center gap-2">
+                        <p className="font-medium text-slate-100 asset-name text-sm">{pos.name}</p>
+                        {pos.lastBuyDate && (
+                          <span className="badge badge-blue text-2xs shrink-0">
+                            {pos.buyDate === pos.lastBuyDate ? 'NOUVEAU' : 'RENFORCÉ'}
+                          </span>
+                        )}
+                      </div>
                       <p className="font-mono text-2xs mt-0.5" style={{ color: '#4A6080' }}>{pos.ticker}</p>
                     </div>
                   </td>

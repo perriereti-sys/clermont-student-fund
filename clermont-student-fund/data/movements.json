@@ -95,6 +95,54 @@
       "currency": "USD",
       "totalEUR": 3692,
       "justification": "Allocation Bitcoin limitée à ~4% du portefeuille. Réserve de valeur numérique avec adoption institutionnelle croissante et offre plafonnée à 21M d'unités. Quatrième halving passé, historiquement favorable à moyen terme. Exposition asymétrique à la classe d'actifs crypto."
+    },
+    {
+      "id": "9",
+      "date": "2026-04-17",
+      "type": "BUY",
+      "ticker": "PAASI.PA",
+      "name": "Amundi PEA Asie Émergente",
+      "quantity": 65,
+      "price": 34.478,
+      "currency": "EUR",
+      "totalEUR": 2241,
+      "justification": "Renforcement de la position Asie émergente dans un contexte de rotation sectorielle vers les marchés hors USA. Valorisations attractives et résilience relative des économies asiatiques face aux tensions commerciales. Prix moyen d'achat abaissé à €33.42."
+    },
+    {
+      "id": "10",
+      "date": "2026-04-17",
+      "type": "BUY",
+      "ticker": "SGO.PA",
+      "name": "Saint-Gobain",
+      "quantity": 20,
+      "price": 78.42,
+      "currency": "EUR",
+      "totalEUR": 1568,
+      "justification": "Renforcement Saint-Gobain après correction du secteur construction. Carnet de commandes solide porté par la rénovation thermique en Europe et l'accélération des normes environnementales. Prix moyen d'achat ajusté à €74.78."
+    },
+    {
+      "id": "11",
+      "date": "2026-04-17",
+      "type": "BUY",
+      "ticker": "EL.PA",
+      "name": "EssilorLuxottica",
+      "quantity": 10,
+      "price": 210.40,
+      "currency": "EUR",
+      "totalEUR": 2104,
+      "justification": "Renforcement EssilorLuxottica profitant d'une nouvelle correction. Fondamentaux inchangés : monopole sur la chaîne optique, expansion Asie en cours. Le recul du titre offre un point d'entrée améliorant le PRU à €236.07."
+    },
+    {
+      "id": "12",
+      "date": "2026-04-17",
+      "type": "BUY",
+      "ticker": "VIE.PA",
+      "name": "Veolia Environnement",
+      "quantity": 125,
+      "price": 34.92,
+      "currency": "EUR",
+      "totalEUR": 4365,
+      "justification": "Ouverture d'une position sur Veolia, leader mondial du traitement de l'eau et des déchets. Positionnement sur les infrastructures essentielles dans un contexte de raréfaction des ressources. Dividende solide, visibilité long terme grâce aux contrats de concession, et exposition défensive dans un marché volatile."
     }
   ]
 }

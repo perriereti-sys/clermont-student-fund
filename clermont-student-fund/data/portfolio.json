@@ -39,10 +39,11 @@
       "ticker": "PAASI.PA",
       "type": "etf",
       "sector": "Asie émergente",
-      "quantity": 135,
-      "avgBuyPrice": 32.907,
+      "quantity": 200,
+      "avgBuyPrice": 33.418,
       "currency": "EUR",
-      "buyDate": "2026-01-01"
+      "buyDate": "2026-01-01",
+      "lastBuyDate": "2026-04-17"
     },
     {
       "id": "5",
@@ -50,10 +51,11 @@
       "ticker": "SGO.PA",
       "type": "action",
       "sector": "Matériaux",
-      "quantity": 60,
-      "avgBuyPrice": 73.56,
+      "quantity": 80,
+      "avgBuyPrice": 74.775,
       "currency": "EUR",
-      "buyDate": "2026-01-01"
+      "buyDate": "2026-01-01",
+      "lastBuyDate": "2026-04-17"
     },
     {
       "id": "6",
@@ -61,10 +63,11 @@
       "ticker": "EL.PA",
       "type": "action",
       "sector": "Santé",
-      "quantity": 20,
-      "avgBuyPrice": 248.90,
+      "quantity": 30,
+      "avgBuyPrice": 236.067,
       "currency": "EUR",
-      "buyDate": "2026-02-17"
+      "buyDate": "2026-02-17",
+      "lastBuyDate": "2026-04-17"
     },
     {
       "id": "7",
@@ -87,9 +90,21 @@
       "avgBuyPrice": 82387,
       "currency": "USD",
       "buyDate": "2026-02-02"
+    },
+    {
+      "id": "9",
+      "name": "Veolia Environnement",
+      "ticker": "VIE.PA",
+      "type": "action",
+      "sector": "Utilities",
+      "quantity": 125,
+      "avgBuyPrice": 34.92,
+      "currency": "EUR",
+      "buyDate": "2026-04-17",
+      "lastBuyDate": "2026-04-17"
     }
   ],
-  "cashUSD": 73575,
+  "cashUSD": 62269,
   "initialValueUSD": 100000,
   "startDate": "2026-01-01",
   "baseCurrency": "USD"

@@ -12,6 +12,7 @@ export interface Position {
   avgBuyPrice: number;
   currency: Currency;
   buyDate: string;
+  lastBuyDate?: string;
 }
 
 export interface PortfolioData {
