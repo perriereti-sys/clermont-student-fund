@@ -30,7 +30,7 @@ const CustomTooltip = ({ active, payload, label }: any) => {
   return (
     <div
       className="rounded-xl border p-3 text-xs shadow-xl"
-      style={{ background: '#0B1C2C', borderColor: '#1A3550' }}
+      style={{ background: '#0E1F33', borderColor: 'rgba(255,255,255,0.1)' }}
     >
       <p className="section-label mb-2">
         {new Date(label).toLocaleDateString('fr-FR', { day: '2-digit', month: 'short', year: '2-digit' })}
@@ -119,14 +119,11 @@ export default function PerformanceChart({ data }: Props) {
   const perfSign  = periodPerf != null && periodPerf >= 0 ? '+' : '';
 
   return (
-    <div
-      className="rounded-xl border overflow-hidden"
-      style={{ background: '#0F2235', borderColor: '#1A3550' }}
-    >
+    <div className="card-static rounded-2xl overflow-hidden">
       {/* Header */}
       <div
         className="px-4 sm:px-6 py-4 border-b flex flex-col sm:flex-row sm:items-center gap-3 sm:justify-between"
-        style={{ borderColor: '#1A3550' }}
+        style={{ borderColor: 'rgba(255,255,255,0.06)' }}
       >
         <div className="flex items-center gap-4">
           <div>
@@ -174,7 +171,7 @@ export default function PerformanceChart({ data }: Props) {
       {/* Chart */}
       <div className="px-2 sm:px-4 py-4 sm:py-5">
         <ResponsiveContainer width="100%" height={220} className="sm:!h-[280px]">
-          <LineChart data={displayed} margin={{ top: 4, right: 12, left: -12, bottom: 0 }}>
+          <LineChart data={displayed} margin={{ top: 4, right: 8, left: 4, bottom: 0 }}>
             <CartesianGrid
               strokeDasharray="2 4"
               stroke="rgba(26,53,80,0.7)"

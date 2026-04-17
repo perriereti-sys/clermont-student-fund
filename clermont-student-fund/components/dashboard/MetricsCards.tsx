@@ -8,12 +8,13 @@ interface CardProps {
 
 function MetricCard({ label, value, sub, description, valueColor }: CardProps) {
   return (
-    <div className="rounded-xl border border-navy-600 p-5 hover:border-navy-500 transition-colors duration-200"
-      style={{ background: '#0F2235' }}>
+    <div
+      className="rounded-2xl p-5 transition-all duration-200 card"
+    >
       <p className="section-label mb-3">{label}</p>
-      <p className={`text-xl font-semibold font-mono ${valueColor ?? 'text-slate-200'}`}>{value}</p>
-      <p className="text-xs mt-0.5" style={{ color: '#4A6080' }}>{sub}</p>
-      <p className="text-xs leading-relaxed mt-3 border-t border-navy-600 pt-3" style={{ color: '#4A6080' }}>
+      <p className={`text-2xl font-bold font-mono ${valueColor ?? 'text-slate-100'}`}>{value}</p>
+      <p className="text-xs mt-1" style={{ color: '#5B7A9A' }}>{sub}</p>
+      <p className="text-xs leading-relaxed mt-3 pt-3 border-t" style={{ color: '#5B7A9A', borderColor: 'rgba(255,255,255,0.06)' }}>
         {description}
       </p>
     </div>

@@ -7,7 +7,7 @@
 
 /* ── CSS Variables ───────────────────────────────────────────────── */
 :root {
-  --navy:       #0B1C2C;
+  --navy:       #0E1F33;
   --gold:       #D4AF37;
   --gold-glow:  rgba(212, 175, 55, 0.15);
   --gain:       #10B981;
@@ -21,18 +21,18 @@
 
 html {
   scroll-behavior: smooth;
-  overflow-x: hidden;
+  /* Do NOT set overflow-x: hidden here — breaks position:fixed on iOS Safari */
 }
 
 body {
-  background-color: #090F1A;
-  color: #E2E8F0;
+  background-color: #0C1A2E;
+  color: #E8EDF4;
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-feature-settings: 'cv11', 'ss01';
-  overflow-x: hidden;
-  /* iOS Safari: prevent text size adjustment on rotation */
+  /* overflow-x: clip does NOT break position:fixed unlike overflow:hidden */
+  overflow-x: clip;
   -webkit-text-size-adjust: 100%;
 }
 
@@ -41,8 +41,8 @@ body::before {
   content: '';
   position: fixed;
   inset: 0;
-  background-image: radial-gradient(circle, rgba(212,175,55,0.04) 1px, transparent 1px);
-  background-size: 32px 32px;
+  background-image: radial-gradient(circle, rgba(212,175,55,0.035) 1px, transparent 1px);
+  background-size: 36px 36px;
   pointer-events: none;
   z-index: 0;
 }
@@ -56,8 +56,8 @@ td {
 
 /* ── Scrollbar ───────────────────────────────────────────────────── */
 ::-webkit-scrollbar            { width: 4px; height: 4px; }
-::-webkit-scrollbar-track      { background: #0B1C2C; }
-::-webkit-scrollbar-thumb      { background: #1A3550; border-radius: 4px; }
+::-webkit-scrollbar-track      { background: #0E1F33; }
+::-webkit-scrollbar-thumb      { background: #1E3A58; border-radius: 4px; }
 ::-webkit-scrollbar-thumb:hover{ background: #D4AF37; }
 
 /* ── Gold text gradient ──────────────────────────────────────────── */
@@ -70,21 +70,21 @@ td {
 
 /* ── Card system ─────────────────────────────────────────────────── */
 .card {
-  background: linear-gradient(160deg, #0F2235 0%, #0C1D2E 100%);
-  border: 1px solid #1A3550;
-  border-radius: 12px;
-  box-shadow: 0 1px 4px rgba(0,0,0,0.5);
-  transition: box-shadow 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+  background: linear-gradient(145deg, #172E4A 0%, #112338 100%);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 14px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.04);
+  transition: box-shadow 0.2s ease, border-color 0.2s ease;
 }
 .card:hover {
-  border-color: rgba(212,175,55,0.25);
-  box-shadow: 0 4px 20px rgba(0,0,0,0.4), 0 0 0 1px rgba(212,175,55,0.15);
+  border-color: rgba(212,175,55,0.3);
+  box-shadow: 0 6px 24px rgba(0,0,0,0.4), 0 0 0 1px rgba(212,175,55,0.12), inset 0 1px 0 rgba(255,255,255,0.06);
 }
 .card-static {
-  background: linear-gradient(160deg, #0F2235 0%, #0C1D2E 100%);
-  border: 1px solid #1A3550;
-  border-radius: 12px;
-  box-shadow: 0 1px 4px rgba(0,0,0,0.5);
+  background: linear-gradient(145deg, #172E4A 0%, #112338 100%);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 14px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.04);
 }
 
 /* ── Gold accent top border ──────────────────────────────────────── */
@@ -93,29 +93,29 @@ td {
   position: absolute;
   top: 0; left: 16px; right: 16px;
   height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(212,175,55,0.6), transparent);
+  background: linear-gradient(90deg, transparent, rgba(212,175,55,0.7), transparent);
 }
 
 /* ── Live dot ────────────────────────────────────────────────────── */
 .live-dot {
   display: inline-block;
-  width: 6px;
-  height: 6px;
+  width: 7px;
+  height: 7px;
   border-radius: 50%;
   background: var(--gain);
-  box-shadow: 0 0 0 2px rgba(16,185,129,0.2);
+  box-shadow: 0 0 0 2px rgba(16,185,129,0.25);
   animation: livePulse 2.5s ease-in-out infinite;
 }
 @keyframes livePulse {
-  0%, 100% { box-shadow: 0 0 0 2px rgba(16,185,129,0.2); }
-  50%       { box-shadow: 0 0 0 5px rgba(16,185,129,0); }
+  0%, 100% { box-shadow: 0 0 0 2px rgba(16,185,129,0.25); }
+  50%       { box-shadow: 0 0 0 6px rgba(16,185,129,0); }
 }
 
 /* ── Badge ───────────────────────────────────────────────────────── */
 .badge {
   display: inline-flex;
   align-items: center;
-  padding: 2px 8px;
+  padding: 3px 9px;
   border-radius: 999px;
   font-size: 0.65rem;
   font-weight: 600;
@@ -123,12 +123,12 @@ td {
   text-transform: uppercase;
   border: 1px solid transparent;
 }
-.badge-gain  { background: rgba(16,185,129,0.1);  color: #10B981; border-color: rgba(16,185,129,0.2); }
-.badge-loss  { background: rgba(239,68,68,0.1);   color: #EF4444; border-color: rgba(239,68,68,0.2); }
-.badge-gold  { background: rgba(212,175,55,0.1);  color: #D4AF37; border-color: rgba(212,175,55,0.2); }
-.badge-blue  { background: rgba(59,130,246,0.1);  color: #3B82F6; border-color: rgba(59,130,246,0.2); }
-.badge-purple{ background: rgba(139,92,246,0.1);  color: #8B5CF6; border-color: rgba(139,92,246,0.2); }
-.badge-gray  { background: rgba(100,116,139,0.1); color: #64748B; border-color: rgba(100,116,139,0.2); }
+.badge-gain  { background: rgba(16,185,129,0.12);  color: #34D399; border-color: rgba(16,185,129,0.25); }
+.badge-loss  { background: rgba(239,68,68,0.12);   color: #F87171; border-color: rgba(239,68,68,0.25); }
+.badge-gold  { background: rgba(212,175,55,0.12);  color: #E8C84A; border-color: rgba(212,175,55,0.25); }
+.badge-blue  { background: rgba(59,130,246,0.12);  color: #60A5FA; border-color: rgba(59,130,246,0.25); }
+.badge-purple{ background: rgba(139,92,246,0.12);  color: #A78BFA; border-color: rgba(139,92,246,0.25); }
+.badge-gray  { background: rgba(100,116,139,0.12); color: #94A3B8; border-color: rgba(100,116,139,0.2); }
 
 /* ── Section label ───────────────────────────────────────────────── */
 .section-label {
@@ -136,25 +136,26 @@ td {
   font-weight: 600;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: #4A6080;
+  color: #5B7A9A;
 }
 
 /* ── Nav ─────────────────────────────────────────────────────────── */
 .nav-link {
   position: relative;
-  padding: 6px 14px;
-  border-radius: 6px;
+  padding: 7px 16px;
+  border-radius: 8px;
   font-size: 0.875rem;
   font-weight: 500;
-  color: #6B8099;
+  color: #7A96B0;
   transition: color 0.2s, background 0.2s;
 }
 .nav-link:hover {
-  color: #E2E8F0;
-  background: rgba(26,53,80,0.6);
+  color: #E8EDF4;
+  background: rgba(255,255,255,0.06);
 }
 .nav-link.active {
   color: #D4AF37;
+  background: rgba(212,175,55,0.08);
 }
 .nav-link.active::after {
   content: '';
@@ -173,22 +174,22 @@ td {
   font-weight: 600;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: #4A6080;
-  padding: 10px 12px;
-  border-bottom: 1px solid #1A3550;
-  background: rgba(9,15,26,0.4);
+  color: #5B7A9A;
+  padding: 10px 14px;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  background: rgba(10,20,34,0.5);
   white-space: nowrap;
 }
 .data-table td {
-  padding: 14px 12px;
+  padding: 14px 14px;
   font-size: 0.8125rem;
-  border-bottom: 1px solid rgba(26,53,80,0.5);
+  border-bottom: 1px solid rgba(255,255,255,0.05);
 }
 .data-table tbody tr {
   transition: background 0.15s ease;
 }
 .data-table tbody tr:hover {
-  background: rgba(26,53,80,0.4);
+  background: rgba(255,255,255,0.03);
 }
 .data-table tbody tr:hover .asset-name {
   color: #D4AF37;
@@ -197,16 +198,16 @@ td {
   border-bottom: none;
 }
 
-/* ── Mobile touch targets ────────────────────────────────────────── */
+/* ── Mobile ──────────────────────────────────────────────────────── */
 @media (max-width: 640px) {
-  .data-table th { padding: 8px 10px; }
+  .data-table th { padding: 8px 10px; font-size: 0.6rem; }
   .data-table td { padding: 12px 10px; font-size: 0.75rem; }
-  .badge { font-size: 0.6rem; padding: 2px 6px; }
+  .badge         { font-size: 0.6rem; padding: 2px 6px; }
 }
 
-/* ── Prevent text overflow on small screens ──────────────────────── */
+/* ── Asset name truncation ───────────────────────────────────────── */
 .asset-name {
-  max-width: 140px;
+  max-width: 130px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
