@@ -16,9 +16,6 @@ async function getEurUsdRate(): Promise<number> {
   return price ?? 1.09;
 }
 
-/**
- * Forward-fills a price map (date → price) so every date has a value.
- */
 function forwardFill(
   dates: string[],
   raw: Record<string, number>
@@ -41,9 +38,7 @@ function barsToMap(bars: HistoricalBar[]): Record<string, number> {
 // ─── Historical data fetch ────────────────────────────────────────────────
 
 interface HistoricalDataResult {
-  /** date → filled price for every portfolio ticker + EURUSD + URTH + QQQ */
   prices: Record<string, Record<string, number>>;
-  /** sorted list of all weekly dates covered */
   dates: string[];
 }
 
@@ -55,22 +50,19 @@ async function fetchAllHistoricalData(): Promise<HistoricalDataResult> {
   const tickersNeeded = [
     ...positions.map((p) => p.ticker),
     'EURUSD=X',
-    'URTH',  // MSCI World ETF proxy
-    'QQQ',   // Nasdaq 100
+    'URTH',
+    'QQQ',
   ];
 
-  // Fetch all in parallel
   const results = await Promise.all(
     tickersNeeded.map((t) => fetchHistoricalPrices(t, START_TS, END_TS))
   );
 
-  // Build raw maps
   const rawMaps: Record<string, Record<string, number>> = {};
   tickersNeeded.forEach((t, i) => {
     rawMaps[t] = barsToMap(results[i]);
   });
 
-  // Collect all dates
   const allDatesSet = new Set<string>();
   Object.values(rawMaps).forEach((m) =>
     Object.keys(m).forEach((d) => allDatesSet.add(d))
@@ -79,7 +71,6 @@ async function fetchAllHistoricalData(): Promise<HistoricalDataResult> {
     .filter((d) => d >= '2026-01-01')
     .sort();
 
-  // Forward-fill each ticker
   const filled: Record<string, Record<string, number>> = {};
   for (const ticker of tickersNeeded) {
     filled[ticker] = forwardFill(dates, rawMaps[ticker]);
@@ -88,13 +79,8 @@ async function fetchAllHistoricalData(): Promise<HistoricalDataResult> {
   return { prices: filled, dates };
 }
 
-// ─── Portfolio history reconstruction ────────────────────────────────────
+// ─── Portfolio history reconstruction (all values in EUR) ────────────────
 
-/**
- * For each weekly date, computes the estimated total portfolio value.
- * – positions not yet bought contribute their cost basis (cash proxy).
- * – positions already held contribute their historical market price.
- */
 function buildPortfolioHistory(
   dates: string[],
   prices: Record<string, Record<string, number>>
@@ -104,22 +90,22 @@ function buildPortfolioHistory(
 
   return dates.map((date) => {
     const eurUsd = prices['EURUSD=X']?.[date] ?? 1.09;
-    let value = cashUSD;
+    // Cash is in USD → convert to EUR
+    let value = cashUSD / eurUsd;
 
     for (const pos of positions) {
-      const toUsd = pos.currency === 'EUR' ? eurUsd : 1;
+      // Convert to EUR: EUR positions stay as-is, USD positions are divided by eurUsd
+      const toEur = pos.currency === 'EUR' ? 1 : (1 / eurUsd);
 
       if (date < pos.buyDate) {
-        // Not yet purchased → add cost basis as virtual cash
-        value += pos.quantity * pos.avgBuyPrice * toUsd;
+        // Not yet purchased → add cost basis as virtual cash (in EUR)
+        value += pos.quantity * pos.avgBuyPrice * toEur;
       } else {
-        // Held position → mark to market
         const px = prices[pos.ticker]?.[date];
         if (px != null && px > 0) {
-          value += pos.quantity * px * toUsd;
+          value += pos.quantity * px * toEur;
         } else {
-          // Fallback: cost basis
-          value += pos.quantity * pos.avgBuyPrice * toUsd;
+          value += pos.quantity * pos.avgBuyPrice * toEur;
         }
       }
     }
@@ -136,11 +122,13 @@ export async function getPortfolioMetrics(): Promise<PortfolioMetrics> {
   const tickers = portfolioData.positions.map((p) => p.ticker);
   const priceMap = await fetchPrices(tickers);
 
+  // All position values computed in EUR
   const positions: EnrichedPosition[] = (portfolioData.positions as any[]).map((pos) => {
     const currentPrice = priceMap[pos.ticker] ?? pos.avgBuyPrice;
-    const toUsd = pos.currency === 'EUR' ? eurUsd : 1;
-    const currentValueEUR = pos.quantity * currentPrice * toUsd;
-    const costBasisEUR = pos.quantity * pos.avgBuyPrice * toUsd;
+    // EUR positions: ×1, USD positions: ÷eurUsd
+    const toEur = pos.currency === 'EUR' ? 1 : (1 / eurUsd);
+    const currentValueEUR = pos.quantity * currentPrice * toEur;
+    const costBasisEUR = pos.quantity * pos.avgBuyPrice * toEur;
     const pnlEUR = currentValueEUR - costBasisEUR;
     const pnlPercent = costBasisEUR > 0 ? (pnlEUR / costBasisEUR) * 100 : 0;
 
@@ -155,34 +143,44 @@ export async function getPortfolioMetrics(): Promise<PortfolioMetrics> {
     };
   });
 
-  const cashUSD = portfolioData.cashUSD;
+  // Cash in EUR
+  const cashEUR = portfolioData.cashUSD / eurUsd;
   const totalInvested = positions.reduce((s, p) => s + p.currentValueEUR, 0);
-  const totalValue = totalInvested + cashUSD;
+  const totalValue = totalInvested + cashEUR;
 
   positions.forEach((p) => {
     p.weight = totalValue > 0 ? (p.currentValueEUR / totalValue) * 100 : 0;
   });
 
-  const totalCost = portfolioData.initialValueUSD;
+  // Initial capital converted to EUR at today's rate
+  const totalCost = portfolioData.initialValueUSD / eurUsd;
   const totalPnL = totalValue - totalCost;
   const totalPnLPercent = (totalPnL / totalCost) * 100;
 
-  // Use historical data for risk metrics when available
+  // Historical data — one fetch for both risk metrics AND chart
   let sharpeRatio = 0;
   let maxDrawdown = 0;
   let var95 = 0;
   let beta = 1.05;
+  let chartData: ChartPoint[] = [];
 
   try {
     const { prices, dates } = await fetchAllHistoricalData();
     const history = buildPortfolioHistory(dates, prices);
+
+    // Anchor the last point to the actual live portfolio value
+    if (history.length > 0) {
+      history[history.length - 1] = {
+        date: history[history.length - 1].date,
+        value: totalValue,
+      };
+    }
 
     if (history.length >= 5) {
       sharpeRatio = computeSharpeRatio(history);
       maxDrawdown = computeMaxDrawdown(history);
       var95 = computeVaR95(history, totalValue);
 
-      // Beta vs MSCI World (URTH)
       const portfolioReturns = getDailyReturns(history);
       const urthValues = dates
         .map((d) => prices['URTH']?.[d])
@@ -195,8 +193,26 @@ export async function getPortfolioMetrics(): Promise<PortfolioMetrics> {
         beta = computeBeta(portfolioReturns, urthReturns);
       }
     }
+
+    // Build chart — indexed to 100 from initial capital in EUR
+    if (history.length > 0) {
+      const portfolioBase = totalCost;
+      const urthBase = prices['URTH']?.[dates[0]];
+      const qqqBase  = prices['QQQ']?.[dates[0]];
+
+      chartData = dates.map((date, i) => ({
+        date,
+        portfolio: history[i] != null ? (history[i].value / portfolioBase) * 100 : (null as any),
+        msciWorld: urthBase && prices['URTH']?.[date] != null
+          ? (prices['URTH'][date] / urthBase) * 100
+          : null,
+        nasdaq100: qqqBase && prices['QQQ']?.[date] != null
+          ? (prices['QQQ'][date] / qqqBase) * 100
+          : null,
+      }));
+    }
   } catch {
-    // Fallback: metrics stay at defaults
+    // Metrics and chart stay at defaults
   }
 
   return {
@@ -209,39 +225,17 @@ export async function getPortfolioMetrics(): Promise<PortfolioMetrics> {
     var95,
     maxDrawdown,
     positions,
-    cashEUR: cashUSD,
+    cashEUR,
+    chartData,
     lastUpdated: new Date().toISOString(),
   };
 }
 
 /**
- * Returns weekly chart data: CSF portfolio vs MSCI World vs Nasdaq 100,
- * all indexed to base 100 on 2026-01-01.
+ * Kept for backward compatibility with the benchmarks route.
+ * @deprecated Use getPortfolioMetrics().chartData instead.
  */
 export async function getHistoricalChartData(): Promise<ChartPoint[]> {
-  try {
-    const { prices, dates } = await fetchAllHistoricalData();
-    const history = buildPortfolioHistory(dates, prices);
-
-    if (history.length === 0) return [];
-
-    const portfolioBase = history[0].value;
-    const urthBase = prices['URTH']?.[dates[0]];
-    const qqqBase = prices['QQQ']?.[dates[0]];
-
-    return dates.map((date, i) => {
-      const portfolioVal = history[i]?.value;
-      const urthVal = prices['URTH']?.[date];
-      const qqqVal = prices['QQQ']?.[date];
-
-      return {
-        date,
-        portfolio: portfolioVal != null ? (portfolioVal / portfolioBase) * 100 : null as any,
-        msciWorld: urthVal != null && urthBase ? (urthVal / urthBase) * 100 : null,
-        nasdaq100: qqqVal != null && qqqBase ? (qqqVal / qqqBase) * 100 : null,
-      };
-    });
-  } catch {
-    return [];
-  }
+  const metrics = await getPortfolioMetrics();
+  return metrics.chartData;
 }

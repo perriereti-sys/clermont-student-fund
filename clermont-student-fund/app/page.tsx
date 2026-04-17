@@ -2,20 +2,18 @@ import PortfolioHeader from '@/components/dashboard/PortfolioHeader';
 import MetricsCards from '@/components/dashboard/MetricsCards';
 import PerformanceChart from '@/components/dashboard/PerformanceChart';
 import AutoRefresh from '@/components/AutoRefresh';
-import { getPortfolioMetrics, getHistoricalChartData } from '@/lib/getPortfolioMetrics';
+import { getPortfolioMetrics } from '@/lib/getPortfolioMetrics';
 
 export const dynamic = 'force-dynamic';
 export const runtime = 'nodejs';
 
 export default async function DashboardPage() {
-  const [portfolio, chartData] = await Promise.all([
-    getPortfolioMetrics().catch(() => ({
-      totalValue: 100000, totalCost: 100000, totalPnL: 0, totalPnLPercent: 0,
-      sharpeRatio: 0, beta: 1.0, var95: 0, maxDrawdown: 0,
-      positions: [], cashEUR: 0, lastUpdated: new Date().toISOString(),
-    })),
-    getHistoricalChartData().catch(() => []),
-  ]);
+  const portfolio = await getPortfolioMetrics().catch(() => ({
+    totalValue: 100000, totalCost: 100000, totalPnL: 0, totalPnLPercent: 0,
+    sharpeRatio: 0, beta: 1.0, var95: 0, maxDrawdown: 0,
+    positions: [], cashEUR: 0, chartData: [], lastUpdated: new Date().toISOString(),
+  }));
+  const chartData = portfolio.chartData;
 
   return (
     <div className="flex flex-col gap-6">
