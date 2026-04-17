@@ -72,6 +72,7 @@ export async function fetchPrice(ticker: string): Promise<number | null> {
           Referer: 'https://finance.yahoo.com/',
         },
         signal: AbortSignal.timeout(8000),
+        cache: 'no-store', // always fetch fresh prices, never use Next.js cache
       });
       if (!res.ok) continue;
       const data = await res.json();

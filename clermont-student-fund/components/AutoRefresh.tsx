@@ -7,7 +7,7 @@ interface Props {
   intervalMs?: number; // default: 5 minutes
 }
 
-export default function AutoRefresh({ intervalMs = 300_000 }: Props) {
+export default function AutoRefresh({ intervalMs = 90_000 }: Props) {
   const router = useRouter();
   const [countdown, setCountdown] = useState(Math.floor(intervalMs / 1000));
 
