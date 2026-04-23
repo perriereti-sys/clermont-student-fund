@@ -144,5 +144,17 @@
       "totalEUR": 4365,
       "justification": "Ouverture d'une position sur Veolia, leader mondial du traitement de l'eau et des déchets. Positionnement sur les infrastructures essentielles dans un contexte de raréfaction des ressources. Dividende solide, visibilité long terme grâce aux contrats de concession, et exposition défensive dans un marché volatile."
     }
+    ,{
+      "id": "13",
+      "date": "2026-04-23",
+      "type": "BUY",
+      "ticker": "SAP.DE",
+      "name": "SAP",
+      "quantity": 28,
+      "price": 150.20,
+      "currency": "EUR",
+      "totalEUR": 4206,
+      "justification": "Ouverture d'une position sur SAP, leader européen du logiciel d'entreprise (ERP, cloud). Transition cloud en forte accélération avec RISE with SAP, croissance récurrente des revenus SaaS. Positionnement défensif sur la tech européenne avec un pricing power élevé et une base client très fidélisée."
+    }
   ]
 }

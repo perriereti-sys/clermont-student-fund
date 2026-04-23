@@ -102,9 +102,20 @@
       "currency": "EUR",
       "buyDate": "2026-04-17",
       "lastBuyDate": "2026-04-17"
+    },
+    {
+      "id": "10",
+      "name": "SAP",
+      "ticker": "SAP.DE",
+      "type": "action",
+      "sector": "Technologie",
+      "quantity": 28,
+      "avgBuyPrice": 150.20,
+      "currency": "EUR",
+      "buyDate": "2026-04-23"
     }
   ],
-  "cashUSD": 61015,
+  "cashUSD": 56242,
   "initialValueUSD": 100000,
   "startDate": "2026-01-01",
   "baseCurrency": "USD"
