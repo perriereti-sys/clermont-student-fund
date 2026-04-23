@@ -82,11 +82,11 @@ export default function MouvementsPage() {
       </div>
 
       {/* Stats */}
-      <div className={`grid gap-4 ${stats.length === 4 ? 'grid-cols-2 sm:grid-cols-4' : 'grid-cols-3'}`}>
-        {stats.map(({ label, value, sub, color, bg, border, icon }) => (
+      <div className={`grid gap-4 ${stats.length === 4 ? 'grid-cols-2 sm:grid-cols-4' : 'grid-cols-2 sm:grid-cols-3'}`}>
+        {stats.map(({ label, value, sub, color, bg, border, icon }, i) => (
           <div
             key={label}
-            className="relative rounded-xl p-5 overflow-hidden"
+            className={`relative rounded-xl p-5 overflow-hidden ${stats.length === 3 && i === 2 ? 'col-span-2 sm:col-span-1' : ''}`}
             style={{ background: bg, border: `1px solid ${border}` }}
           >
             <div className="flex items-start justify-between mb-3">
@@ -96,7 +96,7 @@ export default function MouvementsPage() {
                 {icon}
               </div>
             </div>
-            <p className="font-display font-bold text-2xl tabular-nums" style={{ color }}>{value}</p>
+            <p className="font-display font-bold text-2xl tabular-nums truncate" style={{ color }}>{value}</p>
             <p className="text-xs mt-1.5" style={{ color: '#4A6080' }}>{sub}</p>
           </div>
         ))}
