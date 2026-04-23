@@ -141,7 +141,7 @@ export default function PositionsTable({ positions, cashEUR }: Props) {
 
                   {/* Expanded detail row */}
                   {isOpen && (
-                    <tr key={`${pos.id}-detail`} style={{ background: 'rgba(10,15,30,0.6)' }}>
+                    <tr key={`${pos.id}-detail`} style={{ background: 'rgba(20,32,55,0.6)' }}>
                       <td colSpan={9} className="p-0">
                         <div
                           className="mx-4 my-3 rounded-xl overflow-hidden"

@@ -41,7 +41,7 @@ export default function MovementsTable({ movements }: Props) {
       {/* Column headers — desktop only */}
       <div
         className="hidden sm:flex items-center px-6 py-2.5 border-b border-navy-600 gap-4"
-        style={{ background: 'rgba(9,15,26,0.4)' }}
+        style={{ background: 'rgba(18,30,50,0.4)' }}
       >
         <p className="section-label flex-1 min-w-0">Actif</p>
         <p className="section-label w-20 text-center">Type</p>
@@ -164,7 +164,7 @@ export default function MovementsTable({ movements }: Props) {
               {isOpen && (
                 <div
                   className="px-4 sm:px-6 pb-5 pt-1"
-                  style={{ background: 'rgba(9,15,26,0.4)', borderTop: '1px solid rgba(255,255,255,0.05)' }}
+                  style={{ background: 'rgba(18,30,50,0.4)', borderTop: '1px solid rgba(255,255,255,0.05)' }}
                 >
                   <div
                     className="rounded-xl p-5 mt-2"

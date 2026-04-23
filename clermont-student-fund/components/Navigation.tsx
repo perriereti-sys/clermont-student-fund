@@ -59,7 +59,7 @@ export default function Navigation() {
       {/* ── Top header (all screens) ───────────────────────────────── */}
       <header
         className="sticky top-0 z-50 border-b border-navy-600"
-        style={{ background: 'rgba(14,31,51,0.95)', backdropFilter: 'blur(20px)', WebkitBackdropFilter: 'blur(20px)' }}
+        style={{ background: 'rgba(22,42,72,0.97)', backdropFilter: 'blur(20px)', WebkitBackdropFilter: 'blur(20px)' }}
       >
         <div className="h-px bg-gradient-to-r from-transparent via-gold/50 to-transparent" />
 
@@ -92,7 +92,7 @@ export default function Navigation() {
       {/* ── Mobile bottom nav ─────────────────────────────────────── */}
       <nav
         className="sm:hidden fixed bottom-0 inset-x-0 z-50 border-t border-navy-600"
-        style={{ background: 'rgba(14,31,51,0.98)', backdropFilter: 'blur(20px)', WebkitBackdropFilter: 'blur(20px)' }}
+        style={{ background: 'rgba(22,42,72,0.99)', backdropFilter: 'blur(20px)', WebkitBackdropFilter: 'blur(20px)' }}
       >
         <div className="flex items-stretch">
           {navItems.map((item) => {
@@ -111,7 +111,7 @@ export default function Navigation() {
           })}
         </div>
         {/* iOS home bar safe area */}
-        <div style={{ height: 'env(safe-area-inset-bottom)', background: 'rgba(14,31,51,0.98)' }} />
+        <div style={{ height: 'env(safe-area-inset-bottom)', background: 'rgba(22,42,72,0.99)' }} />
       </nav>
     </>
   );

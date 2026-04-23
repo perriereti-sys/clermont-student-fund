@@ -21,7 +21,7 @@ const PERIODS: { key: Period; label: string; days: number | null }[] = [
 
 const GOLD = '#D4AF37';
 const BLUE = '#3B82F6';
-const MUTED = '#4A6080';
+const MUTED = '#7A96B8';
 
 // ─── Tooltip ────────────────────────────────────────────────────────────────
 
@@ -66,7 +66,7 @@ const CustomLegend = ({ payload }: any) => (
             backgroundColor: e.color,
           }}
         />
-        <span className="text-xs" style={{ color: '#6B8099' }}>{e.value}</span>
+        <span className="text-xs" style={{ color: '#8AAAC0' }}>{e.value}</span>
       </div>
     ))}
   </div>
@@ -115,7 +115,7 @@ export default function PerformanceChart({ data }: Props) {
     return last - 100;
   }, [displayed]);
 
-  const perfColor = periodPerf == null ? '#6B8099' : periodPerf >= 0 ? '#10B981' : '#EF4444';
+  const perfColor = periodPerf == null ? '#8AAAC0' : periodPerf >= 0 ? '#10B981' : '#EF4444';
   const perfSign  = periodPerf != null && periodPerf >= 0 ? '+' : '';
 
   return (
@@ -128,7 +128,7 @@ export default function PerformanceChart({ data }: Props) {
         <div className="flex items-center gap-4">
           <div>
             <p className="text-sm font-medium text-slate-200">Performance relative</p>
-            <p className="text-xs mt-0.5" style={{ color: '#4A6080' }}>
+            <p className="text-xs mt-0.5" style={{ color: '#7A96B8' }}>
               Base 100 — depuis le 01/01/2026
             </p>
           </div>
@@ -145,7 +145,7 @@ export default function PerformanceChart({ data }: Props) {
         {/* Period selector */}
         <div
           className="flex items-center gap-0.5 rounded-lg p-0.5 self-start sm:self-auto"
-          style={{ background: '#0B1C2C' }}
+          style={{ background: '#162540' }}
         >
           {PERIODS.map(({ key, label }) => {
             const active = period === key;
@@ -156,7 +156,7 @@ export default function PerformanceChart({ data }: Props) {
                 className="px-3 py-2 text-xs font-medium rounded-md transition-all duration-150 min-w-[40px] min-h-[36px]"
                 style={{
                   background:    active ? GOLD      : 'transparent',
-                  color:         active ? '#0B1C2C' : '#6B8099',
+                  color:         active ? '#162540' : '#8AAAC0',
                   fontWeight:    active ? 700       : 500,
                   letterSpacing: '0.02em',
                 }}
@@ -180,7 +180,7 @@ export default function PerformanceChart({ data }: Props) {
             <ReferenceLine y={100} stroke="rgba(107,128,153,0.25)" strokeDasharray="3 3" />
             <XAxis
               dataKey="date"
-              tick={{ fill: '#4A6080', fontSize: 10 }}
+              tick={{ fill: '#7A96B8', fontSize: 10 }}
               tickLine={false}
               axisLine={false}
               tickFormatter={(v) => {
@@ -189,7 +189,7 @@ export default function PerformanceChart({ data }: Props) {
               }}
             />
             <YAxis
-              tick={{ fill: '#4A6080', fontSize: 10 }}
+              tick={{ fill: '#7A96B8', fontSize: 10 }}
               tickLine={false}
               axisLine={false}
               domain={['auto', 'auto']}
@@ -210,7 +210,7 @@ export default function PerformanceChart({ data }: Props) {
               stroke={GOLD}
               strokeWidth={2.5}
               dot={false}
-              activeDot={{ r: 4, fill: GOLD, stroke: '#0B1C2C', strokeWidth: 2 }}
+              activeDot={{ r: 4, fill: GOLD, stroke: '#162540', strokeWidth: 2 }}
             />
 
             {/* MSCI World — blue */}

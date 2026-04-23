@@ -27,7 +27,7 @@ export default function EmailCapture() {
     <section id="rejoindre" className="relative rounded-2xl overflow-hidden">
 
       {/* Background */}
-      <div className="absolute inset-0" style={{ background: 'linear-gradient(135deg, #0a1628 0%, #0e1f33 50%, #0a1628 100%)' }} />
+      <div className="absolute inset-0" style={{ background: 'linear-gradient(135deg, #1a2e4a 0%, #1e3255 50%, #1a2e4a 100%)' }} />
 
       {/* Orbs */}
       <div
@@ -100,7 +100,7 @@ export default function EmailCapture() {
                 disabled={status === 'loading'}
                 className="w-full pl-10 pr-4 py-3.5 rounded-xl text-sm text-slate-100 placeholder-slate-600 outline-none transition-all duration-200"
                 style={{
-                  background: 'rgba(10,15,30,0.8)',
+                  background: 'rgba(20,32,55,0.8)',
                   border: '1px solid rgba(255,255,255,0.1)',
                 }}
                 onFocus={(e) => { e.target.style.borderColor = 'rgba(212,175,55,0.4)'; e.target.style.boxShadow = '0 0 0 3px rgba(212,175,55,0.08)'; }}
@@ -111,7 +111,7 @@ export default function EmailCapture() {
               type="submit"
               disabled={status === 'loading'}
               className="flex-shrink-0 flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl text-sm font-bold transition-all duration-200 hover:scale-105 disabled:opacity-60 disabled:scale-100"
-              style={{ background: '#D4AF37', color: '#060d1a', boxShadow: '0 4px 20px rgba(212,175,55,0.25)' }}
+              style={{ background: '#D4AF37', color: '#1a2e4a', boxShadow: '0 4px 20px rgba(212,175,55,0.25)' }}
             >
               {status === 'loading' ? (
                 <svg className="animate-spin" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">

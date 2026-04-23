@@ -7,7 +7,7 @@
 
 /* ── CSS Variables ───────────────────────────────────────────────── */
 :root {
-  --navy:       #0E1F33;
+  --navy:       #1e3555;
   --gold:       #D4AF37;
   --gold-glow:  rgba(212, 175, 55, 0.15);
   --gain:       #10B981;
@@ -25,7 +25,7 @@ html {
 }
 
 body {
-  background-color: #0A1628;
+  background-color: #1a2e4a;
   color: #F1F5F9;
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -55,8 +55,8 @@ td {
 
 /* ── Scrollbar ───────────────────────────────────────────────────── */
 ::-webkit-scrollbar            { width: 4px; height: 4px; }
-::-webkit-scrollbar-track      { background: #0E1F33; }
-::-webkit-scrollbar-thumb      { background: #1E3A58; border-radius: 4px; }
+::-webkit-scrollbar-track      { background: #1e3555; }
+::-webkit-scrollbar-thumb      { background: #2d5080; border-radius: 4px; }
 ::-webkit-scrollbar-thumb:hover{ background: #D4AF37; }
 
 /* ── Gold text gradient ──────────────────────────────────────────── */
@@ -69,7 +69,7 @@ td {
 
 /* ── Card system ─────────────────────────────────────────────────── */
 .card {
-  background: linear-gradient(145deg, #1C3352 0%, #142840 100%);
+  background: linear-gradient(145deg, #243f65 0%, #1e3555 100%);
   border: 1px solid rgba(255,255,255,0.11);
   border-radius: 14px;
   box-shadow: 0 2px 16px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.06);
@@ -80,7 +80,7 @@ td {
   box-shadow: 0 6px 28px rgba(0,0,0,0.35), 0 0 0 1px rgba(212,175,55,0.15), inset 0 1px 0 rgba(255,255,255,0.08);
 }
 .card-static {
-  background: linear-gradient(145deg, #1C3352 0%, #142840 100%);
+  background: linear-gradient(145deg, #243f65 0%, #1e3555 100%);
   border: 1px solid rgba(255,255,255,0.11);
   border-radius: 14px;
   box-shadow: 0 2px 16px rgba(0,0,0,0.25), inset 0 1px 0 rgba(255,255,255,0.06);
@@ -173,10 +173,10 @@ td {
   font-weight: 600;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: #5B7A9A;
+  color: #8AAAC8;
   padding: 10px 14px;
   border-bottom: 1px solid rgba(255,255,255,0.06);
-  background: rgba(10,20,34,0.5);
+  background: rgba(20,35,58,0.5);
   white-space: nowrap;
 }
 .data-table td {
@@ -250,7 +250,7 @@ td {
 
 /* Glass card */
 .glass-card {
-  background: rgba(28, 51, 82, 0.55);
+  background: rgba(36, 63, 101, 0.65);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border: 1px solid rgba(255,255,255,0.12);
@@ -258,7 +258,7 @@ td {
 }
 .glass-card:hover {
   border-color: rgba(212,175,55,0.3);
-  background: rgba(28, 51, 82, 0.7);
+  background: rgba(36, 63, 101, 0.8);
 }
 
 /* ── Mobile ──────────────────────────────────────────────────────── */

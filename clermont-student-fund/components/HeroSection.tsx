@@ -25,7 +25,7 @@ export default function HeroSection() {
     <div ref={sectionRef} className="relative overflow-hidden rounded-2xl mb-2" style={{ minHeight: '520px' }}>
 
       {/* Background */}
-      <div className="absolute inset-0" style={{ background: 'linear-gradient(135deg, #060d1a 0%, #0a1628 40%, #0c1e38 100%)' }} />
+      <div className="absolute inset-0" style={{ background: 'linear-gradient(135deg, #1a2e4a 0%, #1a2e4a 40%, #0c1e38 100%)' }} />
 
       {/* Animated orbs */}
       <div
@@ -91,7 +91,7 @@ export default function HeroSection() {
           <a
             href="#portfolio"
             className="flex items-center gap-2 px-7 py-3 rounded-xl text-sm font-semibold transition-all duration-200 hover:scale-105 hover:shadow-lg"
-            style={{ background: '#D4AF37', color: '#060d1a', boxShadow: '0 4px 20px rgba(212,175,55,0.3)' }}
+            style={{ background: '#D4AF37', color: '#1a2e4a', boxShadow: '0 4px 20px rgba(212,175,55,0.3)' }}
           >
             Voir le portefeuille
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
@@ -118,7 +118,7 @@ export default function HeroSection() {
             { value: '10',            label: 'Actifs en portefeuille' },
             { value: 'Multi-actifs',  label: 'Stratégie' },
           ].map(({ value, label }) => (
-            <div key={label} className="flex flex-col items-center py-5 px-3" style={{ background: 'rgba(10,15,30,0.6)' }}>
+            <div key={label} className="flex flex-col items-center py-5 px-3" style={{ background: 'rgba(20,32,55,0.6)' }}>
               <span className="font-display font-bold text-xl sm:text-2xl text-slate-100">{value}</span>
               <span className="text-[10px] sm:text-xs mt-1 tracking-wide" style={{ color: '#7A96B8' }}>{label}</span>
             </div>

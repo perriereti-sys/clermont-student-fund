@@ -2,7 +2,7 @@ export default function Footer() {
   return (
     <footer
       className="relative mt-16 border-t overflow-hidden"
-      style={{ borderColor: 'rgba(255,255,255,0.07)', background: 'linear-gradient(180deg, transparent 0%, rgba(10,15,30,0.6) 100%)' }}
+      style={{ borderColor: 'rgba(255,255,255,0.07)', background: 'linear-gradient(180deg, transparent 0%, rgba(20,32,55,0.6) 100%)' }}
     >
       <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-gold/30 to-transparent" />
 

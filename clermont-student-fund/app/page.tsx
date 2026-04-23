@@ -54,7 +54,7 @@ export default async function DashboardPage() {
 
         <div
           className="rounded-xl px-6 py-5"
-          style={{ background: 'linear-gradient(145deg, #172E4A 0%, #112338 100%)', border: '1px solid rgba(255,255,255,0.07)' }}
+          style={{ background: 'linear-gradient(145deg, #243f65 0%, #1e3555 100%)', border: '1px solid rgba(255,255,255,0.07)' }}
         >
           <p className="section-label mb-4">Informations du fond</p>
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-5">
