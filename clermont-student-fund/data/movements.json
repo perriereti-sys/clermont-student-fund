@@ -145,6 +145,30 @@
       "justification": "Ouverture d'une position sur Veolia, leader mondial du traitement de l'eau et des déchets. Positionnement sur les infrastructures essentielles dans un contexte de raréfaction des ressources. Dividende solide, visibilité long terme grâce aux contrats de concession, et exposition défensive dans un marché volatile."
     }
     ,{
+      "id": "14",
+      "date": "2025-12-29",
+      "type": "BUY",
+      "ticker": "SI=F",
+      "name": "Argent (Silver)",
+      "quantity": 27,
+      "price": 71.80,
+      "currency": "USD",
+      "totalEUR": 1939,
+      "justification": "Ouverture d'une position sur l'argent métal dans un contexte de demande industrielle soutenue (transition énergétique, photovoltaïque, électronique). Ratio or/argent historiquement élevé, laissant anticiper un rattrapage. Position tactique court/moyen terme sur un actif tangible avec un profil risque/rendement asymétrique."
+    }
+    ,{
+      "id": "15",
+      "date": "2026-01-27",
+      "type": "SELL",
+      "ticker": "SI=F",
+      "name": "Argent (Silver)",
+      "quantity": 27,
+      "price": 106.00,
+      "currency": "USD",
+      "totalEUR": 2862,
+      "justification": "Cession de la totalité de la position argent après une hausse de +47.6% en moins d'un mois. Objectif de cours atteint, prise de bénéfices de +$923. Le ratio or/argent s'étant normalisé, le catalyseur principal de la thèse est épuisé."
+    }
+    ,{
       "id": "13",
       "date": "2026-04-23",
       "type": "BUY",

@@ -11,7 +11,7 @@ export default function MouvementsPage() {
   const divs     = movements.filter(m => m.type === 'DIVIDEND');
 
   const fmtEur = (n: number) =>
-    new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 }).format(n);
+    new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(n);
 
   const stats = [
     {
