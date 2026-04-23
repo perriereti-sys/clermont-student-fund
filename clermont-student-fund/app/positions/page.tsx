@@ -1,8 +1,6 @@
 import PositionsTable from '@/components/positions/PositionsTable';
 import AllocationCharts from '@/components/positions/AllocationCharts';
 import AlertsPanel from '@/components/positions/AlertsPanel';
-import AddPositionModal from '@/components/positions/AddPositionModal';
-import AutoRefresh from '@/components/AutoRefresh';
 import { Alert } from '@/lib/types';
 import { computeAlerts } from '@/lib/calculations';
 import { getPortfolioMetrics } from '@/lib/getPortfolioMetrics';
@@ -24,21 +22,48 @@ export default async function PositionsPage() {
 
   const alerts: Alert[] = computeAlerts(portfolio.positions, portfolio.totalValue);
 
+  const bestPos  = [...portfolio.positions].sort((a, b) => b.pnlPercent - a.pnlPercent)[0];
+  const worstPos = [...portfolio.positions].sort((a, b) => a.pnlPercent - b.pnlPercent)[0];
+  const fmtUsd   = (n: number) => new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(n);
+
   return (
     <div className="flex flex-col gap-7">
 
-      {/* Page header */}
-      <div className="flex items-start justify-between">
-        <div>
-          <h1 className="font-display font-bold text-2xl text-slate-100">Positions</h1>
-          <p className="text-sm mt-1" style={{ color: '#4A6080' }}>
-            {portfolio.positions.length} positions ouvertes · Prix en temps réel
-          </p>
+      {/* Header */}
+      <div>
+        <p className="section-label mb-1">Portefeuille</p>
+        <h1 className="font-display font-bold text-2xl text-slate-100">Positions ouvertes</h1>
+        <p className="text-sm mt-1" style={{ color: '#4A6080' }}>
+          {portfolio.positions.length} actifs · Prix en temps réel via Yahoo Finance
+        </p>
+      </div>
+
+      {/* Quick stats */}
+      <div className="grid grid-cols-3 gap-4">
+        <div className="card relative overflow-hidden rounded-xl p-5">
+          <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-gold/15 to-transparent" />
+          <p className="section-label mb-2">Positions</p>
+          <p className="font-display font-bold text-2xl text-slate-100">{portfolio.positions.length}</p>
+          <p className="text-xs mt-1" style={{ color: '#4A6080' }}>actifs en portefeuille</p>
         </div>
-        <div className="flex items-center gap-3">
-          <AutoRefresh intervalMs={300_000} />
-          <AddPositionModal />
-        </div>
+
+        {bestPos && (
+          <div className="card relative overflow-hidden rounded-xl p-5">
+            <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-gain/20 to-transparent" />
+            <p className="section-label mb-2">Meilleure perf.</p>
+            <p className="font-display font-bold text-xl text-gain truncate">{bestPos.ticker}</p>
+            <p className="text-xs mt-1 font-mono text-gain">+{bestPos.pnlPercent.toFixed(1)}%</p>
+          </div>
+        )}
+
+        {worstPos && (
+          <div className="card relative overflow-hidden rounded-xl p-5">
+            <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-loss/20 to-transparent" />
+            <p className="section-label mb-2">Pire perf.</p>
+            <p className="font-display font-bold text-xl text-loss truncate">{worstPos.ticker}</p>
+            <p className="text-xs mt-1 font-mono text-loss">{worstPos.pnlPercent.toFixed(1)}%</p>
+          </div>
+        )}
       </div>
 
       {/* Alerts */}
