@@ -1,3 +1,12 @@
 {
-  "rapports": []
+  "rapports": [
+    {
+      "id": "1",
+      "title": "Rapport de Performance Mars 2026",
+      "date": "2026-03-31",
+      "type": "Compte de résultats",
+      "period": "Mars 2026",
+      "filename": "CSF_Rapport_Performance_Mars_2026.pdf"
+    }
+  ]
 }
