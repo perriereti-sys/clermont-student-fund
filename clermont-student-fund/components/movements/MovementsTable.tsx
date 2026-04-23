@@ -12,10 +12,10 @@ const TYPE_CFG: Record<string, { label: string; color: string; bg: string; borde
 };
 
 const fmtDate  = (s: string) => new Date(s).toLocaleDateString('fr-FR', { day: 'numeric', month: 'short', year: 'numeric' });
-const fmtTotal = (n: number, cur: string) =>
-  new Intl.NumberFormat('fr-FR', { style: 'currency', currency: cur === 'EUR' ? 'EUR' : 'USD', maximumFractionDigits: 0 }).format(n);
-const fmtPrice = (n: number, cur: string) =>
-  new Intl.NumberFormat('fr-FR', { style: 'currency', currency: cur === 'EUR' ? 'EUR' : 'USD', minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(n);
+const fmtTotal = (n: number, _cur?: string) =>
+  new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(n);
+const fmtPrice = (n: number, _cur?: string) =>
+  new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(n);
 const fmtQty   = (n: number) => n % 1 === 0 ? n.toString() : n.toFixed(4);
 
 export default function MovementsTable({ movements }: Props) {

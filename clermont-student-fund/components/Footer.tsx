@@ -13,7 +13,7 @@ export default function Footer() {
           <div className="text-center sm:text-left">
             <p className="font-display font-bold text-2xl text-shimmer mb-1">CSF</p>
             <p className="text-xs font-medium" style={{ color: '#4A6080' }}>Clermont Student Fund</p>
-            <p className="text-xs mt-1" style={{ color: '#2d4a6a' }}>Association étudiante · Clermont-Ferrand · Est. 2026</p>
+            <p className="text-xs mt-1" style={{ color: '#2d4a6a' }}>Association étudiante · Clermont-Ferrand · Est. 2025</p>
           </div>
 
           {/* Links */}

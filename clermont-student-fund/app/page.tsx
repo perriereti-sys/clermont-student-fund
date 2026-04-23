@@ -59,7 +59,7 @@ export default async function DashboardPage() {
           <p className="section-label mb-4">Informations du fond</p>
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-5">
             {[
-              { label: 'Création',   value: '01/01/2026'   },
+              { label: 'Création',   value: '01/10/2025'   },
               { label: 'Capital',    value: '$100 000'     },
               { label: 'Stratégie',  value: 'Multi-actifs' },
               { label: 'Devise',     value: 'USD'          },

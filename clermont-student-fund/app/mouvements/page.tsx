@@ -30,7 +30,7 @@ export default function MouvementsPage() {
     {
       label: 'Ventes',
       value: sells.length,
-      sub: 'positions cédées',
+      sub: `position${sells.length > 1 ? 's' : ''} cédée${sells.length > 1 ? 's' : ''}`,
       color: '#ef4444',
       bg: 'rgba(239,68,68,0.08)',
       border: 'rgba(239,68,68,0.2)',

@@ -63,7 +63,7 @@ export default function HeroSection() {
           style={{ background: 'rgba(212,175,55,0.1)', border: '1px solid rgba(212,175,55,0.25)', color: '#D4AF37' }}
         >
           <span className="w-1.5 h-1.5 rounded-full bg-gold animate-pulse" />
-          Est. 2026 · Clermont-Ferrand
+          Est. 2025 · Clermont-Ferrand
         </div>
 
         {/* Main heading */}
