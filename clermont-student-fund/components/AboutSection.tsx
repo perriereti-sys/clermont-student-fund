@@ -10,7 +10,7 @@ const features = [
     ),
     color: '#3b82f6',
     title: 'Communauté étudiante',
-    desc: 'Des étudiants de Clermont-Ferrand passionnés par les marchés financiers, réunis pour échanger et progresser ensemble.',
+    desc: 'Fondé à Clermont-Ferrand, le CSF accueille des étudiants de toute école et de toute ville. Si tu es passionné par les marchés financiers, tu as ta place ici.',
   },
   {
     icon: (
@@ -84,19 +84,6 @@ export default function AboutSection() {
         ))}
       </div>
 
-      {/* Quote / manifesto */}
-      <div
-        className="relative rounded-2xl px-8 py-8 text-center overflow-hidden"
-        style={{ background: 'linear-gradient(135deg, #0f1e3a 0%, #0a1220 100%)', border: '1px solid rgba(212,175,55,0.15)' }}
-      >
-        <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-gold/40 to-transparent" />
-        <div className="absolute bottom-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-gold/20 to-transparent" />
-        <p className="text-lg sm:text-xl font-display font-semibold text-slate-100 leading-relaxed max-w-xl mx-auto">
-          "La meilleure façon d'apprendre la finance,{' '}
-          <span className="text-gold-gradient">c'est de mettre de la peau dans le jeu."</span>
-        </p>
-        <p className="text-xs mt-3" style={{ color: '#4A6080' }}>— Philosophie du Clermont Student Fund</p>
-      </div>
     </section>
   );
 }
