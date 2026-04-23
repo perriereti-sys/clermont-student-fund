@@ -16,7 +16,7 @@ export default function AlertsPanel({ alerts }: Props) {
         </div>
         <div>
           <p className="text-sm font-semibold text-slate-100">Règlement respecté</p>
-          <p className="text-xs mt-0.5" style={{ color: '#4A6080' }}>Toutes les limites de concentration sont dans les clous.</p>
+          <p className="text-xs mt-0.5" style={{ color: '#7A96B8' }}>Toutes les limites de concentration sont dans les clous.</p>
         </div>
         <div className="absolute right-4 text-[11px] font-semibold tracking-wider uppercase" style={{ color: 'rgba(16,185,129,0.3)' }}>OK</div>
       </div>
@@ -35,7 +35,7 @@ export default function AlertsPanel({ alerts }: Props) {
         </div>
         <div>
           <p className="text-sm font-semibold text-slate-100">Alertes règlement</p>
-          <p className="text-xs" style={{ color: '#4A6080' }}>{alerts.length} limite{alerts.length > 1 ? 's' : ''} dépassée{alerts.length > 1 ? 's' : ''}</p>
+          <p className="text-xs" style={{ color: '#7A96B8' }}>{alerts.length} limite{alerts.length > 1 ? 's' : ''} dépassée{alerts.length > 1 ? 's' : ''}</p>
         </div>
       </div>
 
@@ -74,7 +74,7 @@ export default function AlertsPanel({ alerts }: Props) {
                     }}
                   />
                 </div>
-                <span className="text-xs font-mono whitespace-nowrap" style={{ color: '#4A6080' }}>
+                <span className="text-xs font-mono whitespace-nowrap" style={{ color: '#7A96B8' }}>
                   {alert.value.toFixed(1)}% / {alert.limit}%
                 </span>
               </div>

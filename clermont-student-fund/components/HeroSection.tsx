@@ -120,7 +120,7 @@ export default function HeroSection() {
           ].map(({ value, label }) => (
             <div key={label} className="flex flex-col items-center py-5 px-3" style={{ background: 'rgba(10,15,30,0.6)' }}>
               <span className="font-display font-bold text-xl sm:text-2xl text-slate-100">{value}</span>
-              <span className="text-[10px] sm:text-xs mt-1 tracking-wide" style={{ color: '#4A6080' }}>{label}</span>
+              <span className="text-[10px] sm:text-xs mt-1 tracking-wide" style={{ color: '#7A96B8' }}>{label}</span>
             </div>
           ))}
         </div>

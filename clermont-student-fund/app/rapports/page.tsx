@@ -41,7 +41,7 @@ export default function RapportsPage() {
       {/* Page header */}
       <div>
         <h1 className="font-display font-bold text-2xl text-slate-100">Rapports</h1>
-        <p className="text-sm mt-1" style={{ color: '#4A6080' }}>
+        <p className="text-sm mt-1" style={{ color: '#7A96B8' }}>
           Comptes de résultats et documents financiers de l'association
         </p>
       </div>
@@ -52,7 +52,7 @@ export default function RapportsPage() {
           <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-gold/15 to-transparent" />
           <p className="section-label mb-3">Documents publiés</p>
           <p className="font-display font-bold text-2xl font-mono text-slate-100">{rapports.length}</p>
-          <p className="text-xs mt-1.5" style={{ color: '#4A6080' }}>rapports disponibles</p>
+          <p className="text-xs mt-1.5" style={{ color: '#7A96B8' }}>rapports disponibles</p>
         </div>
         <div className="card relative overflow-hidden rounded-xl p-5">
           <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-gold/15 to-transparent" />
@@ -62,7 +62,7 @@ export default function RapportsPage() {
               ? new Date(sorted[0].date).toLocaleDateString('fr-FR', { month: 'short', year: 'numeric' })
               : '—'}
           </p>
-          <p className="text-xs mt-1.5" style={{ color: '#4A6080' }}>
+          <p className="text-xs mt-1.5" style={{ color: '#7A96B8' }}>
             {sorted.length > 0 ? sorted[0].type : 'aucun document'}
           </p>
         </div>
@@ -76,14 +76,14 @@ export default function RapportsPage() {
         </div>
 
         {sorted.length === 0 ? (
-          <div className="flex flex-col items-center justify-center py-20 gap-4" style={{ color: '#4A6080' }}>
+          <div className="flex flex-col items-center justify-center py-20 gap-4" style={{ color: '#7A96B8' }}>
             <PdfIcon />
             <p className="text-sm">Aucun rapport déposé pour l'instant</p>
           </div>
         ) : (
           <div className="divide-y divide-navy-600">
             {sorted.map((r) => {
-              const color = TYPE_COLORS[r.type] ?? '#4A6080';
+              const color = TYPE_COLORS[r.type] ?? '#7A96B8';
               return (
                 <div
                   key={r.id}
@@ -107,7 +107,7 @@ export default function RapportsPage() {
                       >
                         {r.type}
                       </span>
-                      <span className="text-xs" style={{ color: '#4A6080' }}>
+                      <span className="text-xs" style={{ color: '#7A96B8' }}>
                         {new Date(r.date).toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' })}
                       </span>
                     </div>

@@ -69,7 +69,7 @@ export default function Navigation() {
             {/* Brand */}
             <Link href="/" className="flex flex-col leading-none select-none">
               <span className="font-display font-bold text-sm tracking-[0.15em] text-gold">CSF</span>
-              <span className="text-[10px] tracking-wider font-medium mt-0.5 hidden sm:block" style={{ color: '#4A6080' }}>
+              <span className="text-[10px] tracking-wider font-medium mt-0.5 hidden sm:block" style={{ color: '#7A96B8' }}>
                 Clermont Student Fund
               </span>
             </Link>
@@ -102,7 +102,7 @@ export default function Navigation() {
                 key={item.href}
                 href={item.href}
                 className="flex-1 flex flex-col items-center justify-center gap-1 py-3 min-h-[60px] transition-colors duration-150"
-                style={{ color: isActive ? '#D4AF37' : '#4A6080' }}
+                style={{ color: isActive ? '#D4AF37' : '#7A96B8' }}
               >
                 {item.icon}
                 <span className="text-[10px] font-medium tracking-wide">{item.label}</span>

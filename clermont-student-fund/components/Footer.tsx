@@ -12,8 +12,8 @@ export default function Footer() {
           {/* Brand */}
           <div className="text-center sm:text-left">
             <p className="font-display font-bold text-2xl text-shimmer mb-1">CSF</p>
-            <p className="text-xs font-medium" style={{ color: '#4A6080' }}>Clermont Student Fund</p>
-            <p className="text-xs mt-1" style={{ color: '#2d4a6a' }}>Association étudiante · Clermont-Ferrand · Est. 2025</p>
+            <p className="text-xs font-medium" style={{ color: '#7A96B8' }}>Clermont Student Fund</p>
+            <p className="text-xs mt-1" style={{ color: '#4A6080' }}>Association étudiante · Clermont-Ferrand · Est. 2025</p>
           </div>
 
           {/* Links */}
@@ -50,8 +50,8 @@ export default function Footer() {
         </div>
 
         <div className="mt-8 pt-5 flex flex-col sm:flex-row items-center justify-between gap-2" style={{ borderTop: '1px solid rgba(255,255,255,0.05)' }}>
-          <p className="text-xs" style={{ color: '#2d4a6a' }}>© 2026 Clermont Student Fund — Tous droits réservés</p>
-          <p className="text-xs" style={{ color: '#2d4a6a' }}>Portefeuille fictif à des fins pédagogiques</p>
+          <p className="text-xs" style={{ color: '#4A6080' }}>© 2026 Clermont Student Fund — Tous droits réservés</p>
+          <p className="text-xs" style={{ color: '#4A6080' }}>Portefeuille fictif à des fins pédagogiques</p>
         </div>
       </div>
 

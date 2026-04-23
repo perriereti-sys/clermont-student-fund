@@ -33,7 +33,7 @@ export default async function PositionsPage() {
       <div>
         <p className="section-label mb-1">Portefeuille</p>
         <h1 className="font-display font-bold text-2xl text-slate-100">Positions ouvertes</h1>
-        <p className="text-sm mt-1" style={{ color: '#4A6080' }}>
+        <p className="text-sm mt-1" style={{ color: '#7A96B8' }}>
           {portfolio.positions.length} actifs · Prix en temps réel via Yahoo Finance
         </p>
       </div>
@@ -44,7 +44,7 @@ export default async function PositionsPage() {
           <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-gold/15 to-transparent" />
           <p className="section-label mb-2">Positions</p>
           <p className="font-display font-bold text-2xl text-slate-100">{portfolio.positions.length}</p>
-          <p className="text-xs mt-1" style={{ color: '#4A6080' }}>actifs en portefeuille</p>
+          <p className="text-xs mt-1" style={{ color: '#7A96B8' }}>actifs en portefeuille</p>
         </div>
 
         {bestPos && (

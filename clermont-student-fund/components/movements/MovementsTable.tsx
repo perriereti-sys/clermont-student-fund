@@ -33,7 +33,7 @@ export default function MovementsTable({ movements }: Props) {
       <div className="px-6 py-4 border-b border-navy-600 flex items-center justify-between">
         <div>
           <h2 className="text-sm font-display font-semibold text-slate-100">Historique des opérations</h2>
-          <p className="text-xs mt-0.5" style={{ color: '#4A6080' }}>Cliquez sur une ligne pour la thèse d'investissement</p>
+          <p className="text-xs mt-0.5" style={{ color: '#7A96B8' }}>Cliquez sur une ligne pour la thèse d'investissement</p>
         </div>
         <span className="badge badge-gray">{movements.length} opérations</span>
       </div>
@@ -75,7 +75,7 @@ export default function MovementsTable({ movements }: Props) {
                     </div>
                     <div className="min-w-0">
                       <p className="font-semibold text-sm text-slate-100 truncate group-hover:text-gold transition-colors">{mov.name}</p>
-                      <p className="font-mono text-[11px] mt-0.5" style={{ color: '#4A6080' }}>{mov.ticker}</p>
+                      <p className="font-mono text-[11px] mt-0.5" style={{ color: '#7A96B8' }}>{mov.ticker}</p>
                     </div>
                   </div>
 
@@ -90,10 +90,10 @@ export default function MovementsTable({ movements }: Props) {
                   </div>
 
                   {/* Date */}
-                  <p className="w-32 text-right text-sm tabular-nums" style={{ color: '#6B8099' }}>{fmtDate(mov.date)}</p>
+                  <p className="w-32 text-right text-sm tabular-nums" style={{ color: '#8AAAC0' }}>{fmtDate(mov.date)}</p>
 
                   {/* Qty × Price */}
-                  <p className="w-40 text-right font-mono text-xs tabular-nums" style={{ color: '#4A6080' }}>
+                  <p className="w-40 text-right font-mono text-xs tabular-nums" style={{ color: '#7A96B8' }}>
                     {fmtQty(mov.quantity)} × {fmtPrice(mov.price, mov.currency)}
                   </p>
 
@@ -105,7 +105,7 @@ export default function MovementsTable({ movements }: Props) {
                   {/* Chevron */}
                   <div
                     className="w-5 flex items-center justify-center transition-transform duration-200"
-                    style={{ transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)', color: '#4A6080' }}
+                    style={{ transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)', color: '#7A96B8' }}
                   >
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                       <polyline points="6 9 12 15 18 9" />
@@ -125,7 +125,7 @@ export default function MovementsTable({ movements }: Props) {
                       <div className="min-w-0">
                         <p className="font-semibold text-sm text-slate-100 truncate">{mov.name}</p>
                         <div className="flex items-center gap-2 mt-0.5">
-                          <p className="font-mono text-[11px]" style={{ color: '#4A6080' }}>{mov.ticker}</p>
+                          <p className="font-mono text-[11px]" style={{ color: '#7A96B8' }}>{mov.ticker}</p>
                           <span
                             className="text-[10px] font-semibold px-1.5 py-0.5 rounded-full"
                             style={{ background: cfg.bg, color: cfg.color }}
@@ -139,18 +139,18 @@ export default function MovementsTable({ movements }: Props) {
                     {/* Right */}
                     <div className="text-right flex-shrink-0">
                       <p className="font-mono font-bold text-base text-slate-100 tabular-nums">{fmtTotal(mov.totalEUR, mov.currency)}</p>
-                      <p className="text-[11px] mt-0.5 tabular-nums" style={{ color: '#4A6080' }}>{fmtDate(mov.date)}</p>
+                      <p className="text-[11px] mt-0.5 tabular-nums" style={{ color: '#7A96B8' }}>{fmtDate(mov.date)}</p>
                     </div>
                   </div>
 
                   {/* Detail row */}
                   <div className="flex items-center justify-between mt-2 pt-2" style={{ borderTop: '1px solid rgba(255,255,255,0.05)' }}>
-                    <p className="font-mono text-xs tabular-nums" style={{ color: '#4A6080' }}>
+                    <p className="font-mono text-xs tabular-nums" style={{ color: '#7A96B8' }}>
                       {fmtQty(mov.quantity)} × {fmtPrice(mov.price, mov.currency)}
                     </p>
                     <div
                       className="transition-transform duration-200"
-                      style={{ transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)', color: '#4A6080' }}
+                      style={{ transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)', color: '#7A96B8' }}
                     >
                       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                         <polyline points="6 9 12 15 18 9" />

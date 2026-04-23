@@ -62,7 +62,7 @@ export default function EmailCapture() {
           Tu es étudiant et passionné<br className="hidden sm:block" /> par les marchés ?
         </h2>
 
-        <p className="text-sm sm:text-base leading-relaxed mb-10 max-w-lg mx-auto" style={{ color: '#6B84A0' }}>
+        <p className="text-sm sm:text-base leading-relaxed mb-10 max-w-lg mx-auto" style={{ color: '#94AAC4' }}>
           Laisse ton email — on te contacte pour t'expliquer comment rejoindre le CSF
           et participer aux prises de décision du portefeuille.
         </p>
@@ -79,13 +79,13 @@ export default function EmailCapture() {
             </div>
             <div className="text-left">
               <p className="font-semibold text-slate-100 text-sm">Inscription enregistrée !</p>
-              <p className="text-xs mt-0.5" style={{ color: '#4A6080' }}>On te recontacte très bientôt.</p>
+              <p className="text-xs mt-0.5" style={{ color: '#7A96B8' }}>On te recontacte très bientôt.</p>
             </div>
           </div>
         ) : (
           <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
             <div className="flex-1 relative">
-              <div className="absolute left-3.5 top-1/2 -translate-y-1/2" style={{ color: '#4A6080' }}>
+              <div className="absolute left-3.5 top-1/2 -translate-y-1/2" style={{ color: '#7A96B8' }}>
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
                   <polyline points="22,6 12,13 2,6" />
@@ -126,7 +126,7 @@ export default function EmailCapture() {
           <p className="text-xs mt-3" style={{ color: '#ef4444' }}>Une erreur est survenue, réessaie.</p>
         )}
 
-        <p className="text-[11px] mt-6" style={{ color: '#2d4a6a' }}>
+        <p className="text-[11px] mt-6" style={{ color: '#4A6080' }}>
           Pas de spam. Juste un message quand les portes s'ouvrent.
         </p>
       </div>

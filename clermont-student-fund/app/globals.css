@@ -25,14 +25,13 @@ html {
 }
 
 body {
-  background-color: #0C1A2E;
-  color: #E8EDF4;
+  background-color: #0A1628;
+  color: #F1F5F9;
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-feature-settings: 'cv11', 'ss01';
-  /* overflow-x: clip does NOT break position:fixed unlike overflow:hidden */
-  overflow-x: clip;
+  /* NO overflow here — breaks position:fixed (hidden) or position:sticky (clip) */
   -webkit-text-size-adjust: 100%;
 }
 
@@ -70,21 +69,21 @@ td {
 
 /* ── Card system ─────────────────────────────────────────────────── */
 .card {
-  background: linear-gradient(145deg, #172E4A 0%, #112338 100%);
-  border: 1px solid rgba(255,255,255,0.08);
+  background: linear-gradient(145deg, #1C3352 0%, #142840 100%);
+  border: 1px solid rgba(255,255,255,0.11);
   border-radius: 14px;
-  box-shadow: 0 2px 12px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.04);
+  box-shadow: 0 2px 16px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.06);
   transition: box-shadow 0.2s ease, border-color 0.2s ease;
 }
 .card:hover {
-  border-color: rgba(212,175,55,0.3);
-  box-shadow: 0 6px 24px rgba(0,0,0,0.4), 0 0 0 1px rgba(212,175,55,0.12), inset 0 1px 0 rgba(255,255,255,0.06);
+  border-color: rgba(212,175,55,0.35);
+  box-shadow: 0 6px 28px rgba(0,0,0,0.35), 0 0 0 1px rgba(212,175,55,0.15), inset 0 1px 0 rgba(255,255,255,0.08);
 }
 .card-static {
-  background: linear-gradient(145deg, #172E4A 0%, #112338 100%);
-  border: 1px solid rgba(255,255,255,0.08);
+  background: linear-gradient(145deg, #1C3352 0%, #142840 100%);
+  border: 1px solid rgba(255,255,255,0.11);
   border-radius: 14px;
-  box-shadow: 0 2px 12px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.04);
+  box-shadow: 0 2px 16px rgba(0,0,0,0.25), inset 0 1px 0 rgba(255,255,255,0.06);
 }
 
 /* ── Gold accent top border ──────────────────────────────────────── */
@@ -136,7 +135,7 @@ td {
   font-weight: 600;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: #5B7A9A;
+  color: #7A96B8;
 }
 
 /* ── Nav ─────────────────────────────────────────────────────────── */
@@ -251,15 +250,15 @@ td {
 
 /* Glass card */
 .glass-card {
-  background: rgba(23, 46, 74, 0.5);
+  background: rgba(28, 51, 82, 0.55);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.12);
   border-radius: 16px;
 }
 .glass-card:hover {
-  border-color: rgba(212,175,55,0.25);
-  background: rgba(23, 46, 74, 0.65);
+  border-color: rgba(212,175,55,0.3);
+  background: rgba(28, 51, 82, 0.7);
 }
 
 /* ── Mobile ──────────────────────────────────────────────────────── */

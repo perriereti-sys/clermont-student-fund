@@ -76,7 +76,7 @@ export default async function DashboardPage() {
       {/* Divider */}
       <div className="flex items-center gap-4">
         <div className="flex-1 h-px" style={{ background: 'linear-gradient(90deg, transparent, rgba(212,175,55,0.2))' }} />
-        <span className="text-xs tracking-widest uppercase font-semibold" style={{ color: '#2d4a6a' }}>À propos</span>
+        <span className="text-xs tracking-widest uppercase font-semibold" style={{ color: '#4A6080' }}>À propos</span>
         <div className="flex-1 h-px" style={{ background: 'linear-gradient(90deg, rgba(212,175,55,0.2), transparent)' }} />
       </div>
 

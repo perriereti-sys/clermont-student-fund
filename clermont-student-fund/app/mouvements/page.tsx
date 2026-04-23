@@ -76,7 +76,7 @@ export default function MouvementsPage() {
       <div>
         <p className="section-label mb-1">Portefeuille</p>
         <h1 className="font-display font-bold text-2xl text-slate-100">Mouvements</h1>
-        <p className="text-sm mt-1" style={{ color: '#4A6080' }}>
+        <p className="text-sm mt-1" style={{ color: '#7A96B8' }}>
           Historique complet des opérations avec leur thèse d'investissement
         </p>
       </div>
@@ -97,7 +97,7 @@ export default function MouvementsPage() {
               </div>
             </div>
             <p className="font-display font-bold text-2xl tabular-nums truncate" style={{ color }}>{value}</p>
-            <p className="text-xs mt-1.5" style={{ color: '#4A6080' }}>{sub}</p>
+            <p className="text-xs mt-1.5" style={{ color: '#7A96B8' }}>{sub}</p>
           </div>
         ))}
       </div>

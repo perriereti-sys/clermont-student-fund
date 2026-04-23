@@ -57,7 +57,7 @@ export default function AboutSection() {
           Apprendre l'investissement<br />
           <span className="text-gold-gradient">par la pratique</span>
         </h2>
-        <p className="text-sm sm:text-base leading-relaxed" style={{ color: '#6B84A0' }}>
+        <p className="text-sm sm:text-base leading-relaxed" style={{ color: '#94AAC4' }}>
           Le CSF n'est pas un cours magistral — c'est un laboratoire d'investissement.
           On prend de vraies décisions, on se trompe, on apprend, et on s'améliore.
         </p>
@@ -78,7 +78,7 @@ export default function AboutSection() {
             </div>
             <div>
               <p className="font-semibold text-slate-100 text-sm mb-1.5">{title}</p>
-              <p className="text-xs leading-relaxed" style={{ color: '#6B84A0' }}>{desc}</p>
+              <p className="text-xs leading-relaxed" style={{ color: '#94AAC4' }}>{desc}</p>
             </div>
           </div>
         ))}
