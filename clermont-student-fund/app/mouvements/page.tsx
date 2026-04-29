@@ -1,9 +1,22 @@
 import MovementsTable from '@/components/movements/MovementsTable';
+import FundCurveChart from '@/components/movements/FundCurveChart';
 import movementsData from '@/data/movements.json';
-import { Movement } from '@/lib/types';
+import { Movement, ChartPoint } from '@/lib/types';
+import { getPortfolioMetrics } from '@/lib/getPortfolioMetrics';
 
-export default function MouvementsPage() {
+export const dynamic = 'force-dynamic';
+export const runtime = 'nodejs';
+
+export default async function MouvementsPage() {
   const movements = movementsData.movements as Movement[];
+
+  let chartData: ChartPoint[] = [];
+  try {
+    const portfolio = await getPortfolioMetrics();
+    chartData = portfolio.chartData;
+  } catch {
+    // chartData stays empty
+  }
 
   const buys     = movements.filter(m => m.type === 'BUY');
   const sells    = movements.filter(m => m.type === 'SELL');
@@ -73,10 +86,10 @@ export default function MouvementsPage() {
     <div className="flex flex-col gap-7">
 
       {/* Header */}
-      <div>
+      <div className="page-heading">
         <p className="section-label mb-1">Portefeuille</p>
-        <h1 className="font-display font-bold text-2xl text-slate-100">Mouvements</h1>
-        <p className="text-sm mt-1" style={{ color: '#7A96B8' }}>
+        <h1 className="font-display font-bold text-2xl text-navy">Mouvements</h1>
+        <p className="text-sm mt-1" style={{ color: '#8496B2' }}>
           Historique complet des opérations avec leur thèse d'investissement
         </p>
       </div>
@@ -97,10 +110,15 @@ export default function MouvementsPage() {
               </div>
             </div>
             <p className="font-display font-bold text-2xl tabular-nums truncate" style={{ color }}>{value}</p>
-            <p className="text-xs mt-1.5" style={{ color: '#7A96B8' }}>{sub}</p>
+            <p className="text-xs mt-1.5" style={{ color: '#8496B2' }}>{sub}</p>
           </div>
         ))}
       </div>
+
+      {/* Fund performance curve with entry/exit points */}
+      {chartData.length >= 2 && (
+        <FundCurveChart chartData={chartData} movements={movements} />
+      )}
 
       <MovementsTable movements={movements} />
     </div>

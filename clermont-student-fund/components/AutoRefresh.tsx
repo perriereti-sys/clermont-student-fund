@@ -39,8 +39,8 @@ export default function AutoRefresh({ intervalMs = 90_000 }: Props) {
       : `Actualisation dans ${seconds}s`;
 
   return (
-    <div className="flex items-center gap-1.5 text-xs text-gray-500">
-      <span className="inline-block w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
+    <div className="flex items-center gap-1.5 text-xs" style={{ color: '#8496B2' }}>
+      <span className="live-dot" />
       {label}
     </div>
   );

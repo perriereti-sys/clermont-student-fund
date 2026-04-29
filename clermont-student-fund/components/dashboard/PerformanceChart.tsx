@@ -2,7 +2,7 @@
 
 import { useState, useMemo } from 'react';
 import {
-  LineChart, Line, XAxis, YAxis, CartesianGrid,
+  ComposedChart, Area, Line, XAxis, YAxis, CartesianGrid,
   Tooltip, Legend, ResponsiveContainer, ReferenceLine,
 } from 'recharts';
 import { ChartPoint } from '@/lib/types';
@@ -12,39 +12,37 @@ interface Props { data: ChartPoint[] }
 type Period = '1D' | '1W' | '1M' | '1Y' | 'ALL';
 
 const PERIODS: { key: Period; label: string; days: number | null }[] = [
-  { key: '1D', label: '1J',    days: 1   },
-  { key: '1W', label: '1S',    days: 7   },
-  { key: '1M', label: '1M',    days: 30  },
-  { key: '1Y', label: '1A',    days: 365 },
+  { key: '1D',  label: '1J',    days: 1   },
+  { key: '1W',  label: '1S',    days: 7   },
+  { key: '1M',  label: '1M',    days: 30  },
+  { key: '1Y',  label: '1A',    days: 365 },
   { key: 'ALL', label: 'Début', days: null },
 ];
 
-const GOLD = '#D4AF37';
-const BLUE = '#3B82F6';
-const MUTED = '#7A96B8';
+const GOLD  = '#B8963A';
+const BLUE  = '#3B82F6';
+const TEAL  = '#0891B2';
+const MUTED = '#8496B2';
 
-// ─── Tooltip ────────────────────────────────────────────────────────────────
+interface TooltipPayloadItem { name: string; value: number | null; color: string }
 
 const CustomTooltip = ({ active, payload, label }: any) => {
   if (!active || !payload?.length) return null;
   return (
     <div
-      className="rounded-xl border p-3 text-xs shadow-xl"
-      style={{ background: '#0E1F33', borderColor: 'rgba(255,255,255,0.1)' }}
+      className="rounded-xl border p-3 text-xs shadow-lg"
+      style={{ background: '#FFFFFF', borderColor: 'rgba(26,37,64,0.1)' }}
     >
       <p className="section-label mb-2">
         {new Date(label).toLocaleDateString('fr-FR', { day: '2-digit', month: 'short', year: '2-digit' })}
       </p>
-      {payload.map((e: any) => (
+      {payload.map((e: TooltipPayloadItem) => (
         <div key={e.name} className="flex items-center justify-between gap-5 mb-1">
           <div className="flex items-center gap-1.5">
-            <span
-              className="w-2 h-2 rounded-full flex-shrink-0"
-              style={{ backgroundColor: e.color }}
-            />
+            <span className="w-2 h-2 rounded-full flex-shrink-0" style={{ backgroundColor: e.color }} />
             <span style={{ color: MUTED }}>{e.name}</span>
           </div>
-          <span className="font-mono font-medium text-slate-200">
+          <span className="font-mono font-medium" style={{ color: '#1A2540' }}>
             {e.value != null ? `${e.value >= 100 ? '+' : ''}${(e.value - 100).toFixed(2)}%` : '—'}
           </span>
         </div>
@@ -53,26 +51,29 @@ const CustomTooltip = ({ active, payload, label }: any) => {
   );
 };
 
-// ─── Legend ─────────────────────────────────────────────────────────────────
-
 const CustomLegend = ({ payload }: any) => (
   <div className="flex items-center justify-center gap-6 pt-2">
-    {payload?.map((e: any) => (
-      <div key={e.value} className="flex items-center gap-2">
-        <span
-          className="inline-block w-5 rounded-full"
-          style={{
-            height: e.value === 'CSF Portfolio' ? '2px' : '1.5px',
-            backgroundColor: e.color,
-          }}
-        />
-        <span className="text-xs" style={{ color: '#8AAAC0' }}>{e.value}</span>
-      </div>
-    ))}
+    {payload?.map((e: any) => {
+      const isPortfolio = e.value === 'CSF Portfolio';
+      return (
+        <div key={e.value} className="flex items-center gap-2">
+          {isPortfolio ? (
+            <span
+              className="inline-block w-5 rounded-sm"
+              style={{ height: '8px', background: `linear-gradient(180deg, ${GOLD}44 0%, ${GOLD}11 100%)`, borderTop: `2px solid ${GOLD}` }}
+            />
+          ) : (
+            <span
+              className="inline-block w-5 rounded-full"
+              style={{ height: '1.5px', backgroundColor: e.color }}
+            />
+          )}
+          <span className="text-xs" style={{ color: MUTED }}>{e.value}</span>
+        </div>
+      );
+    })}
   </div>
 );
-
-// ─── Helpers ─────────────────────────────────────────────────────────────────
 
 function cutoffDate(days: number | null): string | null {
   if (days === null) return null;
@@ -94,8 +95,6 @@ function rebase(data: ChartPoint[]): ChartPoint[] {
   }));
 }
 
-// ─── Component ───────────────────────────────────────────────────────────────
-
 export default function PerformanceChart({ data }: Props) {
   const [period, setPeriod] = useState<Period>('ALL');
 
@@ -103,19 +102,15 @@ export default function PerformanceChart({ data }: Props) {
     const cfg = PERIODS.find((p) => p.key === period)!;
     const cutoff = cutoffDate(cfg.days);
     const filtered = cutoff ? data.filter((pt) => pt.date >= cutoff!) : data;
-    // For ALL: data is already indexed to base 100 from initial capital — no rebase needed.
-    // For sub-periods: rebase to 100 at the start of that window.
     return cfg.key === 'ALL' ? filtered : rebase(filtered);
   }, [data, period]);
 
-  // Compute period performance for CSF
   const periodPerf = useMemo(() => {
     if (!displayed.length) return null;
-    const last = displayed[displayed.length - 1].portfolio;
-    return last - 100;
+    return displayed[displayed.length - 1].portfolio - 100;
   }, [displayed]);
 
-  const perfColor = periodPerf == null ? '#8AAAC0' : periodPerf >= 0 ? '#10B981' : '#EF4444';
+  const perfColor = periodPerf == null ? MUTED : periodPerf >= 0 ? '#0A8E62' : '#C93048';
   const perfSign  = periodPerf != null && periodPerf >= 0 ? '+' : '';
 
   return (
@@ -123,20 +118,17 @@ export default function PerformanceChart({ data }: Props) {
       {/* Header */}
       <div
         className="px-4 sm:px-6 py-4 border-b flex flex-col sm:flex-row sm:items-center gap-3 sm:justify-between"
-        style={{ borderColor: 'rgba(255,255,255,0.06)' }}
+        style={{ borderColor: 'rgba(26,37,64,0.07)', background: '#FAFBFD' }}
       >
         <div className="flex items-center gap-4">
           <div>
-            <p className="text-sm font-medium text-slate-200">Performance relative</p>
-            <p className="text-xs mt-0.5" style={{ color: '#7A96B8' }}>
+            <p className="text-sm font-medium" style={{ color: '#1A2540' }}>Performance relative</p>
+            <p className="text-xs mt-0.5" style={{ color: MUTED }}>
               Base 100 — depuis le 01/01/2026
             </p>
           </div>
           {periodPerf != null && (
-            <span
-              className="text-sm font-mono font-semibold"
-              style={{ color: perfColor }}
-            >
+            <span className="text-sm font-mono font-semibold" style={{ color: perfColor }}>
               {perfSign}{periodPerf.toFixed(2)}%
             </span>
           )}
@@ -145,7 +137,7 @@ export default function PerformanceChart({ data }: Props) {
         {/* Period selector */}
         <div
           className="flex items-center gap-0.5 rounded-lg p-0.5 self-start sm:self-auto"
-          style={{ background: '#162540' }}
+          style={{ background: '#EEF0F7' }}
         >
           {PERIODS.map(({ key, label }) => {
             const active = period === key;
@@ -153,12 +145,13 @@ export default function PerformanceChart({ data }: Props) {
               <button
                 key={key}
                 onClick={() => setPeriod(key)}
-                className="px-3 py-2 text-xs font-medium rounded-md transition-all duration-150 min-w-[40px] min-h-[36px]"
+                className="px-3 py-2 text-xs font-medium rounded-md transition-all duration-150 min-w-[40px] min-h-[36px] active:scale-95"
                 style={{
-                  background:    active ? GOLD      : 'transparent',
-                  color:         active ? '#162540' : '#8AAAC0',
-                  fontWeight:    active ? 700       : 500,
+                  background:    active ? '#FFFFFF'   : 'transparent',
+                  color:         active ? '#1A2540'   : MUTED,
+                  fontWeight:    active ? 700         : 500,
                   letterSpacing: '0.02em',
+                  boxShadow:     active ? '0 1px 3px rgba(26,37,64,0.1)' : 'none',
                 }}
               >
                 {label}
@@ -169,18 +162,26 @@ export default function PerformanceChart({ data }: Props) {
       </div>
 
       {/* Chart */}
-      <div className="px-2 sm:px-4 py-4 sm:py-5">
+      <div className="px-2 sm:px-4 py-4 sm:py-5 bg-white">
         <ResponsiveContainer width="100%" height={220} className="sm:!h-[280px]">
-          <LineChart data={displayed} margin={{ top: 4, right: 8, left: 4, bottom: 0 }}>
+          <ComposedChart data={displayed} margin={{ top: 4, right: 8, left: 4, bottom: 0 }}>
+            <defs>
+              <linearGradient id="portfolioAreaGrad" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%"   stopColor={GOLD} stopOpacity={0.18} />
+                <stop offset="100%" stopColor={GOLD} stopOpacity={0.01} />
+              </linearGradient>
+            </defs>
+
             <CartesianGrid
               strokeDasharray="2 4"
-              stroke="rgba(26,53,80,0.7)"
+              stroke="rgba(26,37,64,0.06)"
               vertical={false}
             />
-            <ReferenceLine y={100} stroke="rgba(107,128,153,0.25)" strokeDasharray="3 3" />
+            <ReferenceLine y={100} stroke="rgba(26,37,64,0.15)" strokeDasharray="3 3" />
+
             <XAxis
               dataKey="date"
-              tick={{ fill: '#7A96B8', fontSize: 10 }}
+              tick={{ fill: MUTED, fontSize: 10 }}
               tickLine={false}
               axisLine={false}
               tickFormatter={(v) => {
@@ -189,7 +190,7 @@ export default function PerformanceChart({ data }: Props) {
               }}
             />
             <YAxis
-              tick={{ fill: '#7A96B8', fontSize: 10 }}
+              tick={{ fill: MUTED, fontSize: 10 }}
               tickLine={false}
               axisLine={false}
               domain={['auto', 'auto']}
@@ -198,45 +199,48 @@ export default function PerformanceChart({ data }: Props) {
             />
             <Tooltip
               content={<CustomTooltip />}
-              cursor={{ stroke: 'rgba(212,175,55,0.15)', strokeWidth: 1 }}
+              cursor={{ stroke: `${GOLD}33`, strokeWidth: 1 }}
             />
             <Legend content={<CustomLegend />} />
 
-            {/* CSF Portfolio — gold */}
-            <Line
+            {/* Portfolio: area + line */}
+            <Area
               type="monotone"
               dataKey="portfolio"
               name="CSF Portfolio"
               stroke={GOLD}
               strokeWidth={2.5}
+              fill="url(#portfolioAreaGrad)"
               dot={false}
-              activeDot={{ r: 4, fill: GOLD, stroke: '#162540', strokeWidth: 2 }}
+              activeDot={{ r: 4, fill: GOLD, stroke: '#FFFFFF', strokeWidth: 2 }}
             />
 
-            {/* MSCI World — blue */}
+            {/* MSCI World */}
             <Line
               type="monotone"
               dataKey="msciWorld"
               name="MSCI World"
               stroke={BLUE}
               strokeWidth={1.5}
-              strokeDasharray="4 3"
+              strokeDasharray="5 3"
               dot={false}
+              activeDot={{ r: 3, fill: BLUE, stroke: '#FFFFFF', strokeWidth: 1.5 }}
               connectNulls
             />
 
-            {/* Nasdaq 100 — muted */}
+            {/* Nasdaq 100 */}
             <Line
               type="monotone"
               dataKey="nasdaq100"
               name="Nasdaq 100"
-              stroke={MUTED}
+              stroke={TEAL}
               strokeWidth={1.5}
-              strokeDasharray="4 3"
+              strokeDasharray="5 3"
               dot={false}
+              activeDot={{ r: 3, fill: TEAL, stroke: '#FFFFFF', strokeWidth: 1.5 }}
               connectNulls
             />
-          </LineChart>
+          </ComposedChart>
         </ResponsiveContainer>
       </div>
     </div>

@@ -1,6 +1,7 @@
 export type AssetType = 'action' | 'etf' | 'or' | 'crypto';
 export type Currency = 'USD' | 'EUR';
 export type MovementType = 'BUY' | 'SELL' | 'DIVIDEND';
+export type BucketCategory = 'socle' | 'conviction' | 'opportunite';
 
 export interface Position {
   id: string;
@@ -13,6 +14,7 @@ export interface Position {
   currency: Currency;
   buyDate: string;
   lastBuyDate?: string;
+  category?: BucketCategory;
 }
 
 export interface PortfolioData {

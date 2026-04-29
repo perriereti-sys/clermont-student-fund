@@ -1,125 +1,175 @@
 'use client';
 
-import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer } from 'recharts';
+import { useState } from 'react';
+import { PieChart, Pie, Cell, ResponsiveContainer } from 'recharts';
 import { EnrichedPosition } from '@/lib/types';
 
 const TYPE_COLORS: Record<string, string> = {
-  action: '#3b82f6',
-  etf:    '#22c55e',
-  or:     '#f59e0b',
-  crypto: '#8b5cf6',
-  cash:   '#64748b',
+  action: '#2563EB',
+  etf:    '#0A8E62',
+  or:     '#B8963A',
+  crypto: '#7C3AED',
+  cash:   '#8496B2',
 };
 const TYPE_LABELS: Record<string, string> = {
-  action: 'Stocks',
+  action: 'Actions',
   etf:    'ETF',
-  or:     'Gold',
+  or:     'Or',
   crypto: 'Crypto',
   cash:   'Cash',
 };
-const SECTOR_COLORS = [
-  '#3b82f6', '#22c55e', '#f59e0b', '#8b5cf6',
-  '#ef4444', '#06b6d4', '#f97316', '#84cc16', '#ec4899',
+const SECTOR_PALETTE = [
+  '#2563EB', '#0A8E62', '#B8963A', '#7C3AED',
+  '#C93048', '#0891B2', '#EA580C', '#65A30D', '#DB2777', '#5C6E8A',
 ];
 
-interface ChartEntry { name: string; value: number; color: string }
+interface ChartEntry { name: string; value: number; color: string; tickers: string[] }
 
-interface Props {
-  positions: EnrichedPosition[];
-  cashEUR: number;
-  totalValue: number;
-}
+interface Props { positions: EnrichedPosition[]; cashEUR: number; totalValue: number }
 
-const CustomTooltip = ({ active, payload }: any) => {
-  if (!active || !payload?.length) return null;
+function DonutChart({ data, label, sublabel }: { data: ChartEntry[]; label: string; sublabel: string }) {
+  const [hovered, setHovered] = useState<string | null>(null);
+  const active = hovered ? data.find(d => d.name === hovered) ?? null : null;
+
   return (
-    <div className="rounded-lg px-3 py-2 text-xs shadow-xl"
-      style={{ background: '#0E1F33', border: '1px solid rgba(255,255,255,0.1)' }}>
-      <p className="font-semibold text-white">{payload[0].name}</p>
-      <p style={{ color: '#94A3B8' }}>{payload[0].value.toFixed(1)}%</p>
-    </div>
-  );
-};
+    <div className="card-static rounded-2xl p-5 flex flex-col">
+      <h3 className="text-sm font-semibold mb-0.5" style={{ color: '#1A2540' }}>{label}</h3>
+      <p className="section-label mb-4">{sublabel}</p>
 
-// Legend rendered outside the SVG so it never overflows
-function ChartLegend({ items }: { items: ChartEntry[] }) {
-  return (
-    <div className="flex flex-wrap justify-center gap-x-4 gap-y-2 mt-3 px-2">
-      {items.map((item) => (
-        <div key={item.name} className="flex items-center gap-1.5">
-          <span className="w-2.5 h-2.5 rounded-sm flex-shrink-0" style={{ background: item.color }} />
-          <span className="text-xs" style={{ color: '#7A96B0' }}>{item.name}</span>
-          <span className="text-xs font-mono" style={{ color: '#94A3B8' }}>{item.value.toFixed(1)}%</span>
-        </div>
-      ))}
-    </div>
-  );
-}
-
-function DonutChart({ data, label }: { data: ChartEntry[]; label: string }) {
-  return (
-    <div className="card-static rounded-2xl p-5">
-      <h3 className="text-sm font-semibold text-slate-100 mb-1">{label}</h3>
-      <p className="section-label mb-4">{data.length} categories</p>
-      {/* Fixed height container — chart only, no legend inside */}
-      <div style={{ height: 180 }}>
+      {/* Donut + center overlay */}
+      <div className="relative flex-shrink-0" style={{ height: 200 }}>
         <ResponsiveContainer width="100%" height="100%">
           <PieChart>
             <Pie
               data={data}
-              cx="50%"
-              cy="50%"
-              innerRadius="45%"
-              outerRadius="72%"
+              cx="50%" cy="50%"
+              innerRadius="42%" outerRadius="68%"
               paddingAngle={2}
               dataKey="value"
+              strokeWidth={0}
+              animationBegin={0}
+              animationDuration={700}
+              onMouseEnter={(_, i) => setHovered(data[i].name)}
+              onMouseLeave={() => setHovered(null)}
             >
               {data.map((entry, i) => (
-                <Cell key={i} fill={entry.color} stroke="rgba(0,0,0,0.2)" strokeWidth={1} />
+                <Cell
+                  key={i} fill={entry.color}
+                  opacity={hovered && hovered !== entry.name ? 0.22 : 1}
+                  style={{ cursor: 'pointer', transition: 'opacity 0.2s' }}
+                />
               ))}
             </Pie>
-            <Tooltip content={<CustomTooltip />} />
           </PieChart>
         </ResponsiveContainer>
+
+        {/* Center text */}
+        <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
+          {active ? (
+            <>
+              <span className="text-[11px] font-semibold text-center leading-tight px-2" style={{ color: active.color, maxWidth: 90 }}>{active.name}</span>
+              <span className="text-xl font-bold font-mono mt-0.5" style={{ color: '#1A2540' }}>{active.value.toFixed(1)}%</span>
+            </>
+          ) : (
+            <>
+              <span className="text-[10px] font-medium" style={{ color: '#8496B2' }}>Total</span>
+              <span className="text-lg font-bold font-mono" style={{ color: '#1A2540' }}>
+                {data.reduce((s, d) => s + d.value, 0).toFixed(0)}%
+              </span>
+            </>
+          )}
+        </div>
       </div>
-      {/* Legend outside SVG — no overflow */}
-      <ChartLegend items={data} />
+
+      {/* Legend with ticker chips on hover */}
+      <div className="flex flex-col gap-1.5 mt-3">
+        {data.map((entry) => {
+          const isActive = hovered === entry.name;
+          return (
+            <div
+              key={entry.name}
+              className="rounded-lg px-2.5 py-1.5 cursor-default transition-all duration-150"
+              style={{
+                background: isActive ? `${entry.color}10` : 'transparent',
+                border: `1px solid ${isActive ? entry.color + '28' : 'transparent'}`,
+              }}
+              onMouseEnter={() => setHovered(entry.name)}
+              onMouseLeave={() => setHovered(null)}
+            >
+              <div className="flex items-center gap-2">
+                <span
+                  className="w-2.5 h-2.5 rounded-sm flex-shrink-0 transition-opacity duration-200"
+                  style={{ background: entry.color, opacity: hovered && !isActive ? 0.25 : 1 }}
+                />
+                <span className="flex-1 text-xs font-medium truncate" style={{ color: isActive ? '#1A2540' : '#5C6E8A' }}>
+                  {entry.name}
+                </span>
+                <span className="text-xs font-mono font-bold" style={{ color: isActive ? entry.color : '#8496B2' }}>
+                  {entry.value.toFixed(1)}%
+                </span>
+              </div>
+
+              {/* Ticker chips — only when hovered */}
+              {isActive && entry.tickers.filter(t => t !== 'Cash').length > 0 && (
+                <div className="flex flex-wrap gap-1 mt-1.5 pl-4">
+                  {entry.tickers.filter(t => t !== 'Cash').map(t => (
+                    <span key={t} className="text-[10px] font-mono px-1.5 py-0.5 rounded" style={{ background: entry.color + '15', color: entry.color }}>
+                      {t}
+                    </span>
+                  ))}
+                </div>
+              )}
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 }
 
 export default function AllocationCharts({ positions, cashEUR, totalValue }: Props) {
   // By asset type
-  const typeMap: Record<string, number> = { cash: (cashEUR / totalValue) * 100 };
+  const typeAcc: Record<string, { value: number; tickers: string[] }> = {
+    cash: { value: totalValue > 0 ? (cashEUR / totalValue) * 100 : 0, tickers: ['Cash'] },
+  };
   for (const p of positions) {
-    typeMap[p.type] = (typeMap[p.type] ?? 0) + p.weight;
+    if (!typeAcc[p.type]) typeAcc[p.type] = { value: 0, tickers: [] };
+    typeAcc[p.type].value += p.weight;
+    typeAcc[p.type].tickers.push(p.ticker);
   }
-  const typeData: ChartEntry[] = Object.entries(typeMap).map(([type, value]) => ({
-    name:  TYPE_LABELS[type] ?? type,
-    value: parseFloat(value.toFixed(1)),
-    color: TYPE_COLORS[type] ?? '#6b7280',
-  }));
+  const typeData: ChartEntry[] = Object.entries(typeAcc)
+    .filter(([, { value }]) => value > 0)
+    .map(([type, { value, tickers }]) => ({
+      name: TYPE_LABELS[type] ?? type,
+      value: parseFloat(value.toFixed(1)),
+      color: TYPE_COLORS[type] ?? '#6b7280',
+      tickers,
+    }));
 
   // By sector
-  const sectorMap: Record<string, number> = {};
+  const sectorAcc: Record<string, { value: number; tickers: string[] }> = {};
   for (const p of positions) {
-    sectorMap[p.sector] = (sectorMap[p.sector] ?? 0) + p.weight;
+    if (!sectorAcc[p.sector]) sectorAcc[p.sector] = { value: 0, tickers: [] };
+    sectorAcc[p.sector].value += p.weight;
+    sectorAcc[p.sector].tickers.push(p.ticker);
   }
-  if (cashEUR > 0) {
-    sectorMap['Cash'] = (cashEUR / totalValue) * 100;
+  if (cashEUR > 0 && totalValue > 0) {
+    sectorAcc['Cash'] = { value: (cashEUR / totalValue) * 100, tickers: ['Cash'] };
   }
-  const sectorData: ChartEntry[] = Object.entries(sectorMap)
-    .sort((a, b) => b[1] - a[1])
-    .map(([name, value], i) => ({
+  const sectorData: ChartEntry[] = Object.entries(sectorAcc)
+    .filter(([, { value }]) => value > 0)
+    .sort((a, b) => b[1].value - a[1].value)
+    .map(([name, { value, tickers }], i) => ({
       name,
       value: parseFloat(value.toFixed(1)),
-      color: SECTOR_COLORS[i % SECTOR_COLORS.length],
+      color: SECTOR_PALETTE[i % SECTOR_PALETTE.length],
+      tickers,
     }));
 
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-      <DonutChart data={typeData}   label="By Asset Type" />
-      <DonutChart data={sectorData} label="By Sector" />
+      <DonutChart data={typeData}   label="Par type d'actif" sublabel={`${typeData.length} catégories`} />
+      <DonutChart data={sectorData} label="Par secteur"       sublabel={`${sectorData.length} secteurs`} />
     </div>
   );
 }

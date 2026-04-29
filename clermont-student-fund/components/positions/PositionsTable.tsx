@@ -38,10 +38,10 @@ export default function PositionsTable({ positions, cashEUR }: Props) {
       <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-gold/20 to-transparent" />
 
       {/* Header */}
-      <div className="px-6 py-4 border-b border-navy-600 flex items-center justify-between">
+      <div className="px-6 py-4 flex items-center justify-between" style={{ borderBottom: '1px solid rgba(26,37,64,0.08)', background: '#FAFBFD' }}>
         <div>
-          <h2 className="text-sm font-display font-semibold text-slate-100">Positions ouvertes</h2>
-          <p className="text-xs mt-0.5" style={{ color: '#7A96B8' }}>Cliquez sur une ligne pour les détails · Prix en temps réel</p>
+          <h2 className="text-sm font-display font-semibold text-navy">Positions ouvertes</h2>
+          <p className="text-xs mt-0.5" style={{ color: '#8496B2' }}>Cliquez sur une ligne pour les détails · Prix en temps réel</p>
         </div>
         <span className="badge badge-gray">{positions.length} lignes</span>
       </div>
@@ -69,7 +69,7 @@ export default function PositionsTable({ positions, cashEUR }: Props) {
                     key={pos.id}
                     onClick={() => toggle(pos.id)}
                     className="cursor-pointer select-none"
-                    style={{ background: isOpen ? 'rgba(212,175,55,0.04)' : undefined }}
+                    style={{ background: isOpen ? 'rgba(184,150,58,0.04)' : undefined }}
                   >
                     {/* Actif */}
                     <td className="text-left">
@@ -80,14 +80,14 @@ export default function PositionsTable({ positions, cashEUR }: Props) {
                         />
                         <div>
                           <div className="flex items-center gap-2">
-                            <p className="font-semibold text-slate-100 asset-name text-sm">{pos.name}</p>
+                            <p className="font-semibold asset-name text-sm" style={{ color: '#1A2540' }}>{pos.name}</p>
                             {pos.lastBuyDate && (
                               <span className="badge badge-blue shrink-0">
                                 {pos.buyDate === pos.lastBuyDate ? 'NOUVEAU' : 'RENFORCÉ'}
                               </span>
                             )}
                           </div>
-                          <p className="font-mono text-[11px] mt-0.5" style={{ color: '#7A96B8' }}>{pos.ticker}</p>
+                          <p className="font-mono text-[11px] mt-0.5" style={{ color: '#8496B2' }}>{pos.ticker}</p>
                         </div>
                       </div>
                     </td>
@@ -98,19 +98,19 @@ export default function PositionsTable({ positions, cashEUR }: Props) {
                       </span>
                     </td>
                     {/* Quantité */}
-                    <td className="text-right font-mono text-slate-400">
+                    <td className="text-right font-mono text-navy-400">
                       {pos.quantity % 1 === 0 ? pos.quantity : pos.quantity.toFixed(4)}
                     </td>
                     {/* Prix moy */}
-                    <td className="text-right font-mono" style={{ color: '#7A96B8' }}>
+                    <td className="text-right font-mono" style={{ color: '#8496B2' }}>
                       {fmtPrice(pos.avgBuyPrice)}
                     </td>
                     {/* Prix actuel */}
-                    <td className="text-right font-mono font-semibold text-slate-100">
+                    <td className="text-right font-mono font-semibold text-navy">
                       {fmtPrice(pos.currentPrice)}
                     </td>
                     {/* Valeur */}
-                    <td className="text-right font-mono font-semibold text-slate-100">
+                    <td className="text-right font-mono font-semibold text-navy">
                       {fmtUsd(pos.currentValueEUR)}
                     </td>
                     {/* P&L */}
@@ -126,13 +126,13 @@ export default function PositionsTable({ positions, cashEUR }: Props) {
                     {/* Poids */}
                     <td className="text-right">
                       <div className="flex items-center justify-end gap-2">
-                        <div className="w-14 rounded-full overflow-hidden h-1.5" style={{ background: 'rgba(255,255,255,0.08)' }}>
+                        <div className="w-14 rounded-full overflow-hidden h-1.5" style={{ background: 'rgba(26,37,64,0.08)' }}>
                           <div
                             className="h-1.5 rounded-full transition-all duration-700"
                             style={{ width: `${Math.min(pos.weight, 100)}%`, background: `linear-gradient(90deg, ${typeColor}99, ${typeColor})` }}
                           />
                         </div>
-                        <span className="font-mono text-xs w-10 text-right" style={{ color: '#8AAAC0' }}>
+                        <span className="font-mono text-xs w-10 text-right" style={{ color: '#8496B2' }}>
                           {pos.weight.toFixed(1)}%
                         </span>
                       </div>
@@ -141,7 +141,7 @@ export default function PositionsTable({ positions, cashEUR }: Props) {
 
                   {/* Expanded detail row */}
                   {isOpen && (
-                    <tr key={`${pos.id}-detail`} style={{ background: 'rgba(20,32,55,0.6)' }}>
+                    <tr key={`${pos.id}-detail`} style={{ background: '#F7F8FC' }}>
                       <td colSpan={9} className="p-0">
                         <div
                           className="mx-4 my-3 rounded-xl overflow-hidden"
@@ -153,24 +153,24 @@ export default function PositionsTable({ positions, cashEUR }: Props) {
                           <div className="px-5 py-4 grid grid-cols-2 sm:grid-cols-4 gap-4">
                             <div>
                               <p className="section-label mb-1">Secteur</p>
-                              <p className="text-sm font-medium text-slate-200">{pos.sector}</p>
+                              <p className="text-sm font-medium text-navy">{pos.sector}</p>
                             </div>
                             <div>
                               <p className="section-label mb-1">Date d'achat</p>
-                              <p className="text-sm font-medium text-slate-200">{fmtDate(pos.buyDate)}</p>
+                              <p className="text-sm font-medium text-navy">{fmtDate(pos.buyDate)}</p>
                               {pos.lastBuyDate && pos.lastBuyDate !== pos.buyDate && (
-                                <p className="text-xs mt-0.5" style={{ color: '#7A96B8' }}>Renforcé le {fmtDate(pos.lastBuyDate)}</p>
+                                <p className="text-xs mt-0.5" style={{ color: '#8496B2' }}>Renforcé le {fmtDate(pos.lastBuyDate)}</p>
                               )}
                             </div>
                             <div>
                               <p className="section-label mb-1">Coût total</p>
-                              <p className="text-sm font-mono font-semibold text-slate-200">
+                              <p className="text-sm font-mono font-semibold text-navy">
                                 {fmtUsd(pos.quantity * pos.avgBuyPrice)}
                               </p>
                             </div>
                             <div>
                               <p className="section-label mb-1">Valeur actuelle</p>
-                              <p className="text-sm font-mono font-semibold text-slate-200">
+                              <p className="text-sm font-mono font-semibold text-navy">
                                 {fmtUsd(pos.currentValueEUR)}
                               </p>
                             </div>
@@ -182,16 +182,16 @@ export default function PositionsTable({ positions, cashEUR }: Props) {
                               <p className="section-label">Poids dans le portefeuille</p>
                               <p className="text-xs font-mono font-semibold" style={{ color: typeColor }}>{pos.weight.toFixed(2)}%</p>
                             </div>
-                            <div className="w-full h-2 rounded-full overflow-hidden" style={{ background: 'rgba(255,255,255,0.06)' }}>
+                            <div className="w-full h-2 rounded-full overflow-hidden" style={{ background: 'rgba(26,37,64,0.06)' }}>
                               <div
                                 className="h-2 rounded-full transition-all duration-700"
                                 style={{ width: `${Math.min(pos.weight, 100)}%`, background: `linear-gradient(90deg, ${typeColor}80, ${typeColor})` }}
                               />
                             </div>
                             <div className="flex justify-between mt-1">
-                              <span className="text-[10px]" style={{ color: '#4A6080' }}>0%</span>
-                              <span className="text-[10px]" style={{ color: '#4A6080' }}>Limite 15%</span>
-                              <span className="text-[10px]" style={{ color: '#4A6080' }}>100%</span>
+                              <span className="text-[10px]" style={{ color: '#8496B2' }}>0%</span>
+                              <span className="text-[10px]" style={{ color: '#8496B2' }}>Limite 15%</span>
+                              <span className="text-[10px]" style={{ color: '#8496B2' }}>100%</span>
                             </div>
                           </div>
                         </div>
@@ -203,19 +203,19 @@ export default function PositionsTable({ positions, cashEUR }: Props) {
             })}
 
             {/* Cash row */}
-            <tr style={{ background: 'rgba(26,53,80,0.15)' }}>
+            <tr style={{ background: '#F7F8FC' }}>
               <td className="text-left">
                 <div className="flex items-center gap-2.5">
                   <div className="flex-shrink-0 w-1 self-stretch rounded-full" style={{ background: '#64748b', minHeight: 32 }} />
                   <div>
-                    <p className="font-medium text-sm" style={{ color: '#8AAAC0' }}>Liquidités</p>
-                    <p className="font-mono text-[11px] mt-0.5" style={{ color: '#7A96B8' }}>Cash USD</p>
+                    <p className="font-medium text-sm" style={{ color: '#8496B2' }}>Liquidités</p>
+                    <p className="font-mono text-[11px] mt-0.5" style={{ color: '#8496B2' }}>Cash USD</p>
                   </div>
                 </div>
               </td>
               <td className="text-right"><span className="badge badge-gray">Cash</span></td>
               <td colSpan={3} />
-              <td className="text-right font-mono font-semibold" style={{ color: '#8AAAC0' }}>{fmtUsd(cashEUR)}</td>
+              <td className="text-right font-mono font-semibold" style={{ color: '#8496B2' }}>{fmtUsd(cashEUR)}</td>
               <td colSpan={3} />
             </tr>
           </tbody>

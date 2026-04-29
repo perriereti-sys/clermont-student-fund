@@ -11,55 +11,56 @@ export default function PortfolioHeader({ totalValue, totalPnL, totalPnLPercent,
   const fmt = (n: number) =>
     new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(n);
 
-  const time = new Date(lastUpdated).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
+  const time = new Date(lastUpdated).toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' });
 
   return (
     <div
-      className="rounded-2xl px-5 sm:px-8 py-6 sm:py-7 relative overflow-hidden"
-      style={{
-        background: 'linear-gradient(135deg, #1A3352 0%, #112540 50%, #0E1F33 100%)',
-        border: '1px solid rgba(255,255,255,0.1)',
-        boxShadow: '0 4px 24px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.06)',
-      }}
+      className="rounded-xl px-5 sm:px-8 py-6 sm:py-7 card-static relative overflow-hidden"
     >
-      {/* Gold top accent */}
-      <div className="absolute top-0 inset-x-0 h-px"
-        style={{ background: 'linear-gradient(90deg, transparent, rgba(212,175,55,0.8), transparent)' }} />
-
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-5">
+      {/* Navy top accent bar */}
+      <div
+        className="absolute top-0 left-0 right-0"
+        style={{ height: 3, background: 'linear-gradient(90deg, rgba(26,37,64,0.30) 0%, rgba(26,37,64,0.10) 60%, transparent 100%)' }}
+      />
+      <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-6">
 
         {/* Left — main value */}
         <div>
-          <p className="section-label mb-2.5">Portfolio Value</p>
-          <p className="text-4xl sm:text-5xl font-bold font-mono tracking-tight text-white">
+          <p className="section-label mb-3">Valeur du portefeuille</p>
+          <p
+            className="font-bold font-mono tracking-tight"
+            style={{ fontSize: 'clamp(2rem, 5vw, 2.8rem)', color: '#1A2540', lineHeight: 1 }}
+          >
             {fmt(totalValue)}
           </p>
           <div className="flex items-center gap-3 mt-3 flex-wrap">
             <span
-              className="text-base font-semibold font-mono"
-              style={{ color: isPositive ? '#34D399' : '#F87171' }}
+              className="text-sm font-semibold font-mono"
+              style={{ color: isPositive ? '#0A8E62' : '#C93048' }}
             >
               {isPositive ? '+' : ''}{fmt(totalPnL)}
             </span>
             <span className={`badge ${isPositive ? 'badge-gain' : 'badge-loss'}`}>
               {isPositive ? '+' : ''}{totalPnLPercent.toFixed(2)}%
             </span>
-            <span className="text-xs" style={{ color: '#5B7A9A' }}>since inception</span>
+            <span className="text-xs" style={{ color: '#8496B2' }}>depuis l'origine</span>
           </div>
         </div>
 
         {/* Right — meta */}
-        <div className="flex items-center gap-6 sm:gap-8">
+        <div
+          className="flex items-center gap-6 sm:gap-8 pb-1"
+          style={{ borderLeft: '1px solid rgba(26,37,64,0.08)', paddingLeft: '1.5rem' }}
+        >
           <div>
-            <p className="section-label mb-1">Initial Capital</p>
-            <p className="text-sm font-mono font-semibold" style={{ color: '#94A3B8' }}>{fmt(100_000)}</p>
+            <p className="section-label mb-1.5">Capital initial</p>
+            <p className="text-sm font-mono font-medium" style={{ color: '#8496B2' }}>{fmt(100_000)}</p>
           </div>
-          <div className="w-px h-10 hidden sm:block" style={{ background: 'rgba(255,255,255,0.08)' }} />
           <div>
-            <p className="section-label mb-1">Last Update</p>
-            <div className="flex items-center gap-2">
+            <p className="section-label mb-1.5">Mise à jour</p>
+            <div className="flex items-center gap-1.5">
               <span className="live-dot" />
-              <p className="text-sm font-mono font-semibold" style={{ color: '#94A3B8' }}>{time}</p>
+              <p className="text-sm font-mono font-medium" style={{ color: '#8496B2' }}>{time}</p>
             </div>
           </div>
         </div>

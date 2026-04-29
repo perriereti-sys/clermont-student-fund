@@ -15,8 +15,8 @@ export default function AlertsPanel({ alerts }: Props) {
           </svg>
         </div>
         <div>
-          <p className="text-sm font-semibold text-slate-100">Règlement respecté</p>
-          <p className="text-xs mt-0.5" style={{ color: '#7A96B8' }}>Toutes les limites de concentration sont dans les clous.</p>
+          <p className="text-sm font-semibold text-navy">Règlement respecté</p>
+          <p className="text-xs mt-0.5" style={{ color: '#8496B2' }}>Toutes les limites de concentration sont dans les clous.</p>
         </div>
         <div className="absolute right-4 text-[11px] font-semibold tracking-wider uppercase" style={{ color: 'rgba(16,185,129,0.3)' }}>OK</div>
       </div>
@@ -26,7 +26,7 @@ export default function AlertsPanel({ alerts }: Props) {
   return (
     <div className="card-static relative rounded-2xl overflow-hidden">
       <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-yellow-500/40 to-transparent" />
-      <div className="px-5 py-4 border-b border-navy-600 flex items-center gap-3">
+      <div className="px-5 py-4 flex items-center gap-3" style={{ borderBottom: '1px solid rgba(26,37,64,0.08)', background: '#FAFBFD' }}>
         <div className="w-7 h-7 rounded-lg flex items-center justify-center flex-shrink-0" style={{ background: 'rgba(239,68,68,0.12)', color: '#ef4444' }}>
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
             <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" />
@@ -34,8 +34,8 @@ export default function AlertsPanel({ alerts }: Props) {
           </svg>
         </div>
         <div>
-          <p className="text-sm font-semibold text-slate-100">Alertes règlement</p>
-          <p className="text-xs" style={{ color: '#7A96B8' }}>{alerts.length} limite{alerts.length > 1 ? 's' : ''} dépassée{alerts.length > 1 ? 's' : ''}</p>
+          <p className="text-sm font-semibold text-navy">Alertes règlement</p>
+          <p className="text-xs" style={{ color: '#8496B2' }}>{alerts.length} limite{alerts.length > 1 ? 's' : ''} dépassée{alerts.length > 1 ? 's' : ''}</p>
         </div>
       </div>
 
@@ -65,7 +65,7 @@ export default function AlertsPanel({ alerts }: Props) {
                 {alert.message}
               </p>
               <div className="flex items-center gap-3 mt-1.5">
-                <div className="flex-1 h-1.5 rounded-full overflow-hidden" style={{ background: 'rgba(255,255,255,0.06)' }}>
+                <div className="flex-1 h-1.5 rounded-full overflow-hidden" style={{ background: 'rgba(26,37,64,0.08)' }}>
                   <div
                     className="h-1.5 rounded-full"
                     style={{
@@ -74,7 +74,7 @@ export default function AlertsPanel({ alerts }: Props) {
                     }}
                   />
                 </div>
-                <span className="text-xs font-mono whitespace-nowrap" style={{ color: '#7A96B8' }}>
+                <span className="text-xs font-mono whitespace-nowrap" style={{ color: '#8496B2' }}>
                   {alert.value.toFixed(1)}% / {alert.limit}%
                 </span>
               </div>

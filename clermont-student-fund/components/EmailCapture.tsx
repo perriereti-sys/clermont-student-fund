@@ -24,31 +24,28 @@ export default function EmailCapture() {
   }
 
   return (
-    <section id="rejoindre" className="relative rounded-2xl overflow-hidden">
-
-      {/* Background */}
-      <div className="absolute inset-0" style={{ background: 'linear-gradient(135deg, #1a2e4a 0%, #1e3255 50%, #1a2e4a 100%)' }} />
-
-      {/* Orbs */}
+    <section
+      id="rejoindre"
+      className="relative rounded-2xl overflow-hidden"
+      style={{
+        background: 'linear-gradient(135deg, #1A2540 0%, #253460 100%)',
+        boxShadow: '0 4px 24px rgba(26,37,64,0.15)',
+      }}
+    >
+      {/* Subtle texture */}
       <div
-        className="absolute rounded-full pointer-events-none"
-        style={{ width: 300, height: 300, top: '-80px', right: '-40px', background: 'radial-gradient(circle, rgba(212,175,55,0.08) 0%, transparent 70%)' }}
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background: 'radial-gradient(ellipse at 80% 20%, rgba(184,150,58,0.08) 0%, transparent 55%)',
+        }}
       />
-      <div
-        className="absolute rounded-full pointer-events-none"
-        style={{ width: 240, height: 240, bottom: '-60px', left: '10%', background: 'radial-gradient(circle, rgba(59,130,246,0.07) 0%, transparent 70%)' }}
-      />
-
-      {/* Border */}
-      <div className="absolute inset-0 rounded-2xl" style={{ border: '1px solid rgba(212,175,55,0.2)' }} />
-      <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-gold to-transparent opacity-60" />
 
       {/* Content */}
       <div className="relative z-10 px-6 sm:px-12 py-12 sm:py-16 text-center">
 
         <div
           className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold tracking-widest uppercase mb-6"
-          style={{ background: 'rgba(212,175,55,0.1)', border: '1px solid rgba(212,175,55,0.2)', color: '#D4AF37' }}
+          style={{ background: 'rgba(184,150,58,0.12)', border: '1px solid rgba(184,150,58,0.25)', color: '#D4AF37' }}
         >
           <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
             <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
@@ -58,11 +55,11 @@ export default function EmailCapture() {
           Rejoindre le fond
         </div>
 
-        <h2 className="font-display font-bold text-2xl sm:text-4xl text-slate-100 leading-tight mb-3">
+        <h2 className="font-display font-bold text-2xl sm:text-4xl leading-tight mb-3" style={{ color: '#F0F2F8' }}>
           Tu es étudiant et passionné<br className="hidden sm:block" /> par les marchés ?
         </h2>
 
-        <p className="text-sm sm:text-base leading-relaxed mb-10 max-w-lg mx-auto" style={{ color: '#94AAC4' }}>
+        <p className="text-sm sm:text-base leading-relaxed mb-10 max-w-lg mx-auto" style={{ color: '#8496B2' }}>
           Laisse ton email — on te contacte pour t'expliquer comment rejoindre le CSF
           et participer aux prises de décision du portefeuille.
         </p>
@@ -71,21 +68,21 @@ export default function EmailCapture() {
           <div className="flex items-center justify-center gap-3 py-4">
             <div
               className="w-10 h-10 rounded-full flex items-center justify-center"
-              style={{ background: 'rgba(34,197,94,0.15)', color: '#22c55e' }}
+              style={{ background: 'rgba(10,142,98,0.15)', color: '#0A8E62' }}
             >
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                 <polyline points="20 6 9 17 4 12" />
               </svg>
             </div>
             <div className="text-left">
-              <p className="font-semibold text-slate-100 text-sm">Inscription enregistrée !</p>
-              <p className="text-xs mt-0.5" style={{ color: '#7A96B8' }}>On te recontacte très bientôt.</p>
+              <p className="font-semibold text-sm" style={{ color: '#F0F2F8' }}>Inscription enregistrée !</p>
+              <p className="text-xs mt-0.5" style={{ color: '#8496B2' }}>On te recontacte très bientôt.</p>
             </div>
           </div>
         ) : (
           <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
             <div className="flex-1 relative">
-              <div className="absolute left-3.5 top-1/2 -translate-y-1/2" style={{ color: '#7A96B8' }}>
+              <div className="absolute left-3.5 top-1/2 -translate-y-1/2" style={{ color: '#8496B2' }}>
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
                   <polyline points="22,6 12,13 2,6" />
@@ -98,20 +95,21 @@ export default function EmailCapture() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 disabled={status === 'loading'}
-                className="w-full pl-10 pr-4 py-3.5 rounded-xl text-sm text-slate-100 placeholder-slate-600 outline-none transition-all duration-200"
+                className="w-full pl-10 pr-4 py-3.5 rounded-xl text-sm outline-none transition-all duration-200"
                 style={{
-                  background: 'rgba(20,32,55,0.8)',
-                  border: '1px solid rgba(255,255,255,0.1)',
+                  background: 'rgba(255,255,255,0.07)',
+                  border: '1px solid rgba(255,255,255,0.12)',
+                  color: '#F0F2F8',
                 }}
-                onFocus={(e) => { e.target.style.borderColor = 'rgba(212,175,55,0.4)'; e.target.style.boxShadow = '0 0 0 3px rgba(212,175,55,0.08)'; }}
-                onBlur={(e)  => { e.target.style.borderColor = 'rgba(255,255,255,0.1)'; e.target.style.boxShadow = 'none'; }}
+                onFocus={(e) => { e.target.style.borderColor = 'rgba(184,150,58,0.5)'; e.target.style.boxShadow = '0 0 0 3px rgba(184,150,58,0.10)'; }}
+                onBlur={(e)  => { e.target.style.borderColor = 'rgba(255,255,255,0.12)'; e.target.style.boxShadow = 'none'; }}
               />
             </div>
             <button
               type="submit"
               disabled={status === 'loading'}
-              className="flex-shrink-0 flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl text-sm font-bold transition-all duration-200 hover:scale-105 disabled:opacity-60 disabled:scale-100"
-              style={{ background: '#D4AF37', color: '#1a2e4a', boxShadow: '0 4px 20px rgba(212,175,55,0.25)' }}
+              className="flex-shrink-0 flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl text-sm font-bold transition-all duration-200 hover:opacity-90 active:scale-95 disabled:opacity-60 disabled:scale-100"
+              style={{ background: '#B8963A', color: '#FFFFFF', boxShadow: '0 2px 12px rgba(184,150,58,0.30)' }}
             >
               {status === 'loading' ? (
                 <svg className="animate-spin" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
@@ -126,7 +124,7 @@ export default function EmailCapture() {
           <p className="text-xs mt-3" style={{ color: '#ef4444' }}>Une erreur est survenue, réessaie.</p>
         )}
 
-        <p className="text-[11px] mt-6" style={{ color: '#4A6080' }}>
+        <p className="text-[11px] mt-6" style={{ color: '#5C6E8A' }}>
           Pas de spam. Juste un message quand les portes s'ouvrent.
         </p>
       </div>

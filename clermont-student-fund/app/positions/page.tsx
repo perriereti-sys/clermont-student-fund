@@ -1,12 +1,39 @@
-import PositionsTable from '@/components/positions/PositionsTable';
-import AllocationCharts from '@/components/positions/AllocationCharts';
-import AlertsPanel from '@/components/positions/AlertsPanel';
-import { Alert } from '@/lib/types';
-import { computeAlerts } from '@/lib/calculations';
 import { getPortfolioMetrics } from '@/lib/getPortfolioMetrics';
+import { EnrichedPosition } from '@/lib/types';
+import BucketSection, { BucketId, BucketConfig } from '@/components/positions/BucketSection';
+import AllocationCharts from '@/components/positions/AllocationCharts';
+import GeoSection from '@/components/GeoSection';
+import AnimateIn from '@/components/AnimateIn';
 
 export const dynamic = 'force-dynamic';
 export const runtime = 'nodejs';
+
+const BUCKETS: BucketConfig[] = [
+  {
+    id: 'socle',
+    label: 'Socle',
+    color: '#2E75B6',
+    description:
+      'Positions de long terme qui ancrent le portefeuille. Faible rotation, volatilité maîtrisée, exposition diversifiée géographiquement et sectoriellement.',
+    targetCount: 6,
+  },
+  {
+    id: 'conviction',
+    label: 'Convictions',
+    color: '#D4AF37',
+    description:
+      'Paris à fort potentiel sur 12 à 24 mois. Sociétés positionnées sur des thématiques de rupture (IA, spatial, quantique). Volatilité acceptée et assumée.',
+    targetCount: 2,
+  },
+  {
+    id: 'opportunite',
+    label: 'Opportunités',
+    color: '#70AD47',
+    description:
+      "Positions tactiques sur des catalyseurs identifiés. Horizon court à moyen terme, taille de position limitée, sortie dès l'objectif atteint.",
+    targetCount: 2,
+  },
+];
 
 export default async function PositionsPage() {
   let portfolio;
@@ -16,68 +43,115 @@ export default async function PositionsPage() {
     portfolio = {
       totalValue: 100000, totalCost: 100000, totalPnL: 0, totalPnLPercent: 0,
       sharpeRatio: 0, beta: 1.0, var95: 0, maxDrawdown: 0,
-      positions: [], cashEUR: 0, lastUpdated: new Date().toISOString(),
+      positions: [], cashEUR: 0, chartData: [], lastUpdated: new Date().toISOString(),
     };
   }
 
-  const alerts: Alert[] = computeAlerts(portfolio.positions, portfolio.totalValue);
+  const grouped: Record<BucketId, EnrichedPosition[]> = {
+    socle: [], conviction: [], opportunite: [],
+  };
+  for (const pos of portfolio.positions) {
+    const cat = (pos as any).category as BucketId | undefined;
+    const bucket: BucketId = cat && cat in grouped ? cat : 'socle';
+    grouped[bucket].push(pos);
+  }
 
-  const bestPos  = [...portfolio.positions].sort((a, b) => b.pnlPercent - a.pnlPercent)[0];
-  const worstPos = [...portfolio.positions].sort((a, b) => a.pnlPercent - b.pnlPercent)[0];
-  const fmtUsd   = (n: number) => new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(n);
+  const fmtUsd = (n: number) =>
+    new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(n);
 
   return (
-    <div className="flex flex-col gap-7">
+    <div className="flex flex-col gap-8">
 
-      {/* Header */}
-      <div>
-        <p className="section-label mb-1">Portefeuille</p>
-        <h1 className="font-display font-bold text-2xl text-slate-100">Positions ouvertes</h1>
-        <p className="text-sm mt-1" style={{ color: '#7A96B8' }}>
-          {portfolio.positions.length} actifs · Prix en temps réel via Yahoo Finance
-        </p>
-      </div>
-
-      {/* Quick stats */}
-      <div className="grid grid-cols-3 gap-4">
-        <div className="card relative overflow-hidden rounded-xl p-5">
-          <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-gold/15 to-transparent" />
-          <p className="section-label mb-2">Positions</p>
-          <p className="font-display font-bold text-2xl text-slate-100">{portfolio.positions.length}</p>
-          <p className="text-xs mt-1" style={{ color: '#7A96B8' }}>actifs en portefeuille</p>
+      {/* Page header */}
+      <AnimateIn y={16}>
+        <div className="page-heading">
+          <p className="section-label mb-1">Portefeuille</p>
+          <h1 className="font-display font-bold text-2xl text-navy">Positions par bucket</h1>
+          <p className="text-sm mt-1" style={{ color: '#8496B2' }}>
+            {portfolio.positions.length} actifs · Prix en temps réel via Yahoo Finance
+          </p>
         </div>
+      </AnimateIn>
 
-        {bestPos && (
-          <div className="card relative overflow-hidden rounded-xl p-5">
-            <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-gain/20 to-transparent" />
-            <p className="section-label mb-2">Meilleure perf.</p>
-            <p className="font-display font-bold text-xl text-gain truncate">{bestPos.ticker}</p>
-            <p className="text-xs mt-1 font-mono text-gain">+{bestPos.pnlPercent.toFixed(1)}%</p>
+      {/* Bucket summary cards */}
+      <AnimateIn delay={60} y={16}>
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+          {BUCKETS.map((bucket) => {
+            const positions = grouped[bucket.id];
+            const pnl      = positions.reduce((s, p) => s + p.pnlEUR, 0);
+            const weight   = positions.reduce((s, p) => s + p.weight, 0);
+            const isPnlPos = pnl >= 0;
+
+            return (
+              <div
+                key={bucket.id}
+                className="card relative overflow-hidden rounded-xl p-5"
+                style={{ borderLeft: `4px solid ${bucket.color}` }}
+              >
+                <div
+                  className="absolute top-0 inset-x-0 h-px"
+                  style={{ background: `linear-gradient(90deg, transparent, ${bucket.color}40, transparent)` }}
+                />
+                <span
+                  className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold mb-3"
+                  style={{ background: `${bucket.color}22`, color: bucket.color, border: `1px solid ${bucket.color}44` }}
+                >
+                  {bucket.label}
+                </span>
+                <div className="grid grid-cols-2 gap-x-4 gap-y-1 mb-2">
+                  <div>
+                    <p className="section-label mb-0.5">Poids</p>
+                    <p className="font-mono font-bold text-xl text-navy">{weight.toFixed(1)}%</p>
+                  </div>
+                  <div>
+                    <p className="section-label mb-0.5">P&amp;L</p>
+                    <p className={`font-mono font-bold text-xl ${isPnlPos ? 'text-gain' : 'text-loss'}`}>
+                      {isPnlPos ? '+' : ''}{fmtUsd(pnl)}
+                    </p>
+                  </div>
+                </div>
+                <p className="text-xs" style={{ color: '#8496B2' }}>
+                  {positions.length} / {bucket.targetCount} positions
+                </p>
+              </div>
+            );
+          })}
+        </div>
+      </AnimateIn>
+
+      {/* ── Allocation charts ───────────────────────────── */}
+      <AnimateIn delay={120} y={20}>
+        <section className="flex flex-col gap-4">
+          <div>
+            <p className="section-label mb-1">Allocation</p>
+            <h2 className="font-display font-bold text-xl" style={{ color: '#1A2540' }}>Répartition du portefeuille</h2>
           </div>
-        )}
+          <AllocationCharts
+            positions={portfolio.positions}
+            cashEUR={portfolio.cashEUR}
+            totalValue={portfolio.totalValue}
+          />
+        </section>
+      </AnimateIn>
 
-        {worstPos && (
-          <div className="card relative overflow-hidden rounded-xl p-5">
-            <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-loss/20 to-transparent" />
-            <p className="section-label mb-2">Pire perf.</p>
-            <p className="font-display font-bold text-xl text-loss truncate">{worstPos.ticker}</p>
-            <p className="text-xs mt-1 font-mono text-loss">{worstPos.pnlPercent.toFixed(1)}%</p>
+      {/* ── Bucket detail sections ──────────────────────── */}
+      {BUCKETS.map((bucket, i) => (
+        <AnimateIn key={bucket.id} delay={i * 80} y={18}>
+          <BucketSection bucket={bucket} positions={grouped[bucket.id]} />
+        </AnimateIn>
+      ))}
+
+      {/* ── Geographic exposure ─────────────────────────── */}
+      <AnimateIn delay={60} y={20}>
+        <section className="flex flex-col gap-4">
+          <div>
+            <p className="section-label mb-1">Exposition géographique</p>
+            <h2 className="font-display font-bold text-xl" style={{ color: '#1A2540' }}>Où investit le CSF ?</h2>
           </div>
-        )}
-      </div>
+          <GeoSection positions={portfolio.positions} />
+        </section>
+      </AnimateIn>
 
-      {/* Alerts */}
-      <AlertsPanel alerts={alerts} />
-
-      {/* Allocation charts */}
-      <AllocationCharts
-        positions={portfolio.positions}
-        cashEUR={portfolio.cashEUR}
-        totalValue={portfolio.totalValue}
-      />
-
-      {/* Positions table */}
-      <PositionsTable positions={portfolio.positions} cashEUR={portfolio.cashEUR} />
     </div>
   );
 }

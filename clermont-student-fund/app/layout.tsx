@@ -17,7 +17,7 @@ export const viewport: Viewport = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="fr">
-      <body className="min-h-dvh bg-bg text-slate-100 antialiased">
+      <body className="min-h-dvh bg-bg text-navy antialiased">
         {/* Navigation outside the clip wrapper so sticky + fixed both work */}
         <Navigation />
         {/* clip wrapper prevents horizontal overflow without breaking fixed/sticky */}

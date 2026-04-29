@@ -24,6 +24,9 @@ yarn-error.log*
 .DS_Store
 Thumbs.db
 
+# TypeScript incremental build cache
+tsconfig.tsbuildinfo
+
 # Editor
 .vscode/
 .idea/

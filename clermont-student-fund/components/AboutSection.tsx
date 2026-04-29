@@ -8,7 +8,7 @@ const features = [
         <path d="M16 3.13a4 4 0 0 1 0 7.75" />
       </svg>
     ),
-    color: '#3b82f6',
+    color: '#2563EB',
     title: 'Communauté étudiante',
     desc: 'Fondé à Clermont-Ferrand, le CSF accueille des étudiants de toute école et de toute ville. Si tu es passionné par les marchés financiers, tu as ta place ici.',
   },
@@ -18,7 +18,7 @@ const features = [
         <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
       </svg>
     ),
-    color: '#D4AF37',
+    color: '#B8963A',
     title: 'Portefeuille en conditions réelles',
     desc: 'On gère un portefeuille virtuel multi-actifs avec une vraie rigueur : thèses d\'investissement écrites, règles de gestion du risque, suivi de performance.',
   },
@@ -29,7 +29,7 @@ const features = [
         <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" />
       </svg>
     ),
-    color: '#a855f7',
+    color: '#7C3AED',
     title: 'Montée en compétences',
     desc: 'Analyses fondamentales, macro-économie, lecture de bilans — chaque membre apporte ses connaissances pour que tout le groupe progresse.',
   },
@@ -40,7 +40,7 @@ const features = [
         <path d="M12 8v4l3 3" />
       </svg>
     ),
-    color: '#22c55e',
+    color: '#0A8E62',
     title: 'Réactivité aux marchés',
     desc: 'Veille hebdomadaire, débats sur l\'actualité économique et ajustements du portefeuille au fil des opportunités de marché.',
   },
@@ -52,12 +52,12 @@ export default function AboutSection() {
 
       {/* Heading */}
       <div className="text-center max-w-2xl mx-auto">
-        <p className="section-label mb-3" style={{ color: '#D4AF37' }}>Notre mission</p>
-        <h2 className="font-display font-bold text-3xl sm:text-4xl text-slate-100 leading-tight mb-4">
+        <p className="section-label mb-3" style={{ color: '#B8963A' }}>Notre mission</p>
+        <h2 className="font-display font-bold text-3xl sm:text-4xl leading-tight mb-4" style={{ color: '#1A2540' }}>
           Apprendre l'investissement<br />
-          <span className="text-gold-gradient">par la pratique</span>
+          <span style={{ color: '#B8963A' }}>par la pratique</span>
         </h2>
-        <p className="text-sm sm:text-base leading-relaxed" style={{ color: '#94AAC4' }}>
+        <p className="text-sm sm:text-base leading-relaxed" style={{ color: '#5C6E8A' }}>
           Le CSF n'est pas un cours magistral — c'est un laboratoire d'investissement.
           On prend de vraies décisions, on se trompe, on apprend, et on s'améliore.
         </p>
@@ -72,13 +72,13 @@ export default function AboutSection() {
           >
             <div
               className="flex-shrink-0 w-11 h-11 rounded-xl flex items-center justify-center transition-transform duration-300 group-hover:scale-110"
-              style={{ background: `${color}18`, color }}
+              style={{ background: `${color}14`, color }}
             >
               {icon}
             </div>
             <div>
-              <p className="font-semibold text-slate-100 text-sm mb-1.5">{title}</p>
-              <p className="text-xs leading-relaxed" style={{ color: '#94AAC4' }}>{desc}</p>
+              <p className="font-semibold text-sm mb-1.5" style={{ color: '#1A2540' }}>{title}</p>
+              <p className="text-xs leading-relaxed" style={{ color: '#5C6E8A' }}>{desc}</p>
             </div>
           </div>
         ))}
