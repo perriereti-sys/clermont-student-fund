@@ -56,7 +56,7 @@ export default function HeroSection() {
           className="text-base leading-relaxed mb-8 max-w-lg"
           style={{ color: '#5C6E8A' }}
         >
-          Un fond d'investissement étudiant piloté par des passionnés de marchés
+          Un fonds d'investissement étudiant piloté par des passionnés de marchés
           financiers. On analyse, on débat, on investit — ensemble.
         </p>
 

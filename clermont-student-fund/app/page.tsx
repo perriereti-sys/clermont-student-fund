@@ -65,7 +65,7 @@ export default async function DashboardPage() {
         {/* Fund info */}
         <AnimateIn delay={220} y={16}>
           <div className="rounded-xl px-6 py-5 card-static">
-            <p className="section-label mb-4">Informations du fond</p>
+            <p className="section-label mb-4">Informations du fonds</p>
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-5">
               {[
                 { label: 'Création',   value: '01/10/2025'   },
