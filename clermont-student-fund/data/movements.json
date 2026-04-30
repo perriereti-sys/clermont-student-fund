@@ -169,6 +169,30 @@
       "justification": "Cession de la totalité de la position argent après une hausse de +47.6% en moins d'un mois. Objectif de cours atteint, prise de bénéfices de +$923. Le ratio or/argent s'étant normalisé, le catalyseur principal de la thèse est épuisé."
     }
     ,{
+      "id": "16",
+      "date": "2026-04-30",
+      "type": "BUY",
+      "ticker": "META",
+      "name": "Meta Platforms",
+      "quantity": 10,
+      "price": 607.15,
+      "currency": "USD",
+      "totalEUR": 6072,
+      "justification": "Ouverture d'une position tactique sur Meta Platforms dans un contexte de correction du secteur tech. Monétisation publicitaire en accélération grâce à l'IA (Advantage+), croissance de Reels et début de monétisation de WhatsApp. Valorisation revenue sur des niveaux attractifs avec un profil FCF très solide."
+    }
+    ,{
+      "id": "17",
+      "date": "2026-04-30",
+      "type": "BUY",
+      "ticker": "ASTS",
+      "name": "AST SpaceMobile",
+      "quantity": 15,
+      "price": 71.15,
+      "currency": "USD",
+      "totalEUR": 1067,
+      "justification": "Renforcement AST SpaceMobile sur repli. Déploiement commercial en cours avec les premiers abonnés sur le réseau spatial. Partenariats opérateurs confirmés (AT&T, Vodafone, Rakuten). La baisse du titre offre un point d'entrée améliorant le PRU de $89.67 à $79.38."
+    }
+    ,{
       "id": "13",
       "date": "2026-04-23",
       "type": "BUY",

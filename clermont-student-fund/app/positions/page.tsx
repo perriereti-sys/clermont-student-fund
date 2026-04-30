@@ -31,7 +31,7 @@ const BUCKETS: BucketConfig[] = [
     color: '#70AD47',
     description:
       "Positions tactiques sur des catalyseurs identifiés. Horizon court à moyen terme, taille de position limitée, sortie dès l'objectif atteint.",
-    targetCount: 2,
+    targetCount: 3,
   },
 ];
 
