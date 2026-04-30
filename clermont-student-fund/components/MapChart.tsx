@@ -176,11 +176,11 @@ export default function MapChart({ hoveredZone, onHoverZone }: Props) {
   const [activeMarker, setActiveMarker] = useState<string | null>(null);
   const [tip,  setTip]   = useState<Tip | null>(null);
   const [zoom, setZoom]  = useState(1);
-  const [center, setCenter] = useState<[number, number]>([15, 8]);
+  const [center, setCenter] = useState<[number, number]>([15, 20]);
 
   const zoomIn  = () => setZoom(z => Math.min(+(z * 1.7).toFixed(2), 10));
   const zoomOut = () => setZoom(z => Math.max(+(z / 1.7).toFixed(2), 1));
-  const reset   = () => { setZoom(1); setCenter([15, 8]); };
+  const reset   = () => { setZoom(1); setCenter([15, 20]); };
 
   const s = 1 / zoom;
 
@@ -200,7 +200,7 @@ export default function MapChart({ hoveredZone, onHoverZone }: Props) {
 
       <ComposableMap
         projection="geoNaturalEarth1"
-        projectionConfig={{ scale: 145, center: [15, 8] }}
+        projectionConfig={{ scale: 165, center: [15, 20] }}
         style={{ width: '100%', height: 'auto' }}
       >
         <defs>
@@ -225,6 +225,7 @@ export default function MapChart({ hoveredZone, onHoverZone }: Props) {
             {({ geographies }: { geographies: any[] }) =>
               geographies.map((geo: any) => {
                 const id          = String(geo.id);
+                if (id === '10') return null; // Antarctica
                 const exposedZone = EXPOSURE[id];
                 const fill        = exposedZone ? ZONE_FILL[exposedZone] : '#CDD0D4';
                 const dimmed      = hoveredZone !== null
