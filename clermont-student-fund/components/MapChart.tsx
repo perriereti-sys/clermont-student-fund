@@ -176,11 +176,11 @@ export default function MapChart({ hoveredZone, onHoverZone }: Props) {
   const [activeMarker, setActiveMarker] = useState<string | null>(null);
   const [tip,  setTip]   = useState<Tip | null>(null);
   const [zoom, setZoom]  = useState(1);
-  const [center, setCenter] = useState<[number, number]>([15, 20]);
+  const [center, setCenter] = useState<[number, number]>([15, 18]);
 
   const zoomIn  = () => setZoom(z => Math.min(+(z * 1.7).toFixed(2), 10));
   const zoomOut = () => setZoom(z => Math.max(+(z / 1.7).toFixed(2), 1));
-  const reset   = () => { setZoom(1); setCenter([15, 20]); };
+  const reset   = () => { setZoom(1); setCenter([15, 18]); };
 
   const s = 1 / zoom;
 
@@ -188,7 +188,7 @@ export default function MapChart({ hoveredZone, onHoverZone }: Props) {
     <div
       ref={mapRef}
       className="relative w-full select-none overflow-hidden"
-      style={{ background: '#E8EFF9', borderRadius: 12 }}
+      style={{ background: '#D6E4F2', borderRadius: 12 }}
       onMouseLeave={() => setTip(null)}
     >
       {/* ── Zoom controls ──────────────────────────── */}
@@ -200,17 +200,19 @@ export default function MapChart({ hoveredZone, onHoverZone }: Props) {
 
       <ComposableMap
         projection="geoNaturalEarth1"
-        projectionConfig={{ scale: 165, center: [15, 20] }}
+        projectionConfig={{ scale: 190, center: [15, 18] }}
+        width={800}
+        height={420}
         style={{ width: '100%', height: 'auto' }}
       >
         <defs>
-          <radialGradient id="ocean" cx="50%" cy="40%" r="70%">
-            <stop offset="0%"   stopColor="#C4DCED" />
-            <stop offset="100%" stopColor="#A8C8E0" />
+          <radialGradient id="ocean" cx="50%" cy="45%" r="65%">
+            <stop offset="0%"   stopColor="#D6E4F2" />
+            <stop offset="100%" stopColor="#C2D5E8" />
           </radialGradient>
         </defs>
 
-        <rect width="800" height="490" fill="url(#ocean)" />
+        <rect width="800" height="420" fill="url(#ocean)" />
 
         <ZoomableGroup
           zoom={zoom}
