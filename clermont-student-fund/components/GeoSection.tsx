@@ -40,11 +40,13 @@ const TICKER_ZONE: Record<string, string> = {
 
 const CustomTooltip = ({ active, payload }: any) => {
   if (!active || !payload?.length) return null;
+  const isCash = payload[0].name === 'Cash';
   const zone = ZONES.find(z => z.label === payload[0].name);
+  const color = isCash ? CASH_COLOR : (zone?.color ?? CASH_COLOR);
   return (
     <div className="rounded-xl border px-3 py-2 text-xs shadow-lg" style={{ background: '#fff', borderColor: 'rgba(26,37,64,0.1)' }}>
       <div className="flex items-center gap-1.5 mb-0.5">
-        <span className="w-2 h-2 rounded-full" style={{ background: zone?.color }} />
+        <span className="w-2 h-2 rounded-full" style={{ background: color }} />
         <span className="font-semibold" style={{ color: '#1A2540' }}>{payload[0].name}</span>
       </div>
       <span style={{ color: '#8496B2' }}>{payload[0].value.toFixed(1)}% du portefeuille</span>
@@ -52,22 +54,33 @@ const CustomTooltip = ({ active, payload }: any) => {
   );
 };
 
-interface Props { positions: EnrichedPosition[] }
+interface Props {
+  positions: EnrichedPosition[];
+  cashUSD?: number;
+  totalValue?: number;
+}
 
-export default function GeoSection({ positions }: Props) {
+const CASH_COLOR = '#8496B2';
+const fmtUsd = (n: number) =>
+  new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(n);
+
+export default function GeoSection({ positions, cashUSD = 0, totalValue = 1 }: Props) {
   const [hoveredZone, setHoveredZone] = useState<string | null>(null);
 
-  /* Compute zone weights */
+  /* Compute zone weights (cash excluded — shown separately) */
   const weights: Record<string, number> = { europe: 0, asia: 0, americas: 0, global: 0 };
   const tickers: Record<string, string[]> = { europe: [], asia: [], americas: [], global: [] };
   for (const pos of positions) {
     const z = TICKER_ZONE[pos.ticker];
     if (z) { weights[z] += pos.weight; tickers[z].push(pos.ticker); }
   }
-  const total = Object.values(weights).reduce((a, b) => a + b, 0);
-  weights.global += Math.max(0, 100 - total);
 
-  const pieData = ZONES.map(z => ({ name: z.label, value: parseFloat(weights[z.id].toFixed(1)), color: z.color }));
+  const cashPct = totalValue > 0 ? (cashUSD / totalValue) * 100 : 0;
+
+  const pieData = [
+    ...ZONES.map(z => ({ name: z.label, value: parseFloat(weights[z.id].toFixed(1)), color: z.color })),
+    { name: 'Cash', value: parseFloat(cashPct.toFixed(1)), color: CASH_COLOR },
+  ];
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-5 gap-4">
@@ -91,13 +104,16 @@ export default function GeoSection({ positions }: Props) {
                 onMouseLeave={() => setHoveredZone(null)}
                 animationBegin={0} animationDuration={800}
               >
-                {pieData.map((e, i) => (
-                  <Cell
-                    key={i} fill={e.color}
-                    opacity={hoveredZone && hoveredZone !== ZONES[i].id ? 0.3 : 1}
-                    style={{ cursor: 'pointer', transition: 'opacity 0.2s' }}
-                  />
-                ))}
+                {pieData.map((e, i) => {
+                  const zoneId = i < ZONES.length ? ZONES[i].id : 'cash';
+                  return (
+                    <Cell
+                      key={i} fill={e.color}
+                      opacity={hoveredZone && hoveredZone !== zoneId ? 0.3 : 1}
+                      style={{ cursor: 'pointer', transition: 'opacity 0.2s' }}
+                    />
+                  );
+                })}
               </Pie>
               <Tooltip content={<CustomTooltip />} />
             </PieChart>
@@ -138,6 +154,34 @@ export default function GeoSection({ positions }: Props) {
               </div>
             );
           })}
+
+          {/* Cash — ligne séparée */}
+          <div
+            className="flex items-center gap-2.5 rounded-lg px-3 py-2 cursor-default transition-all duration-150"
+            style={{
+              background: hoveredZone === 'cash' ? 'rgba(132,150,178,0.10)' : 'rgba(26,37,64,0.03)',
+              border: `1px solid ${hoveredZone === 'cash' ? CASH_COLOR + '30' : 'transparent'}`,
+            }}
+            onMouseEnter={() => setHoveredZone('cash')}
+            onMouseLeave={() => setHoveredZone(null)}
+          >
+            <span className="w-2.5 h-2.5 rounded-full flex-shrink-0" style={{ background: CASH_COLOR }} />
+            <div className="flex-1 min-w-0">
+              <div className="flex items-center justify-between mb-1">
+                <span className="text-xs font-semibold" style={{ color: '#1A2540' }}>
+                  Cash disponible
+                </span>
+                <div className="flex items-center gap-1.5">
+                  <span className="text-[10px] font-mono" style={{ color: '#8496B2' }}>{fmtUsd(cashUSD)}</span>
+                  <span className="text-xs font-mono font-bold" style={{ color: CASH_COLOR }}>{cashPct.toFixed(1)}%</span>
+                </div>
+              </div>
+              <div className="w-full h-1 rounded-full overflow-hidden" style={{ background: 'rgba(26,37,64,0.08)' }}>
+                <div className="h-1 rounded-full transition-all duration-700" style={{ width: `${Math.min(cashPct, 100)}%`, background: CASH_COLOR }} />
+              </div>
+              <p className="text-[10px] mt-1" style={{ color: '#8496B2' }}>Non investi · disponible pour de nouvelles positions</p>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -145,7 +189,13 @@ export default function GeoSection({ positions }: Props) {
       <div className="lg:col-span-3 card-static rounded-2xl p-5 flex flex-col gap-3">
         <div>
           <p className="text-sm font-semibold" style={{ color: '#1A2540' }}>Carte d'exposition mondiale</p>
-          <p className="text-xs mt-0.5" style={{ color: '#8496B2' }}>Survole un pays ou une ville — <span style={{ color: '#B8963A', fontWeight: 600 }}>★ Clermont-Ferrand</span></p>
+          <p className="text-xs mt-0.5" style={{ color: '#8496B2' }}>
+            Survole un pays ou une ville ·{' '}
+            <span style={{ color: '#B8963A', fontWeight: 600 }}>★ Clermont-Ferrand</span>
+            {cashUSD > 0 && (
+              <> · <span style={{ color: CASH_COLOR, fontWeight: 600 }}>Cash : {fmtUsd(cashUSD)}</span></>
+            )}
+          </p>
         </div>
 
         <MapChart hoveredZone={hoveredZone} onHoverZone={setHoveredZone} />
@@ -168,6 +218,19 @@ export default function GeoSection({ positions }: Props) {
               <span className="text-xs font-mono font-bold" style={{ color: z.color }}>{(weights[z.id] ?? 0).toFixed(0)}%</span>
             </div>
           ))}
+          <div
+            className="flex items-center gap-1.5 px-2.5 py-1 rounded-full cursor-default transition-all"
+            style={{
+              background: hoveredZone === 'cash' ? 'rgba(132,150,178,0.10)' : 'rgba(26,37,64,0.04)',
+              border: `1px solid ${hoveredZone === 'cash' ? CASH_COLOR + '35' : 'rgba(26,37,64,0.08)'}`,
+            }}
+            onMouseEnter={() => setHoveredZone('cash')}
+            onMouseLeave={() => setHoveredZone(null)}
+          >
+            <span className="w-2 h-2 rounded-full" style={{ background: CASH_COLOR }} />
+            <span className="text-xs font-medium" style={{ color: '#1A2540' }}>Cash</span>
+            <span className="text-xs font-mono font-bold" style={{ color: CASH_COLOR }}>{cashPct.toFixed(0)}%</span>
+          </div>
         </div>
       </div>
     </div>

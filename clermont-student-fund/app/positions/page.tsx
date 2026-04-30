@@ -148,7 +148,11 @@ export default async function PositionsPage() {
             <p className="section-label mb-1">Exposition géographique</p>
             <h2 className="font-display font-bold text-xl" style={{ color: '#1A2540' }}>Où investit le CSF ?</h2>
           </div>
-          <GeoSection positions={portfolio.positions} />
+          <GeoSection
+            positions={portfolio.positions}
+            cashUSD={portfolio.cashEUR}
+            totalValue={portfolio.totalValue}
+          />
         </section>
       </AnimateIn>
 
