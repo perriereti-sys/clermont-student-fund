@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { EnrichedPosition } from '@/lib/types';
 
 export type BucketId = 'socle' | 'conviction' | 'opportunite';
@@ -41,6 +41,22 @@ const BUCKET_TARGETS: Record<BucketId, { ticker: string; name: string }[]> = {
 
 export default function BucketSection({ bucket, positions, eurUsd = 1.09 }: Props) {
   const [collapsed, setCollapsed] = useState(false);
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const [showHint, setShowHint] = useState(false);
+
+  useEffect(() => {
+    if (collapsed) { setShowHint(false); return; }
+    const el = scrollRef.current;
+    if (!el) return;
+    const check = () => setShowHint(el.scrollLeft + el.clientWidth < el.scrollWidth - 4);
+    check();
+    el.addEventListener('scroll', check, { passive: true });
+    window.addEventListener('resize', check, { passive: true });
+    return () => {
+      el.removeEventListener('scroll', check);
+      window.removeEventListener('resize', check);
+    };
+  }, [collapsed]);
 
   const fmtUsd = (n: number) =>
     new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(n);
@@ -106,7 +122,8 @@ export default function BucketSection({ bucket, positions, eurUsd = 1.09 }: Prop
 
       {/* Table */}
       {!collapsed && (
-        <div className="overflow-x-auto">
+        <div className="relative">
+          <div ref={scrollRef} className="overflow-x-auto">
           <table className="w-full data-table">
             <thead>
               <tr>
@@ -191,6 +208,24 @@ export default function BucketSection({ bucket, positions, eurUsd = 1.09 }: Prop
               ))}
             </tbody>
           </table>
+          </div>
+
+          {/* Scroll hint — fade gradient + arrow, visible when content overflows */}
+          {showHint && (
+            <div
+              className="absolute top-0 right-0 bottom-0 w-14 pointer-events-none flex items-center justify-end pr-2 sm:hidden"
+              style={{ background: 'linear-gradient(to right, transparent, rgba(255,255,255,0.97) 60%)' }}
+            >
+              <div className="flex flex-col items-center gap-0.5">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#8496B2" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                  <polyline points="9 18 15 12 9 6" />
+                </svg>
+                <span className="text-[9px] font-semibold tracking-wide" style={{ color: '#8496B2', writingMode: 'vertical-rl', transform: 'rotate(180deg)', lineHeight: 1 }}>
+                  glisser
+                </span>
+              </div>
+            </div>
+          )}
         </div>
       )}
     </div>
