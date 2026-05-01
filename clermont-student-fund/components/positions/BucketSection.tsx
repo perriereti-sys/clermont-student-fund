@@ -115,7 +115,7 @@ export default function BucketSection({ bucket, positions, eurUsd = 1.09 }: Prop
                 <th className="text-right">Qté</th>
                 <th className="text-right hidden sm:table-cell">Prix achat</th>
                 <th className="text-right">Prix actuel</th>
-                <th className="text-right hidden sm:table-cell">P&amp;L €</th>
+                <th className="text-right">P&amp;L €</th>
                 <th className="text-right">P&amp;L %</th>
                 <th className="text-right hidden sm:table-cell">Poids %</th>
               </tr>
@@ -146,12 +146,15 @@ export default function BucketSection({ bucket, positions, eurUsd = 1.09 }: Prop
                       {fmtPrice(pos.currentPrice, pos.currency)}
                     </td>
                     {/* P&L € */}
-                    <td className={`text-right font-mono text-sm hidden sm:table-cell`}>
-                      <span className={`font-semibold ${isPos ? 'text-gain' : 'text-loss'}`}>
+                    <td className="text-right font-mono text-sm">
+                      <span className={`font-bold ${isPos ? 'text-gain' : 'text-loss'}`}>
                         {isPos ? '+' : ''}{fmtEur(pos.pnlEUR / eurUsd)}
                       </span>
                       <br />
-                      <span className="text-[10px]" style={{ color: '#8496B2' }}>
+                      <span
+                        className="text-[10px] font-medium"
+                        style={{ color: isPos ? 'rgba(10,142,98,0.55)' : 'rgba(201,48,72,0.55)' }}
+                      >
                         {isPos ? '+' : ''}{fmtUsd(pos.pnlEUR)}
                       </span>
                     </td>
