@@ -133,6 +133,15 @@ function fmtPerf(v: number | null): string {
   return `${v >= 0 ? '+' : ''}${v.toFixed(2)}%`;
 }
 
+/* ── StatChip ────────────────────────────────────────────────────────────── */
+
+const StatChip = ({ label, value, color }: { label: string; value: string; color: string }) => (
+  <div className="flex items-center gap-1.5">
+    <span className="text-[10px] uppercase tracking-wide" style={{ color: MUTED }}>{label}</span>
+    <span className="text-xs font-mono font-bold" style={{ color }}>{value}</span>
+  </div>
+);
+
 /* ── Component ───────────────────────────────────────────────────────────── */
 
 export default function PerformanceChart({ data }: Props) {
@@ -296,9 +305,14 @@ export default function PerformanceChart({ data }: Props) {
       </div>
 
       {/* ── Chart ───────────────────────────────────────── */}
+      <div className="px-4 sm:px-6 py-2 flex flex-wrap items-center gap-x-6 gap-y-1 bg-white" style={{ borderBottom: '1px solid rgba(26,37,64,0.05)' }}>
+        <StatChip label="Haut période" value={portMax > 100 ? `+${(portMax - 100).toFixed(2)}%` : `${(portMax - 100).toFixed(2)}%`} color={GOLD} />
+        <StatChip label="Bas période"  value={`${(portMin - 100).toFixed(2)}%`} color={portMin < 100 ? RED : GREEN} />
+        <StatChip label="Points"       value={String(n)} color={MUTED} />
+      </div>
       <div className="px-1 sm:px-4 py-4 sm:py-5 bg-white">
         <ResponsiveContainer width="100%" height={230} className="sm:!h-[300px]">
-          <ComposedChart data={displayed} margin={{ top: 10, right: 16, left: 4, bottom: 0 }}>
+          <ComposedChart data={displayed} margin={{ top: 10, right: 24, left: 0, bottom: 0 }}>
             <defs>
               <linearGradient id="portfolioFill" x1="0" y1="0" x2="0" y2="1">
                 <stop offset="0%"   stopColor={GOLD} stopOpacity={0.30} />
@@ -309,35 +323,17 @@ export default function PerformanceChart({ data }: Props) {
 
             <CartesianGrid strokeDasharray="2 5" stroke="rgba(26,37,64,0.055)" vertical={false} />
 
-            {/* Baseline */}
-            <ReferenceLine
-              y={100}
-              stroke="rgba(26,37,64,0.18)"
-              strokeDasharray="3 3"
-              strokeWidth={1}
-              label={{ value: '0 %', position: 'insideBottomLeft', fill: MUTED, fontSize: 9, offset: 4 }}
-            />
+            {/* Baseline 0% */}
+            <ReferenceLine y={100} stroke="rgba(26,37,64,0.20)" strokeDasharray="3 4" strokeWidth={1} />
 
-            {/* Portfolio high-water mark */}
+            {/* High-water mark */}
             {portMax > 101 && (
-              <ReferenceLine
-                y={portMax}
-                stroke={GOLD + '55'}
-                strokeDasharray="2 3"
-                strokeWidth={1}
-                label={{ value: `Max +${(portMax - 100).toFixed(1)}%`, position: 'insideTopRight', fill: GOLD, fontSize: 9 }}
-              />
+              <ReferenceLine y={portMax} stroke={GOLD + '50'} strokeDasharray="2 4" strokeWidth={1} />
             )}
 
             {/* Portfolio low */}
             {portMin < 99 && (
-              <ReferenceLine
-                y={portMin}
-                stroke={RED + '44'}
-                strokeDasharray="2 3"
-                strokeWidth={1}
-                label={{ value: `Min ${(portMin - 100).toFixed(1)}%`, position: 'insideBottomRight', fill: RED, fontSize: 9 }}
-              />
+              <ReferenceLine y={portMin} stroke={RED + '44'} strokeDasharray="2 4" strokeWidth={1} />
             )}
 
             <XAxis

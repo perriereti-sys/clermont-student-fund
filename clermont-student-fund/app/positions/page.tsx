@@ -43,7 +43,7 @@ export default async function PositionsPage() {
     portfolio = {
       totalValue: 100000, totalCost: 100000, totalPnL: 0, totalPnLPercent: 0,
       sharpeRatio: 0, beta: 1.0, var95: 0, maxDrawdown: 0,
-      positions: [], cashEUR: 0, chartData: [], lastUpdated: new Date().toISOString(),
+      positions: [], cashEUR: 0, eurUsd: 1.09, chartData: [], lastUpdated: new Date().toISOString(),
     };
   }
 
@@ -56,8 +56,11 @@ export default async function PositionsPage() {
     grouped[bucket].push(pos);
   }
 
+  const eurUsd = portfolio.eurUsd ?? 1.09;
   const fmtUsd = (n: number) =>
     new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(n);
+  const fmtEur = (n: number) =>
+    new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 }).format(n);
 
   return (
     <div className="flex flex-col gap-8">
@@ -106,6 +109,9 @@ export default async function PositionsPage() {
                   <div>
                     <p className="section-label mb-0.5">P&amp;L</p>
                     <p className={`font-mono font-bold text-xl ${isPnlPos ? 'text-gain' : 'text-loss'}`}>
+                      {isPnlPos ? '+' : ''}{fmtEur(pnl / eurUsd)}
+                    </p>
+                    <p className="font-mono text-xs mt-0.5" style={{ color: '#8496B2' }}>
                       {isPnlPos ? '+' : ''}{fmtUsd(pnl)}
                     </p>
                   </div>
@@ -137,7 +143,7 @@ export default async function PositionsPage() {
       {/* ── Bucket detail sections ──────────────────────── */}
       {BUCKETS.map((bucket, i) => (
         <AnimateIn key={bucket.id} delay={i * 80} y={18}>
-          <BucketSection bucket={bucket} positions={grouped[bucket.id]} />
+          <BucketSection bucket={bucket} positions={grouped[bucket.id]} eurUsd={eurUsd} />
         </AnimateIn>
       ))}
 

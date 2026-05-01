@@ -71,6 +71,7 @@ export async function GET() {
       maxDrawdown: computeMaxDrawdown(history),
       positions,
       cashEUR: cashUSD,
+      eurUsd: 1.09,
       chartData: [],
       lastUpdated: new Date().toISOString(),
     };

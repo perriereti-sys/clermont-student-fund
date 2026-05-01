@@ -210,7 +210,8 @@ export async function getPortfolioMetrics(): Promise<PortfolioMetrics> {
     var95,
     maxDrawdown,
     positions,
-    cashEUR: cashUSD, // USD cash passed as cashEUR prop (field name kept for compat)
+    cashEUR: cashUSD,
+    eurUsd,
     chartData,
     lastUpdated: new Date().toISOString(),
   };

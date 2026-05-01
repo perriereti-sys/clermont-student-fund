@@ -15,7 +15,7 @@ export default async function DashboardPage() {
   const portfolio = await getPortfolioMetrics().catch(() => ({
     totalValue: 100000, totalCost: 100000, totalPnL: 0, totalPnLPercent: 0,
     sharpeRatio: 0, beta: 1.0, var95: 0, maxDrawdown: 0,
-    positions: [], cashEUR: 0, chartData: [], lastUpdated: new Date().toISOString(),
+    positions: [], cashEUR: 0, eurUsd: 1.09, chartData: [], lastUpdated: new Date().toISOString(),
   }));
   const chartData = portfolio.chartData;
 

@@ -63,6 +63,7 @@ export interface PortfolioMetrics {
   maxDrawdown: number;
   positions: EnrichedPosition[];
   cashEUR: number;
+  eurUsd: number;
   chartData: ChartPoint[];
   lastUpdated: string;
 }
