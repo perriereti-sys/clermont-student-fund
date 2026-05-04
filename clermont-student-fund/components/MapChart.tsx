@@ -286,11 +286,30 @@ export default function MapChart({ hoveredZone, onHoverZone }: Props) {
             const color    = ZONE_COLOR[m.zone];
             const isActive = activeMarker === m.name;
             const isDirect = !m.indirect && m.tickers.some(t => t !== 'PAASI.PA');
-            const cw = 122 * s;
-            const ch = 64  * s;
-            const cx2 = -cw / 2;
-            const showAbove = m.coords[1] > 20;
-            const cy2 = showAbove ? -(ch + 18 * s) : 18 * s;
+
+            // Exchange text: split at first ' · ' when text is too long for one line
+            const excFull  = m.exchange;
+            const excSplit = excFull.length > 22 ? excFull.indexOf(' · ') : -1;
+            const excL1    = excSplit > 0 ? excFull.slice(0, excSplit) : excFull;
+            const excL2    = excSplit > 0 ? excFull.slice(excSplit + 3) : '';
+
+            // Tickers: up to 3 on row 1, rest on row 2
+            const tRow1 = m.tickers.slice(0, 3).join(' · ');
+            const tRow2 = m.tickers.slice(3).join(' · ');
+
+            // Card dimensions — adaptive to content
+            const cw       = 152 * s;
+            const ch       = (60 + (excL2 ? 10 : 0) + (tRow2 ? 10 : 0)) * s;
+            const cx2      = -cw / 2;
+
+            // For equatorial / southern cities show card above the dot
+            const showAbove = m.coords[1] < 25;
+            const cy2       = showAbove ? -(ch + 18 * s) : 18 * s;
+
+            // Layout y-offsets inside card (computed after cy2)
+            const sepY = cy2 + (excL2 ? 51 : 41) * s;
+            const tY1  = cy2 + (excL2 ? 62 : 52) * s;
+            const tY2  = cy2 + (excL2 ? 72 : 62) * s;
 
             return (
               <Marker
@@ -340,21 +359,35 @@ export default function MapChart({ hoveredZone, onHoverZone }: Props) {
                       style={{ fontSize: `${8.5 * s}px`, fontFamily: '"Plus Jakarta Sans",sans-serif', fontWeight: 700, fill: '#1A2540' }}>
                       {m.name}
                     </text>
-                    {/* Exchange */}
+                    {/* Exchange line 1 */}
                     <text x={cx2 + 38 * s} y={cy2 + 33 * s}
                       style={{ fontSize: `${6.5 * s}px`, fontFamily: '"Plus Jakarta Sans",sans-serif', fontWeight: 600, fill: color }}>
-                      {m.exchange}
+                      {excL1}
                     </text>
+                    {/* Exchange line 2 (long names only) */}
+                    {excL2 && (
+                      <text x={cx2 + 38 * s} y={cy2 + 43 * s}
+                        style={{ fontSize: `${6.5 * s}px`, fontFamily: '"Plus Jakarta Sans",sans-serif', fontWeight: 600, fill: color }}>
+                        {excL2}
+                      </text>
+                    )}
 
                     {/* Separator */}
-                    <line x1={cx2 + 8 * s} y1={cy2 + 40 * s} x2={cx2 + cw - 8 * s} y2={cy2 + 40 * s}
+                    <line x1={cx2 + 8 * s} y1={sepY} x2={cx2 + cw - 8 * s} y2={sepY}
                       stroke="rgba(26,37,64,0.07)" strokeWidth={0.8 * s} />
 
-                    {/* Tickers */}
-                    <text textAnchor="middle" y={cy2 + 54 * s}
+                    {/* Tickers row 1 */}
+                    <text textAnchor="middle" y={tY1}
                       style={{ fontSize: `${6.5 * s}px`, fontFamily: '"JetBrains Mono",monospace', fill: '#5C6E8A', fontWeight: 600 }}>
-                      {m.tickers.join(' · ')}
+                      {tRow1}
                     </text>
+                    {/* Tickers row 2 (Paris etc.) */}
+                    {tRow2 && (
+                      <text textAnchor="middle" y={tY2}
+                        style={{ fontSize: `${6.5 * s}px`, fontFamily: '"JetBrains Mono",monospace', fill: '#5C6E8A', fontWeight: 600 }}>
+                        {tRow2}
+                      </text>
+                    )}
 
                     {/* Arrow toward dot */}
                     <polygon
