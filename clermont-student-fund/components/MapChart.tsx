@@ -175,6 +175,9 @@ interface Tip {
   tooltipZone: string | null;
   x: number; y: number;
 }
+interface MarkerTip {
+  city: CityMarker; x: number; y: number;
+}
 interface Props { hoveredZone: string | null; onHoverZone: (z: string | null) => void }
 
 /* ── Component ───────────────────────────────────────────────────────────── */
@@ -182,7 +185,8 @@ interface Props { hoveredZone: string | null; onHoverZone: (z: string | null) =>
 export default function MapChart({ hoveredZone, onHoverZone }: Props) {
   const mapRef  = useRef<HTMLDivElement>(null);
   const [activeMarker, setActiveMarker] = useState<string | null>(null);
-  const [tip,  setTip]   = useState<Tip | null>(null);
+  const [tip,       setTip]       = useState<Tip | null>(null);
+  const [markerTip, setMarkerTip] = useState<MarkerTip | null>(null);
   const [zoom, setZoom]  = useState(1);
   const [center, setCenter] = useState<[number, number]>([15, 18]);
 
@@ -287,36 +291,26 @@ export default function MapChart({ hoveredZone, onHoverZone }: Props) {
             const isActive = activeMarker === m.name;
             const isDirect = !m.indirect && m.tickers.some(t => t !== 'PAASI.PA');
 
-            // Exchange text: split at first ' · ' when text is too long for one line
-            const excFull  = m.exchange;
-            const excSplit = excFull.length > 22 ? excFull.indexOf(' · ') : -1;
-            const excL1    = excSplit > 0 ? excFull.slice(0, excSplit) : excFull;
-            const excL2    = excSplit > 0 ? excFull.slice(excSplit + 3) : '';
-
-            // Tickers: up to 3 on row 1, rest on row 2
-            const tRow1 = m.tickers.slice(0, 3).join(' · ');
-            const tRow2 = m.tickers.slice(3).join(' · ');
-
-            // Card dimensions — adaptive to content
-            const cw       = 152 * s;
-            const ch       = (60 + (excL2 ? 10 : 0) + (tRow2 ? 10 : 0)) * s;
-            const cx2      = -cw / 2;
-
-            // For equatorial / southern cities show card above the dot
-            const showAbove = m.coords[1] < 25;
-            const cy2       = showAbove ? -(ch + 18 * s) : 18 * s;
-
-            // Layout y-offsets inside card (computed after cy2)
-            const sepY = cy2 + (excL2 ? 51 : 41) * s;
-            const tY1  = cy2 + (excL2 ? 62 : 52) * s;
-            const tY2  = cy2 + (excL2 ? 72 : 62) * s;
-
             return (
               <Marker
                 key={m.name}
                 coordinates={m.coords}
-                onMouseEnter={() => { setActiveMarker(m.name); onHoverZone(m.zone); setTip(null); }}
-                onMouseLeave={() => { setActiveMarker(null); onHoverZone(null); }}
+                onMouseEnter={(evt: any) => {
+                  setActiveMarker(m.name);
+                  onHoverZone(m.zone);
+                  setTip(null);
+                  if (mapRef.current) {
+                    const r = mapRef.current.getBoundingClientRect();
+                    setMarkerTip({ city: m, x: evt.clientX - r.left, y: evt.clientY - r.top });
+                  }
+                }}
+                onMouseMove={(evt: any) => {
+                  if (mapRef.current) {
+                    const r = mapRef.current.getBoundingClientRect();
+                    setMarkerTip({ city: m, x: evt.clientX - r.left, y: evt.clientY - r.top });
+                  }
+                }}
+                onMouseLeave={() => { setActiveMarker(null); onHoverZone(null); setMarkerTip(null); }}
               >
                 {/* Outer pulse ring */}
                 {isActive && (
@@ -332,72 +326,6 @@ export default function MapChart({ hoveredZone, onHoverZone }: Props) {
                 />
                 <circle r={(isActive ? 2.5 : isDirect ? 1.8 : 1.2) * s} fill={color}
                   style={{ pointerEvents: 'none' }} />
-
-                {/* Tooltip card on hover */}
-                {isActive && (
-                  <g style={{ pointerEvents: 'none' }}>
-                    {/* Shadow + background */}
-                    <rect x={cx2} y={cy2} width={cw} height={ch} rx={8 * s}
-                      fill="white"
-                      style={{ filter: 'drop-shadow(0 6px 20px rgba(26,37,64,0.20))' }} />
-                    {/* Border */}
-                    <rect x={cx2} y={cy2} width={cw} height={ch} rx={8 * s}
-                      fill="none" stroke={color} strokeWidth={0.9 * s} strokeOpacity={0.22} />
-                    {/* Accent bar top */}
-                    <rect x={cx2} y={cy2} width={cw} height={4.5 * s} rx={8 * s}
-                      fill={color} fillOpacity={0.75} />
-
-                    {/* Emoji icon */}
-                    <text
-                      x={cx2 + 14 * s} y={cy2 + 24 * s}
-                      style={{ fontSize: `${16 * s}px`, fontFamily: 'system-ui,-apple-system,sans-serif', dominantBaseline: 'auto' }}>
-                      {m.emoji}
-                    </text>
-
-                    {/* City name */}
-                    <text x={cx2 + 38 * s} y={cy2 + 22 * s}
-                      style={{ fontSize: `${8.5 * s}px`, fontFamily: '"Plus Jakarta Sans",sans-serif', fontWeight: 700, fill: '#1A2540' }}>
-                      {m.name}
-                    </text>
-                    {/* Exchange line 1 */}
-                    <text x={cx2 + 38 * s} y={cy2 + 33 * s}
-                      style={{ fontSize: `${6.5 * s}px`, fontFamily: '"Plus Jakarta Sans",sans-serif', fontWeight: 600, fill: color }}>
-                      {excL1}
-                    </text>
-                    {/* Exchange line 2 (long names only) */}
-                    {excL2 && (
-                      <text x={cx2 + 38 * s} y={cy2 + 43 * s}
-                        style={{ fontSize: `${6.5 * s}px`, fontFamily: '"Plus Jakarta Sans",sans-serif', fontWeight: 600, fill: color }}>
-                        {excL2}
-                      </text>
-                    )}
-
-                    {/* Separator */}
-                    <line x1={cx2 + 8 * s} y1={sepY} x2={cx2 + cw - 8 * s} y2={sepY}
-                      stroke="rgba(26,37,64,0.07)" strokeWidth={0.8 * s} />
-
-                    {/* Tickers row 1 */}
-                    <text textAnchor="middle" y={tY1}
-                      style={{ fontSize: `${6.5 * s}px`, fontFamily: '"JetBrains Mono",monospace', fill: '#5C6E8A', fontWeight: 600 }}>
-                      {tRow1}
-                    </text>
-                    {/* Tickers row 2 (Paris etc.) */}
-                    {tRow2 && (
-                      <text textAnchor="middle" y={tY2}
-                        style={{ fontSize: `${6.5 * s}px`, fontFamily: '"JetBrains Mono",monospace', fill: '#5C6E8A', fontWeight: 600 }}>
-                        {tRow2}
-                      </text>
-                    )}
-
-                    {/* Arrow toward dot */}
-                    <polygon
-                      points={showAbove
-                        ? `${-5 * s},${-16 * s} ${5 * s},${-16 * s} 0,${-2 * s}`
-                        : `${-5 * s},${16 * s} ${5 * s},${16 * s} 0,${2 * s}`}
-                      fill="white" stroke={color} strokeWidth={0.9 * s} strokeOpacity={0.22}
-                    />
-                  </g>
-                )}
 
                 {/* At-rest label — emoji for direct-stock markers only */}
                 {!isActive && isDirect && (
@@ -417,6 +345,53 @@ export default function MapChart({ hoveredZone, onHoverZone }: Props) {
 
         </ZoomableGroup>
       </ComposableMap>
+
+      {/* ── City marker tooltip ────────────────────── */}
+      {markerTip && (() => {
+        const { city, x, y } = markerTip;
+        const color = ZONE_COLOR[city.zone];
+        const w = mapRef.current?.clientWidth ?? 600;
+        return (
+          <div
+            className="absolute pointer-events-none z-20 rounded-xl overflow-hidden"
+            style={{
+              left: Math.min(x + 14, w - 210),
+              top:  Math.max(6, y - 80),
+              background: 'rgba(255,255,255,0.97)',
+              border: `1px solid ${color}30`,
+              boxShadow: '0 4px 20px rgba(26,37,64,0.16)',
+              minWidth: 160,
+              maxWidth: 200,
+            }}
+          >
+            <div style={{ height: 3, background: color }} />
+            <div style={{ padding: '8px 12px 10px' }}>
+              <div className="flex items-center gap-1.5 mb-1">
+                <span style={{ fontSize: 14, lineHeight: 1 }}>{city.emoji}</span>
+                <span className="text-xs font-bold" style={{ color: '#1A2540' }}>{city.name}</span>
+                {city.indirect && (
+                  <span className="text-[9px] font-semibold px-1 py-px rounded"
+                    style={{ background: color + '18', color }}>
+                    Indirect
+                  </span>
+                )}
+              </div>
+              <p className="text-[10px] font-semibold leading-snug mb-2" style={{ color }}>
+                {city.exchange}
+              </p>
+              <div style={{ height: 1, background: 'rgba(26,37,64,0.07)', marginBottom: 6 }} />
+              <div className="flex flex-wrap gap-1">
+                {city.tickers.map(t => (
+                  <span key={t} className="text-[9px] font-mono font-semibold px-1.5 py-px rounded"
+                    style={{ background: color + '14', color: '#5C6E8A' }}>
+                    {t}
+                  </span>
+                ))}
+              </div>
+            </div>
+          </div>
+        );
+      })()}
 
       {/* ── Country hover tooltip ──────────────────── */}
       {tip && tip.name && (
