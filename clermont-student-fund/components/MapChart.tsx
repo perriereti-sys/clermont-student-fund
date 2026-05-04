@@ -11,9 +11,10 @@ const GEO_URL = 'https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json'
 /* ── Portfolio exposure: only these countries are colored ────────────────── */
 
 const EXPOSURE: Record<string, string> = {
-  '250': 'europe',   // France  — Euronext Paris
-  '276': 'europe',   // Germany — XETRA
-  '840': 'americas', // USA     — NYSE / NASDAQ / OTC
+  '250': 'europe',   // France   — Euronext Paris
+  '276': 'europe',   // Germany  — XETRA
+  '724': 'europe',   // Spain    — BME Madrid (SAN.MC)
+  '840': 'americas', // USA      — NYSE / NASDAQ / OTC
   '392': 'asia', '156': 'asia', '410': 'asia', '158': 'asia',
   '356': 'asia', '702': 'asia', '360': 'asia', '458': 'asia',
   '764': 'asia', '608': 'asia', '36':  'asia',
@@ -67,7 +68,7 @@ const ZONE_LABEL: Record<string, string> = {
 /* ── Country emoji (for tooltip) ─────────────────────────────────────────── */
 
 const COUNTRY_EMOJI: Record<string, string> = {
-  '250': '🇫🇷', '276': '🇩🇪', '840': '🇺🇸',
+  '250': '🇫🇷', '276': '🇩🇪', '724': '🇪🇸', '840': '🇺🇸',
   '392': '🇯🇵', '156': '🇨🇳', '410': '🇰🇷', '158': '🇹🇼',
   '356': '🇮🇳', '702': '🇸🇬', '360': '🇮🇩', '458': '🇲🇾',
   '764': '🇹🇭', '608': '🇵🇭', '36':  '🇦🇺',
@@ -115,13 +116,20 @@ interface CityMarker {
   name: string; emoji: string;
   coords: [number, number]; zone: string;
   exchange: string; tickers: string[];
+  indirect?: boolean;
 }
 
 const CITY_MARKERS: CityMarker[] = [
   // ── Direct listings ────────────────────────────────────────────────────
   { name:'Paris',        emoji:'🗼', coords:[2.35,   48.86],  zone:'europe',   exchange:'Euronext Paris', tickers:['SGO.PA','EL.PA','VIE.PA','PAASI.PA'] },
   { name:'Francfort',    emoji:'🇩🇪', coords:[8.68,   50.11],  zone:'europe',   exchange:'XETRA',          tickers:['SAP.DE'] },
+  { name:'Madrid',       emoji:'🇪🇸', coords:[-3.70,  40.42],  zone:'europe',   exchange:'BME Madrid',     tickers:['SAN.MC'] },
   { name:'New York',     emoji:'🗽', coords:[-74.01, 40.71],  zone:'americas', exchange:'NYSE · NASDAQ',  tickers:['META','IONQ','ASTS','KRKNF','GC=F'] },
+  // ── Exposition LatAm via Banco Santander ───────────────────────────────
+  { name:'São Paulo',    emoji:'🇧🇷', coords:[-46.63,-23.55],  zone:'europe',   exchange:'Santander Brasil · ~27% des bénéfices',   tickers:['SAN.MC'], indirect:true },
+  { name:'Mexico',       emoji:'🇲🇽', coords:[-99.13, 19.43],  zone:'europe',   exchange:'Santander Mexico · ~14% des bénéfices',   tickers:['SAN.MC'], indirect:true },
+  { name:'Buenos Aires', emoji:'🇦🇷', coords:[-58.38,-34.60],  zone:'europe',   exchange:'Santander Argentine · ~8% des bénéfices', tickers:['SAN.MC'], indirect:true },
+  { name:'Bogotá',       emoji:'🇨🇴', coords:[-74.08,  4.71],  zone:'europe',   exchange:'Santander Colombie · ~7% des bénéfices',  tickers:['SAN.MC'], indirect:true },
   // ── PAASI.PA underlying markets ────────────────────────────────────────
   { name:'Tokyo',        emoji:'🇯🇵', coords:[139.69, 35.69],  zone:'asia', exchange:'TSE',       tickers:['PAASI.PA'] },
   { name:'Séoul',        emoji:'🇰🇷', coords:[126.978,37.566], zone:'asia', exchange:'KRX',       tickers:['PAASI.PA'] },
@@ -277,7 +285,7 @@ export default function MapChart({ hoveredZone, onHoverZone }: Props) {
           {CITY_MARKERS.map((m) => {
             const color    = ZONE_COLOR[m.zone];
             const isActive = activeMarker === m.name;
-            const isDirect = m.tickers.some(t => t !== 'PAASI.PA');
+            const isDirect = !m.indirect && m.tickers.some(t => t !== 'PAASI.PA');
             const cw = 122 * s;
             const ch = 64  * s;
             const cx2 = -cw / 2;

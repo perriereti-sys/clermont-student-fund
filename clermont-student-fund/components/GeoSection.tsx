@@ -32,7 +32,7 @@ const ZONES = [
 ];
 
 const TICKER_ZONE: Record<string, string> = {
-  'SGO.PA': 'europe', 'EL.PA': 'europe', 'VIE.PA': 'europe', 'SAP.DE': 'europe',
+  'SGO.PA': 'europe', 'EL.PA': 'europe', 'VIE.PA': 'europe', 'SAP.DE': 'europe', 'SAN.MC': 'europe',
   'PAASI.PA': 'asia',
   'IONQ': 'americas', 'ASTS': 'americas', 'KRKNF': 'americas', 'META': 'americas',
   'GC=F': 'global', 'BTC-USD': 'global',

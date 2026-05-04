@@ -136,9 +136,21 @@
       "avgBuyPrice": 607.15,
       "currency": "USD",
       "buyDate": "2026-04-30"
+    },
+    {
+      "id": "12",
+      "name": "Banco Santander",
+      "ticker": "SAN.MC",
+      "type": "action",
+      "sector": "Finance",
+      "category": "socle",
+      "quantity": 420,
+      "avgBuyPrice": 10.084,
+      "currency": "EUR",
+      "buyDate": "2026-05-04"
     }
   ],
-  "cashUSD": 49103,
+  "cashUSD": 44487,
   "initialValueUSD": 100000,
   "startDate": "2026-01-01",
   "baseCurrency": "USD"

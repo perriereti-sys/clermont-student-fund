@@ -27,6 +27,7 @@ const BUCKET_TARGETS: Record<BucketId, { ticker: string; name: string }[]> = {
     { ticker: 'EL.PA',    name: 'EssilorLuxottica' },
     { ticker: 'VIE.PA',   name: 'Veolia Environnement' },
     { ticker: 'SAP.DE',   name: 'SAP' },
+    { ticker: 'SAN.MC',   name: 'Banco Santander' },
   ],
   conviction: [
     { ticker: 'ASTS', name: 'AST SpaceMobile' },

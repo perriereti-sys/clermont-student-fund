@@ -204,5 +204,17 @@
       "totalEUR": 4206,
       "justification": "Ouverture d'une position sur SAP, leader européen du logiciel d'entreprise (ERP, cloud). Transition cloud en forte accélération avec RISE with SAP, croissance récurrente des revenus SaaS. Positionnement défensif sur la tech européenne avec un pricing power élevé et une base client très fidélisée."
     }
+    ,{
+      "id": "18",
+      "date": "2026-05-04",
+      "type": "BUY",
+      "ticker": "SAN.MC",
+      "name": "Banco Santander",
+      "quantity": 420,
+      "price": 10.084,
+      "currency": "EUR",
+      "totalEUR": 4235,
+      "justification": "Ouverture d'une position sur Banco Santander, première banque de la zone euro par actifs. Valorisation attractive (P/E < 8x) et ROE en forte amélioration (>12%). La thèse repose sur la diversification géographique unique du groupe : le Brésil, le Mexique, l'Argentine et la Colombie représentent plus de 50% des bénéfices, offrant une exposition aux marchés émergents latino-américains à travers un titre européen coté sur le BME de Madrid. Double vecteur de création de valeur : redressement européen + croissance LatAm."
+    }
   ]
 }
