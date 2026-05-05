@@ -5,66 +5,34 @@ import {
   ComposedChart, Area, XAxis, YAxis, CartesianGrid,
   Tooltip, ResponsiveContainer, ReferenceLine,
 } from 'recharts';
-import type { ChartPoint, Movement } from '@/lib/types';
+import type { ChartPoint } from '@/lib/types';
 
 interface Props {
   chartData:    ChartPoint[];
-  movements:    Movement[];
   cashUSD:      number;
   totalCost:    number;
   deployedBase: number;
 }
 
-interface TooltipProps {
-  active?:    boolean;
-  payload?:   any[];
-  label?:     string;
-  movByDate:  Record<string, Movement[]>;
-}
-
-function ChartTooltip({ active, payload, label, movByDate }: TooltipProps) {
+function ChartTooltip({ active, payload, label }: any) {
   if (!active || !payload?.length || !label) return null;
-  const movs = movByDate[label] ?? [];
-  const pct  = (payload[0]?.value ?? 100) - 100;
+  const pct = (payload[0]?.value ?? 100) - 100;
   return (
     <div
       className="rounded-xl border p-3 text-xs shadow-lg"
-      style={{ background: '#fff', borderColor: 'rgba(26,37,64,0.1)', maxWidth: 230 }}
+      style={{ background: '#fff', borderColor: 'rgba(26,37,64,0.1)' }}
     >
       <p className="font-semibold mb-1" style={{ color: '#1A2540' }}>
         {new Date(label).toLocaleDateString('fr-FR', { day: '2-digit', month: 'short', year: '2-digit' })}
       </p>
-      <p className="font-mono font-bold mb-2" style={{ color: pct >= 0 ? '#0A8E62' : '#C93048' }}>
+      <p className="font-mono font-bold" style={{ color: pct >= 0 ? '#0A8E62' : '#C93048' }}>
         {pct >= 0 ? '+' : ''}{pct.toFixed(2)}%
       </p>
-      {movs.length > 0 && (
-        <div className="border-t pt-2 flex flex-col gap-1.5" style={{ borderColor: 'rgba(26,37,64,0.07)' }}>
-          {movs.map(m => (
-            <div key={m.id} className="flex items-center gap-1.5 flex-wrap">
-              <span
-                className="text-[9px] font-bold px-1.5 py-0.5 rounded-md flex-shrink-0"
-                style={{
-                  background: m.type === 'BUY' ? 'rgba(10,142,98,0.12)'  : 'rgba(201,48,72,0.12)',
-                  color:      m.type === 'BUY' ? '#0A8E62'               : '#C93048',
-                }}
-              >
-                {m.type === 'BUY' ? 'ACHAT' : 'VENTE'}
-              </span>
-              <span className="font-mono font-semibold" style={{ color: '#1A2540' }}>{m.ticker}</span>
-              <span style={{ color: '#8496B2' }}>{m.name}</span>
-            </div>
-          ))}
-        </div>
-      )}
     </div>
   );
 }
 
-export default function DeployedCurveChart({ chartData, movements, cashUSD, totalCost, deployedBase }: Props) {
-  // Reindex the portfolio curve to deployed capital only (strip out constant cashUSD)
-  // portfolio_abs_at_t  = (pt.portfolio / 100) * totalCost
-  // invested_at_t       = portfolio_abs_at_t - cashUSD
-  // deployed_pct_at_t   = (invested_at_t / deployedBase) * 100
+export default function DeployedCurveChart({ chartData, cashUSD, totalCost, deployedBase }: Props) {
   const data = useMemo(() =>
     deployedBase > 0
       ? chartData
@@ -76,38 +44,6 @@ export default function DeployedCurveChart({ chartData, movements, cashUSD, tota
       : [],
     [chartData, cashUSD, totalCost, deployedBase]
   );
-
-  const movByDate = useMemo(() => {
-    const chartDates = data.map(pt => pt.date);
-    const map: Record<string, Movement[]> = {};
-    for (const m of movements) {
-      const d = chartDates.find(cd => cd >= m.date) ?? null;
-      if (!d) continue;
-      if (!map[d]) map[d] = [];
-      map[d].push(m);
-    }
-    return map;
-  }, [movements, data]);
-
-  // eslint-disable-next-line react/display-name
-  const renderDot = useMemo(() => (props: any) => {
-    const { cx, cy, payload, index } = props;
-    const movs = movByDate[payload?.date];
-    if (!movs?.length) return <circle key={index} cx={cx} cy={cy} r={0} fill="none" />;
-    const onlySells = movs.every((m: Movement) => m.type === 'SELL');
-    const color = onlySells ? '#C93048' : '#0A8E62';
-    return (
-      <g key={`dep-${index}`}>
-        <circle cx={cx} cy={cy} r={6.5} fill={color} stroke="white" strokeWidth={2}
-          style={{ filter: `drop-shadow(0 1px 6px ${color}66)` }} />
-        <circle cx={cx} cy={cy} r={2.5} fill="white" />
-        <text x={cx} y={cy - 12} textAnchor="middle"
-          style={{ fontSize: '8px', fontWeight: 800, fill: color, pointerEvents: 'none', userSelect: 'none' }}>
-          {onlySells ? '▼' : '▲'}
-        </text>
-      </g>
-    );
-  }, [movByDate]);
 
   if (!data.length) return null;
 
@@ -124,10 +60,7 @@ export default function DeployedCurveChart({ chartData, movements, cashUSD, tota
         <div>
           <p className="text-sm font-semibold" style={{ color: '#1A2540' }}>Capital investi — sans liquidités</p>
           <p className="text-xs mt-0.5" style={{ color: '#8496B2' }}>
-            Performance des positions uniquement ·{' '}
-            <span style={{ color: '#0A8E62', fontWeight: 700 }}>▲ Entrée</span>
-            {' · '}
-            <span style={{ color: '#C93048', fontWeight: 700 }}>▼ Sortie</span>
+            Performance des positions uniquement · hors cash disponible
           </p>
         </div>
         <span className="text-sm font-mono font-bold" style={{ color: perfColor }}>
@@ -165,7 +98,7 @@ export default function DeployedCurveChart({ chartData, movements, cashUSD, tota
               width={42}
             />
             <Tooltip
-              content={(props) => <ChartTooltip {...props} movByDate={movByDate} />}
+              content={<ChartTooltip />}
               cursor={{ stroke: 'rgba(37,99,235,0.20)', strokeWidth: 1 }}
             />
 
@@ -176,7 +109,7 @@ export default function DeployedCurveChart({ chartData, movements, cashUSD, tota
               stroke="#2563EB"
               strokeWidth={2.5}
               fill="url(#deployedCurveGrad)"
-              dot={renderDot}
+              dot={false}
               activeDot={{ r: 4, fill: '#2563EB', stroke: '#FFFFFF', strokeWidth: 2 }}
             />
           </ComposedChart>

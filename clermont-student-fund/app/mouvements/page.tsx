@@ -130,18 +130,17 @@ export default async function MouvementsPage() {
         <FundCurveChart chartData={chartData} movements={movements} />
       )}
 
+      <MovementsTable movements={movements} />
+
       {/* Courbe capital investi (sans liquidités) */}
       {chartData.length >= 2 && deployedBase > 0 && (
         <DeployedCurveChart
           chartData={chartData}
-          movements={movements}
           cashUSD={cashUSD}
           totalCost={totalCost}
           deployedBase={deployedBase}
         />
       )}
-
-      <MovementsTable movements={movements} />
 
       {/* Performance par position sur fonds déployés */}
       {positions.length > 0 && (
