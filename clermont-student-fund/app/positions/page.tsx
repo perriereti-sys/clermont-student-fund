@@ -2,7 +2,6 @@ import { getPortfolioMetrics } from '@/lib/getPortfolioMetrics';
 import { EnrichedPosition } from '@/lib/types';
 import BucketSection, { BucketId, BucketConfig } from '@/components/positions/BucketSection';
 import AllocationCharts from '@/components/positions/AllocationCharts';
-import DeployedPerformance from '@/components/positions/DeployedPerformance';
 import GeoSection from '@/components/GeoSection';
 import AnimateIn from '@/components/AnimateIn';
 
@@ -163,10 +162,6 @@ export default async function PositionsPage() {
         </section>
       </AnimateIn>
 
-      {/* ── Performance on deployed capital ─────────────── */}
-      <AnimateIn delay={80} y={20}>
-        <DeployedPerformance positions={portfolio.positions} />
-      </AnimateIn>
 
     </div>
   );

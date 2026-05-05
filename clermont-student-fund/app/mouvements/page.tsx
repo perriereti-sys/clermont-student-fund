@@ -1,7 +1,9 @@
 import MovementsTable from '@/components/movements/MovementsTable';
 import FundCurveChart from '@/components/movements/FundCurveChart';
+import DeployedCurveChart from '@/components/movements/DeployedCurveChart';
+import DeployedPerformance from '@/components/positions/DeployedPerformance';
 import movementsData from '@/data/movements.json';
-import { Movement, ChartPoint } from '@/lib/types';
+import { Movement, ChartPoint, EnrichedPosition } from '@/lib/types';
 import { getPortfolioMetrics } from '@/lib/getPortfolioMetrics';
 
 export const dynamic = 'force-dynamic';
@@ -11,11 +13,19 @@ export default async function MouvementsPage() {
   const movements = movementsData.movements as Movement[];
 
   let chartData: ChartPoint[] = [];
+  let positions: EnrichedPosition[] = [];
+  let cashUSD    = 0;
+  let totalCost  = 100000;
+  let deployedBase = 0;
   try {
     const portfolio = await getPortfolioMetrics();
-    chartData = portfolio.chartData;
+    chartData    = portfolio.chartData;
+    positions    = portfolio.positions;
+    cashUSD      = portfolio.cashEUR;          // named cashEUR but is USD
+    totalCost    = portfolio.totalCost;
+    deployedBase = positions.reduce((s, p) => s + p.costBasisEUR, 0);
   } catch {
-    // chartData stays empty
+    // stays at defaults
   }
 
   const buys     = movements.filter(m => m.type === 'BUY');
@@ -115,12 +125,28 @@ export default async function MouvementsPage() {
         ))}
       </div>
 
-      {/* Fund performance curve with entry/exit points */}
+      {/* Courbe totale (avec liquidités) */}
       {chartData.length >= 2 && (
         <FundCurveChart chartData={chartData} movements={movements} />
       )}
 
+      {/* Courbe capital investi (sans liquidités) */}
+      {chartData.length >= 2 && deployedBase > 0 && (
+        <DeployedCurveChart
+          chartData={chartData}
+          movements={movements}
+          cashUSD={cashUSD}
+          totalCost={totalCost}
+          deployedBase={deployedBase}
+        />
+      )}
+
       <MovementsTable movements={movements} />
+
+      {/* Performance par position sur fonds déployés */}
+      {positions.length > 0 && (
+        <DeployedPerformance positions={positions} />
+      )}
     </div>
   );
 }
