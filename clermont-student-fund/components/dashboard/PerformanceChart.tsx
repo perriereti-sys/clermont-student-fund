@@ -111,11 +111,12 @@ function cutoffDate(days: number): string {
 function rebase(pts: ChartPoint[]): ChartPoint[] {
   if (!pts.length) return pts;
   const pb = pts[0].portfolio;
-  const mb = pts[0].msciWorld;
-  const nb = pts[0].nasdaq100;
+  // Find first non-null benchmark value (may not be pts[0] if it falls on a holiday)
+  const mb = pts.find(p => p.msciWorld != null)?.msciWorld ?? null;
+  const nb = pts.find(p => p.nasdaq100 != null)?.nasdaq100 ?? null;
   return pts.map(pt => ({
     date:      pt.date,
-    portfolio: pb   ? (pt.portfolio / pb) * 100 : pt.portfolio,
+    portfolio: pb ? (pt.portfolio / pb) * 100 : pt.portfolio,
     msciWorld: mb && pt.msciWorld != null ? (pt.msciWorld / mb) * 100 : pt.msciWorld,
     nasdaq100: nb && pt.nasdaq100 != null ? (pt.nasdaq100 / nb) * 100 : pt.nasdaq100,
   }));

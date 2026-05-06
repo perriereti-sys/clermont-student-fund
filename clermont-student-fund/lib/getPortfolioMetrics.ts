@@ -193,8 +193,9 @@ export async function getPortfolioMetrics(): Promise<PortfolioMetrics> {
     // Build chart indexed to 100 from initial capital
     if (history.length > 0) {
       const portfolioBase = totalCost;
-      const urthBase      = prices['URTH']?.[dates[0]];
-      const qqqBase       = prices['QQQ']?.[dates[0]];
+      // Find first date with actual URTH/QQQ data (Jan 1 = US holiday, markets closed)
+      const urthBase = dates.reduce<number | undefined>((acc, d) => acc ?? prices['URTH']?.[d], undefined);
+      const qqqBase  = dates.reduce<number | undefined>((acc, d) => acc ?? prices['QQQ']?.[d],  undefined);
 
       chartData = dates.map((date, i) => ({
         date,
