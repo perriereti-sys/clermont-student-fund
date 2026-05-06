@@ -86,10 +86,11 @@ export default async function PositionsPage() {
             const isPnlPos = pnl >= 0;
 
             return (
-              <div
+              <a
                 key={bucket.id}
-                className="card relative overflow-hidden rounded-xl p-5"
-                style={{ borderLeft: `4px solid ${bucket.color}` }}
+                href={`#bucket-${bucket.id}`}
+                className="card relative overflow-hidden rounded-xl p-5 block"
+                style={{ borderLeft: `4px solid ${bucket.color}`, textDecoration: 'none', cursor: 'pointer' }}
               >
                 <div
                   className="absolute top-0 inset-x-0 h-px"
@@ -116,10 +117,13 @@ export default async function PositionsPage() {
                     </p>
                   </div>
                 </div>
-                <p className="text-xs" style={{ color: '#8496B2' }}>
-                  {positions.length} / {bucket.targetCount} positions
-                </p>
-              </div>
+                <div className="flex items-center justify-between mt-1">
+                  <p className="text-xs" style={{ color: '#8496B2' }}>
+                    {positions.length} / {bucket.targetCount} positions
+                  </p>
+                  <span className="text-xs font-semibold" style={{ color: bucket.color }}>Voir ↓</span>
+                </div>
+              </a>
             );
           })}
         </div>

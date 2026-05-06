@@ -79,6 +79,7 @@ export interface Alert {
 export interface ChartPoint {
   date: string;
   portfolio: number;
+  deployed?: number | null;
   msciWorld: number | null;
   nasdaq100: number | null;
 }

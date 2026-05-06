@@ -12,18 +12,12 @@ export const runtime = 'nodejs';
 export default async function MouvementsPage() {
   const movements = movementsData.movements as Movement[];
 
-  let chartData: ChartPoint[] = [];
+  let chartData: ChartPoint[]       = [];
   let positions: EnrichedPosition[] = [];
-  let cashUSD    = 0;
-  let totalCost  = 100000;
-  let deployedBase = 0;
   try {
     const portfolio = await getPortfolioMetrics();
-    chartData    = portfolio.chartData;
-    positions    = portfolio.positions;
-    cashUSD      = portfolio.cashEUR;          // named cashEUR but is USD
-    totalCost    = portfolio.totalCost;
-    deployedBase = positions.reduce((s, p) => s + p.costBasisEUR, 0);
+    chartData = portfolio.chartData;
+    positions = portfolio.positions;
   } catch {
     // stays at defaults
   }
@@ -133,13 +127,8 @@ export default async function MouvementsPage() {
       <MovementsTable movements={movements} />
 
       {/* Courbe capital investi (sans liquidités) */}
-      {chartData.length >= 2 && deployedBase > 0 && (
-        <DeployedCurveChart
-          chartData={chartData}
-          cashUSD={cashUSD}
-          totalCost={totalCost}
-          deployedBase={deployedBase}
-        />
+      {chartData.length >= 2 && (
+        <DeployedCurveChart chartData={chartData} />
       )}
 
       {/* Performance par position sur fonds déployés */}

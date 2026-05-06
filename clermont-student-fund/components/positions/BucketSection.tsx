@@ -72,6 +72,7 @@ export default function BucketSection({ bucket, positions, eurUsd = 1.09 }: Prop
 
   return (
     <div
+      id={`bucket-${bucket.id}`}
       className="card-static relative overflow-hidden rounded-2xl"
       style={{ borderLeft: `4px solid ${bucket.color}` }}
     >

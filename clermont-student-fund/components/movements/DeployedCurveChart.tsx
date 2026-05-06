@@ -8,10 +8,7 @@ import {
 import type { ChartPoint } from '@/lib/types';
 
 interface Props {
-  chartData:    ChartPoint[];
-  cashUSD:      number;
-  totalCost:    number;
-  deployedBase: number;
+  chartData: ChartPoint[];
 }
 
 function ChartTooltip({ active, payload, label }: any) {
@@ -32,17 +29,12 @@ function ChartTooltip({ active, payload, label }: any) {
   );
 }
 
-export default function DeployedCurveChart({ chartData, cashUSD, totalCost, deployedBase }: Props) {
+export default function DeployedCurveChart({ chartData }: Props) {
   const data = useMemo(() =>
-    deployedBase > 0
-      ? chartData
-          .filter(pt => pt.portfolio != null)
-          .map(pt => ({
-            date:  pt.date,
-            value: ((pt.portfolio! / 100 * totalCost - cashUSD) / deployedBase) * 100,
-          }))
-      : [],
-    [chartData, cashUSD, totalCost, deployedBase]
+    chartData
+      .filter(pt => pt.deployed != null)
+      .map(pt => ({ date: pt.date, value: pt.deployed! })),
+    [chartData]
   );
 
   if (!data.length) return null;

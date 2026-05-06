@@ -79,34 +79,42 @@ async function fetchAllHistoricalData(): Promise<HistoricalDataResult> {
 
 // ─── Portfolio history reconstruction (all values in USD) ────────────────
 
+interface EnrichedHistoryPoint extends HistoryPoint {
+  investedValue: number;
+  costBasis:     number;
+}
+
 function buildPortfolioHistory(
   dates: string[],
   prices: Record<string, Record<string, number>>
-): HistoryPoint[] {
+): EnrichedHistoryPoint[] {
   const positions = portfolioData.positions;
   const cashUSD   = portfolioData.cashUSD;
 
   return dates.map((date) => {
     const eurUsd = prices['EURUSD=X']?.[date] ?? 1.09;
-    let value = cashUSD;
+    let value         = cashUSD;
+    let investedValue = 0;
+    let costBasis     = 0;
 
     for (const pos of positions) {
-      // EUR positions → multiply by EUR/USD to get USD
       const toUsd = pos.currency === 'EUR' ? eurUsd : 1;
 
       if (date < pos.buyDate) {
+        // Position not yet held — add cost as placeholder for total value only
         value += pos.quantity * pos.avgBuyPrice * toUsd;
       } else {
         const px = prices[pos.ticker]?.[date];
-        if (px != null && px > 0) {
-          value += pos.quantity * px * toUsd;
-        } else {
-          value += pos.quantity * pos.avgBuyPrice * toUsd;
-        }
+        const mv = (px != null && px > 0)
+          ? pos.quantity * px * toUsd
+          : pos.quantity * pos.avgBuyPrice * toUsd;
+        value         += mv;
+        investedValue += mv;
+        costBasis     += pos.quantity * pos.avgBuyPrice * toUsd;
       }
     }
 
-    return { date, value };
+    return { date, value, investedValue, costBasis };
   });
 }
 
@@ -156,17 +164,20 @@ export async function getPortfolioMetrics(): Promise<PortfolioMetrics> {
     // Anchor last point to actual live value
     if (history.length > 0) {
       history[history.length - 1] = {
-        date: history[history.length - 1].date,
+        ...history[history.length - 1],
+        date:  history[history.length - 1].date,
         value: totalValue,
       };
     }
 
-    if (history.length >= 5) {
-      sharpeRatio = computeSharpeRatio(history);
-      maxDrawdown = computeMaxDrawdown(history);
-      var95       = computeVaR95(history, totalValue);
+    const historyForStats: HistoryPoint[] = history.map(h => ({ date: h.date, value: h.value }));
 
-      const portfolioReturns = getDailyReturns(history);
+    if (historyForStats.length >= 5) {
+      sharpeRatio = computeSharpeRatio(historyForStats);
+      maxDrawdown = computeMaxDrawdown(historyForStats);
+      var95       = computeVaR95(historyForStats, totalValue);
+
+      const portfolioReturns = getDailyReturns(historyForStats);
       const urthValues = dates
         .map((d) => prices['URTH']?.[d])
         .filter((v): v is number => v != null);
@@ -188,6 +199,9 @@ export async function getPortfolioMetrics(): Promise<PortfolioMetrics> {
       chartData = dates.map((date, i) => ({
         date,
         portfolio: history[i] != null ? (history[i].value / portfolioBase) * 100 : (null as any),
+        deployed: history[i] && history[i].costBasis > 0
+          ? (history[i].investedValue / history[i].costBasis) * 100
+          : null,
         msciWorld: urthBase && prices['URTH']?.[date] != null
           ? (prices['URTH'][date] / urthBase) * 100
           : null,
