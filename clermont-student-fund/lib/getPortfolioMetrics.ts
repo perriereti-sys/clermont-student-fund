@@ -100,6 +100,15 @@ interface EnrichedHistoryPoint extends HistoryPoint {
   costBasis:     number;
 }
 
+// Holdings store cost in native currency so the deployed ratio converts
+// both sides with the same per-date EUR/USD — EUR effects cancel out and
+// the metric matches exactly what the positions page shows per position.
+interface Holding {
+  qty:        number;
+  costNative: number; // cost in native currency (EUR or USD, not converted)
+  currency:   string; // "EUR" | "USD"
+}
+
 function buildPortfolioHistory(
   dates: string[],
   prices: Record<string, Record<string, number>>
@@ -110,59 +119,44 @@ function buildPortfolioHistory(
     .filter((m) => m.type === 'BUY' || m.type === 'SELL')
     .sort((a, b) => a.date.localeCompare(b.date));
 
-  // Track actual historical cash starting from initial capital.
-  // Each BUY reduces cash, each SELL credits proceeds — no placeholders needed.
+  // Actual historical cash — starts at $100 K, each BUY debits at historical
+  // EUR/USD, each SELL credits proceeds at historical EUR/USD.
   let cash = portfolioData.initialValueUSD;
   let mIdx = 0;
-  const holdings: Record<string, { qty: number; costBasisUSD: number }> = {};
+  const holdings: Record<string, Holding> = {};
 
-  // Apply movements that happened before the chart start date so that
-  // sold positions (e.g. Dec-29 silver buy) are correctly in holdings on Jan 1.
-  while (mIdx < movements.length && movements[mIdx].date < dates[0]) {
-    const m = movements[mIdx];
-    const toUsd = m.currency === 'EUR' ? 1.09 : 1; // no FX data pre-chart
-    const amountUSD = m.quantity * m.price * toUsd;
+  function applyMov(m: Movement, movEurUsd: number) {
+    const toUsd      = m.currency === 'EUR' ? movEurUsd : 1;
+    const cashDeltaUSD = m.quantity * m.price * toUsd;
     if (m.type === 'BUY') {
-      if (!holdings[m.ticker]) holdings[m.ticker] = { qty: 0, costBasisUSD: 0 };
-      holdings[m.ticker].qty          += m.quantity;
-      holdings[m.ticker].costBasisUSD += amountUSD;
-      cash -= amountUSD;
+      if (!holdings[m.ticker]) {
+        holdings[m.ticker] = { qty: 0, costNative: 0, currency: m.currency };
+      }
+      holdings[m.ticker].qty        += m.quantity;
+      holdings[m.ticker].costNative += m.quantity * m.price; // native currency, no FX
+      cash -= cashDeltaUSD;
     } else {
       const h = holdings[m.ticker];
       if (h && h.qty > 0) {
-        const avgCost = h.costBasisUSD / h.qty;
-        h.costBasisUSD -= m.quantity * avgCost;
-        h.qty          -= m.quantity;
+        const avgNative   = h.costNative / h.qty;
+        h.costNative     -= m.quantity * avgNative;
+        h.qty            -= m.quantity;
         if (h.qty <= 0) delete holdings[m.ticker];
       }
-      cash += amountUSD;
+      cash += cashDeltaUSD;
     }
+  }
+
+  // Pre-chart movements (e.g. Dec-29 silver buy must be in holdings on Jan 1)
+  while (mIdx < movements.length && movements[mIdx].date < dates[0]) {
+    applyMov(movements[mIdx], 1.09); // no FX data before chart start
     mIdx++;
   }
 
   return dates.map((date) => {
-    // Apply every movement on or before this date.
     while (mIdx < movements.length && movements[mIdx].date <= date) {
-      const m = movements[mIdx];
-      const movEurUsd  = prices['EURUSD=X']?.[m.date] ?? 1.09;
-      const toUsd      = m.currency === 'EUR' ? movEurUsd : 1;
-      const amountUSD  = m.quantity * m.price * toUsd;
-
-      if (m.type === 'BUY') {
-        if (!holdings[m.ticker]) holdings[m.ticker] = { qty: 0, costBasisUSD: 0 };
-        holdings[m.ticker].qty          += m.quantity;
-        holdings[m.ticker].costBasisUSD += amountUSD;
-        cash -= amountUSD;
-      } else {
-        const h = holdings[m.ticker];
-        if (h && h.qty > 0) {
-          const avgCost = h.costBasisUSD / h.qty;
-          h.costBasisUSD -= m.quantity * avgCost;
-          h.qty          -= m.quantity;
-          if (h.qty <= 0) delete holdings[m.ticker];
-        }
-        cash += amountUSD;
-      }
+      const movEurUsd = prices['EURUSD=X']?.[movements[mIdx].date] ?? 1.09;
+      applyMov(movements[mIdx], movEurUsd);
       mIdx++;
     }
 
@@ -171,17 +165,16 @@ function buildPortfolioHistory(
     let costBasis     = 0;
 
     for (const [ticker, h] of Object.entries(holdings)) {
-      const pos      = positions.find((p) => p.ticker === ticker);
-      const currency = pos?.currency ?? 'USD';
-      const toUsd    = currency === 'EUR' ? eurUsd : 1;
-      const px       = prices[ticker]?.[date];
-      const mv       = px != null && px > 0 ? h.qty * px * toUsd : h.costBasisUSD;
+      // Both investedValue and costBasis use the SAME per-date eurUsd so that
+      // currency moves cancel — deployed = pure local-currency stock return.
+      const toUsd = h.currency === 'EUR' ? eurUsd : 1;
+      const px    = prices[ticker]?.[date];
+      const mv    = px != null && px > 0 ? h.qty * px * toUsd : h.costNative * toUsd;
 
       investedValue += mv;
-      costBasis     += h.costBasisUSD;
+      costBasis     += h.costNative * toUsd;
     }
 
-    // value = actual cash + market value of all open positions
     return { date, value: cash + investedValue, investedValue, costBasis };
   });
 }
