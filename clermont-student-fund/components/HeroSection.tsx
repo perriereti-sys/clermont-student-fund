@@ -12,17 +12,52 @@ export default function HeroSection() {
       {/* Puy de Dôme silhouette — clin d'œil à Clermont */}
       <svg
         className="absolute bottom-0 right-0 pointer-events-none select-none"
-        width="420" height="160" viewBox="0 0 420 160"
-        style={{ opacity: 0.065 }}
+        style={{ opacity: 0.10, width: 'min(88vw, 860px)', height: 'auto' }}
+        viewBox="0 0 860 310"
         aria-hidden
       >
+        {/* Chaîne des Puys — secondary volcanic cones creating depth */}
         <path
-          d="M0 160 L60 160 L80 130 L100 110 L115 95 L130 100 L145 80 L155 55 L162 35 L168 45 L175 30 L182 20 L190 28 L200 10 L210 22 L220 15 L228 30 L235 25 L242 40 L252 60 L265 75 L280 90 L295 100 L315 105 L335 115 L360 130 L390 145 L420 155 L420 160 Z"
           fill="#1A2540"
+          opacity="0.38"
+          d="M 0 310 L 0 278
+             C 38 274 72 268 108 262
+             C 142 256 168 246 192 235
+             C 214 225 232 211 248 200
+             Q 259 191 270 192
+             Q 281 193 292 203
+             C 308 216 326 235 355 246
+             C 388 257 427 262 470 264
+             C 510 266 552 265 593 262
+             C 630 259 666 253 700 245
+             Q 715 241 730 242
+             Q 745 243 760 250
+             C 782 261 806 275 835 284
+             C 848 288 856 290 860 291
+             L 860 310 Z"
         />
+
+        {/* Main Puy de Dôme — broad rounded dome, characteristic shield shape */}
         <path
-          d="M195 10 Q200 0 205 8 L210 4 Q215 -2 220 6 L225 2"
-          fill="none" stroke="#1A2540" strokeWidth="4" strokeLinecap="round"
+          fill="#1A2540"
+          d="M 0 310 L 0 296
+             C 40 292 78 286 115 278
+             C 160 269 200 255 238 239
+             C 274 223 306 203 334 180
+             C 360 158 378 131 390 103
+             C 400 79 404 56 406 37
+             C 407 24 408 13 409 7
+             Q 410 2 414 0
+             Q 418 -1 422 2
+             Q 426 6 427 14
+             C 429 26 431 42 434 62
+             C 438 86 444 114 456 143
+             C 469 174 489 204 515 228
+             C 542 253 574 270 612 280
+             C 648 290 688 294 730 296
+             C 768 298 808 298 845 297
+             L 860 297
+             L 860 310 Z"
         />
       </svg>
 
