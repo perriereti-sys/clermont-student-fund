@@ -70,6 +70,11 @@ export default function BucketSection({ bucket, positions, eurUsd = 1.09 }: Prop
   const positionTickers = new Set(positions.map(p => p.ticker));
   const emptySlots = targets.filter(t => !positionTickers.has(t.ticker));
 
+  const bucketPnlUSD  = positions.reduce((s, p) => s + p.pnlEUR, 0);
+  const bucketCostUSD = positions.reduce((s, p) => s + p.costBasisEUR, 0);
+  const bucketPnlPct  = bucketCostUSD > 0 ? (bucketPnlUSD / bucketCostUSD) * 100 : 0;
+  const isPnlPos      = bucketPnlUSD >= 0;
+
   return (
     <div
       id={`bucket-${bucket.id}`}
@@ -102,6 +107,19 @@ export default function BucketSection({ bucket, positions, eurUsd = 1.09 }: Prop
             <span className="text-xs font-mono" style={{ color: '#8496B2' }}>
               {positions.length} / {targets.length} positions ouvertes
             </span>
+            {positions.length > 0 && (
+              <span
+                className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-mono font-bold shrink-0"
+                style={{
+                  background: isPnlPos ? 'rgba(10,142,98,0.10)' : 'rgba(201,48,72,0.10)',
+                  color: isPnlPos ? '#0A8E62' : '#C93048',
+                  border: `1px solid ${isPnlPos ? 'rgba(10,142,98,0.25)' : 'rgba(201,48,72,0.25)'}`,
+                }}
+              >
+                {isPnlPos ? '▲' : '▼'} {isPnlPos ? '+' : ''}{fmtUsd(bucketPnlUSD)}
+                <span className="opacity-70">({isPnlPos ? '+' : ''}{bucketPnlPct.toFixed(1)}%)</span>
+              </span>
+            )}
           </div>
           <p className="text-sm italic leading-relaxed" style={{ color: '#5C6E8A' }}>
             {bucket.description}
