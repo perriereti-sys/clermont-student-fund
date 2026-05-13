@@ -17,6 +17,13 @@ async function getEurUsdRate(): Promise<number> {
   return price ?? 1.09;
 }
 
+async function getHkdUsdRate(): Promise<number> {
+  const price = await fetchPrice('HKDUSD=X');
+  return price ?? 0.1282;
+}
+
+const HKD_USD_HIST = 0.1282; // HKD pegged ~7.8/USD — stable constant for history
+
 function forwardFill(
   dates: string[],
   raw: Record<string, number>
@@ -126,7 +133,7 @@ function buildPortfolioHistory(
   const holdings: Record<string, Holding> = {};
 
   function applyMov(m: Movement, movEurUsd: number) {
-    const toUsd      = m.currency === 'EUR' ? movEurUsd : 1;
+    const toUsd      = m.currency === 'EUR' ? movEurUsd : m.currency === 'HKD' ? HKD_USD_HIST : 1;
     const cashDeltaUSD = m.quantity * m.price * toUsd;
     if (m.type === 'BUY') {
       if (!holdings[m.ticker]) {
@@ -167,7 +174,7 @@ function buildPortfolioHistory(
     for (const [ticker, h] of Object.entries(holdings)) {
       // Both investedValue and costBasis use the SAME per-date eurUsd so that
       // currency moves cancel — deployed = pure local-currency stock return.
-      const toUsd = h.currency === 'EUR' ? eurUsd : 1;
+      const toUsd = h.currency === 'EUR' ? eurUsd : h.currency === 'HKD' ? HKD_USD_HIST : 1;
       const px    = prices[ticker]?.[date];
       const mv    = px != null && px > 0 ? h.qty * px * toUsd : h.costNative * toUsd;
 
@@ -183,6 +190,7 @@ function buildPortfolioHistory(
 
 export async function getPortfolioMetrics(): Promise<PortfolioMetrics> {
   const eurUsd = await getEurUsdRate();
+  const hkdUsd = await getHkdUsdRate();
 
   const tickers  = portfolioData.positions.map((p) => p.ticker);
   const priceMap = await fetchPrices(tickers);
@@ -190,8 +198,7 @@ export async function getPortfolioMetrics(): Promise<PortfolioMetrics> {
   // All position values in USD
   const positions: EnrichedPosition[] = (portfolioData.positions as any[]).map((pos) => {
     const currentPrice = priceMap[pos.ticker] ?? pos.avgBuyPrice;
-    // EUR positions × eurUsd = USD value
-    const toUsd = pos.currency === 'EUR' ? eurUsd : 1;
+    const toUsd = pos.currency === 'EUR' ? eurUsd : pos.currency === 'HKD' ? hkdUsd : 1;
     const currentValueEUR = pos.quantity * currentPrice * toUsd;
     const costBasisEUR    = pos.quantity * pos.avgBuyPrice * toUsd;
     const pnlEUR          = currentValueEUR - costBasisEUR;

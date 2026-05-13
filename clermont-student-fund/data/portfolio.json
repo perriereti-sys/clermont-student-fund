@@ -148,9 +148,33 @@
       "avgBuyPrice": 10.084,
       "currency": "EUR",
       "buyDate": "2026-05-04"
+    },
+    {
+      "id": "13",
+      "name": "Tencent Holdings",
+      "ticker": "0700.HK",
+      "type": "action",
+      "sector": "Technologie",
+      "category": "socle",
+      "quantity": 69,
+      "avgBuyPrice": 462.2,
+      "currency": "HKD",
+      "buyDate": "2026-05-13"
+    },
+    {
+      "id": "14",
+      "name": "Safran",
+      "ticker": "SAF.PA",
+      "type": "action",
+      "sector": "Aéronautique & Défense",
+      "category": "socle",
+      "quantity": 15,
+      "avgBuyPrice": 280.2,
+      "currency": "EUR",
+      "buyDate": "2026-05-13"
     }
   ],
-  "cashUSD": 44487,
+  "cashUSD": 35682,
   "initialValueUSD": 100000,
   "startDate": "2026-01-01",
   "baseCurrency": "USD"

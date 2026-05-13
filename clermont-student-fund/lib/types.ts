@@ -1,5 +1,5 @@
 export type AssetType = 'action' | 'etf' | 'or' | 'crypto';
-export type Currency = 'USD' | 'EUR';
+export type Currency = 'USD' | 'EUR' | 'HKD';
 export type MovementType = 'BUY' | 'SELL' | 'DIVIDEND';
 export type BucketCategory = 'socle' | 'conviction' | 'opportunite';
 

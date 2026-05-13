@@ -121,7 +121,7 @@ interface CityMarker {
 
 const CITY_MARKERS: CityMarker[] = [
   // ── Direct listings ────────────────────────────────────────────────────
-  { name:'Paris',        emoji:'🗼', coords:[2.35,   48.86],  zone:'europe',   exchange:'Euronext Paris', tickers:['SGO.PA','EL.PA','VIE.PA','PAASI.PA'] },
+  { name:'Paris',        emoji:'🗼', coords:[2.35,   48.86],  zone:'europe',   exchange:'Euronext Paris', tickers:['SGO.PA','EL.PA','VIE.PA','PAASI.PA','SAF.PA'] },
   { name:'Francfort',    emoji:'🇩🇪', coords:[8.68,   50.11],  zone:'europe',   exchange:'XETRA',          tickers:['SAP.DE'] },
   { name:'Madrid',       emoji:'🇪🇸', coords:[-3.70,  40.42],  zone:'europe',   exchange:'BME Madrid',     tickers:['SAN.MC'] },
   { name:'New York',     emoji:'🗽', coords:[-74.01, 40.71],  zone:'americas', exchange:'NYSE · NASDAQ',  tickers:['META','IONQ','ASTS','KRKNF','GC=F'] },
@@ -133,7 +133,7 @@ const CITY_MARKERS: CityMarker[] = [
   // ── PAASI.PA underlying markets ────────────────────────────────────────
   { name:'Tokyo',        emoji:'🇯🇵', coords:[139.69, 35.69],  zone:'asia', exchange:'TSE',       tickers:['PAASI.PA'] },
   { name:'Séoul',        emoji:'🇰🇷', coords:[126.978,37.566], zone:'asia', exchange:'KRX',       tickers:['PAASI.PA'] },
-  { name:'Hong Kong',    emoji:'🇭🇰', coords:[114.16, 22.29],  zone:'asia', exchange:'HKEX',      tickers:['PAASI.PA'] },
+  { name:'Hong Kong',    emoji:'🇭🇰', coords:[114.16, 22.29],  zone:'asia', exchange:'HKEX',      tickers:['PAASI.PA','0700.HK'] },
   { name:'Shanghai',     emoji:'🇨🇳', coords:[121.47, 31.23],  zone:'asia', exchange:'SSE',       tickers:['PAASI.PA'] },
   { name:'Mumbai',       emoji:'🇮🇳', coords:[72.88,  19.08],  zone:'asia', exchange:'NSE · BSE', tickers:['PAASI.PA'] },
   { name:'Taipei',       emoji:'🇹🇼', coords:[121.60, 25.10],  zone:'asia', exchange:'TWSE',      tickers:['PAASI.PA'] },

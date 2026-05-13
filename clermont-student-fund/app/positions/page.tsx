@@ -15,7 +15,7 @@ const BUCKETS: BucketConfig[] = [
     color: '#2E75B6',
     description:
       'Positions de long terme qui ancrent le portefeuille. Faible rotation, volatilité maîtrisée, exposition diversifiée géographiquement et sectoriellement.',
-    targetCount: 7,
+    targetCount: 9,
   },
   {
     id: 'conviction',

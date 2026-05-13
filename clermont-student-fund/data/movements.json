@@ -205,6 +205,30 @@
       "justification": "Ouverture d'une position sur SAP, leader européen du logiciel d'entreprise (ERP, cloud). Transition cloud en forte accélération avec RISE with SAP, croissance récurrente des revenus SaaS. Positionnement défensif sur la tech européenne avec un pricing power élevé et une base client très fidélisée."
     }
     ,{
+      "id": "19",
+      "date": "2026-05-13",
+      "type": "BUY",
+      "ticker": "0700.HK",
+      "name": "Tencent Holdings",
+      "quantity": 69,
+      "price": 462.2,
+      "currency": "HKD",
+      "totalEUR": 4098,
+      "justification": "Ouverture d'une position sur Tencent Holdings, leader chinois des services numériques (WeChat, jeux vidéo, cloud, fintech). Valorisation revenue sur des niveaux historiquement bas après les régulations chinoises. La reprise progressive du secteur tech en Chine, le programme massif de rachat d'actions et la diversification internationale via les participations (Epic Games, Spotify, Meituan) constituent les principaux catalyseurs. Exposition directe au marché actions de Hong Kong (HKEX)."
+    }
+    ,{
+      "id": "20",
+      "date": "2026-05-13",
+      "type": "BUY",
+      "ticker": "SAF.PA",
+      "name": "Safran",
+      "quantity": 15,
+      "price": 280.2,
+      "currency": "EUR",
+      "totalEUR": 4203,
+      "justification": "Ouverture d'une position sur Safran, champion français de l'aéronautique et de la défense. Leader mondial des moteurs d'avions civils via CFM International (JV avec GE), bénéficiaire direct du supercycle de la MRO (maintenance, réparation, révision) avec des marges en forte expansion. Carnet de commandes record, visibilité à 10 ans sur les revenus de services, et positionnement sur la défense européenne en phase d'accélération budgétaire."
+    }
+    ,{
       "id": "18",
       "date": "2026-05-04",
       "type": "BUY",
