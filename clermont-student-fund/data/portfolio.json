@@ -172,9 +172,21 @@
       "avgBuyPrice": 280.2,
       "currency": "EUR",
       "buyDate": "2026-05-13"
+    },
+    {
+      "id": "15",
+      "name": "CrowdStrike Holdings",
+      "ticker": "CRWD",
+      "type": "action",
+      "sector": "Technologie",
+      "category": "conviction",
+      "quantity": 5,
+      "avgBuyPrice": 548.74,
+      "currency": "USD",
+      "buyDate": "2026-05-13"
     }
   ],
-  "cashUSD": 35682,
+  "cashUSD": 32938.30,
   "initialValueUSD": 100000,
   "startDate": "2026-01-01",
   "baseCurrency": "USD"

@@ -35,6 +35,7 @@ const BUCKET_TARGETS: Record<BucketId, { ticker: string; name: string }[]> = {
   conviction: [
     { ticker: 'ASTS', name: 'AST SpaceMobile' },
     { ticker: 'IONQ', name: 'IonQ' },
+    { ticker: 'CRWD', name: 'CrowdStrike Holdings' },
   ],
   opportunite: [
     { ticker: 'KRKNF',   name: 'Kraken Robotics' },

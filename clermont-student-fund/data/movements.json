@@ -229,6 +229,18 @@
       "justification": "Ouverture d'une position sur Safran, champion français de l'aéronautique et de la défense. Leader mondial des moteurs d'avions civils via CFM International (JV avec GE), bénéficiaire direct du supercycle de la MRO (maintenance, réparation, révision) avec des marges en forte expansion. Carnet de commandes record, visibilité à 10 ans sur les revenus de services, et positionnement sur la défense européenne en phase d'accélération budgétaire."
     }
     ,{
+      "id": "21",
+      "date": "2026-05-13",
+      "type": "BUY",
+      "ticker": "CRWD",
+      "name": "CrowdStrike Holdings",
+      "quantity": 5,
+      "price": 548.74,
+      "currency": "USD",
+      "totalEUR": 2508,
+      "justification": "Ouverture d'une position sur CrowdStrike, leader mondial de la cybersécurité cloud-native (plateforme Falcon). Croissance annuelle récurrente supérieure à 30%, modèle ARR en forte expansion, adoption massive par les entreprises suite aux incidents de sécurité majeurs. Positionnement idéal sur la consolidation du marché EDR/XDR avec une plateforme IA intégrée qui renforce les effets réseau et la rétention client."
+    }
+    ,{
       "id": "18",
       "date": "2026-05-04",
       "type": "BUY",

@@ -124,7 +124,7 @@ const CITY_MARKERS: CityMarker[] = [
   { name:'Paris',        emoji:'🗼', coords:[2.35,   48.86],  zone:'europe',   exchange:'Euronext Paris', tickers:['SGO.PA','EL.PA','VIE.PA','PAASI.PA','SAF.PA'] },
   { name:'Francfort',    emoji:'🇩🇪', coords:[8.68,   50.11],  zone:'europe',   exchange:'XETRA',          tickers:['SAP.DE'] },
   { name:'Madrid',       emoji:'🇪🇸', coords:[-3.70,  40.42],  zone:'europe',   exchange:'BME Madrid',     tickers:['SAN.MC'] },
-  { name:'New York',     emoji:'🗽', coords:[-74.01, 40.71],  zone:'americas', exchange:'NYSE · NASDAQ',  tickers:['META','IONQ','ASTS','KRKNF','GC=F'] },
+  { name:'New York',     emoji:'🗽', coords:[-74.01, 40.71],  zone:'americas', exchange:'NYSE · NASDAQ',  tickers:['META','IONQ','ASTS','KRKNF','CRWD','GC=F'] },
   // ── Exposition LatAm via Banco Santander ───────────────────────────────
   { name:'São Paulo',    emoji:'🇧🇷', coords:[-46.63,-23.55],  zone:'europe',   exchange:'Santander Brasil · ~27% des bénéfices',   tickers:['SAN.MC'], indirect:true },
   { name:'Mexico',       emoji:'🇲🇽', coords:[-99.13, 19.43],  zone:'europe',   exchange:'Santander Mexico · ~14% des bénéfices',   tickers:['SAN.MC'], indirect:true },
