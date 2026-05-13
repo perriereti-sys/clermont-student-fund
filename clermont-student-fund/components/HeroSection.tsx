@@ -31,25 +31,25 @@ export default function HeroSection() {
         aria-hidden
       >
         <defs>
-          {/* Gradient principal dôme : basalte violet → roche volcanique orange → ocre solaire → vert forestier */}
+          {/* Gradient dôme — couleurs du site : navy sommet → or (flancs ensoleillés) → bleu-navy base */}
           <linearGradient id="domeGrad" x1="0" y1="0" x2="0" y2="310" gradientUnits="userSpaceOnUse">
-            <stop offset="0%"   stopColor="#2A244E" />
-            <stop offset="20%"  stopColor="#5C3C60" />
-            <stop offset="46%"  stopColor="#BE5E3A" />
-            <stop offset="72%"  stopColor="#967240" />
-            <stop offset="100%" stopColor="#4C7A3A" />
+            <stop offset="0%"   stopColor="#1A2540" />
+            <stop offset="22%"  stopColor="#243560" />
+            <stop offset="48%"  stopColor="#B8963A" />
+            <stop offset="74%"  stopColor="#7A6830" />
+            <stop offset="100%" stopColor="#3A4E6A" />
           </linearGradient>
 
-          {/* Lumière dorée de coucher de soleil sur le flanc droit */}
+          {/* Halo doré — gold du site, lumière rasante sur la roche */}
           <radialGradient id="sunsetGlow" cx="620" cy="100" r="220" gradientUnits="userSpaceOnUse">
-            <stop offset="0%"   stopColor="#F0A040" stopOpacity="0.20" />
-            <stop offset="100%" stopColor="#F0A040" stopOpacity="0"   />
+            <stop offset="0%"   stopColor="#B8963A" stopOpacity="0.18" />
+            <stop offset="100%" stopColor="#B8963A" stopOpacity="0"   />
           </radialGradient>
 
-          {/* Brume légère à la base */}
+          {/* Brume légère à la base — couleur background du site */}
           <linearGradient id="mistGrad" x1="0" y1="255" x2="0" y2="310" gradientUnits="userSpaceOnUse">
-            <stop offset="0%"   stopColor="#EEF2F8" stopOpacity="0"   />
-            <stop offset="100%" stopColor="#EEF2F8" stopOpacity="0.60" />
+            <stop offset="0%"   stopColor="#F3F5FB" stopOpacity="0"   />
+            <stop offset="100%" stopColor="#F3F5FB" stopOpacity="0.62" />
           </linearGradient>
         </defs>
 
@@ -59,7 +59,7 @@ export default function HeroSection() {
             couleur bleu-gris très pâle (perspective atmosphérique).
         ══════════════════════════════════════════════════ */}
         <path
-          fill="#9AAABB"
+          fill="#8496B2"
           opacity="0.34"
           d="
             M 0 310 L 0 260
@@ -79,8 +79,8 @@ export default function HeroSection() {
             Couleur : gris-brun volcanique chaud.
         ══════════════════════════════════════════════════ */}
         <path
-          fill="#6C6452"
-          opacity="0.60"
+          fill="#5C6E8A"
+          opacity="0.58"
           d="
             M 0 310 L 0 280
             C 34 272 68 260 100 245
@@ -103,8 +103,8 @@ export default function HeroSection() {
             Point clé : lèvres à y=148, fond de cratère à y=172.
         ══════════════════════════════════════════════════ */}
         <path
-          fill="#6A8250"
-          opacity="0.76"
+          fill="#4A5E7A"
+          opacity="0.72"
           d="
             M 178 310 L 178 240
             C 192 230 208 212 220 194
@@ -125,8 +125,8 @@ export default function HeroSection() {
             La Vache : pic à (648, 180). Lassolas : pic à (694, 178).
         ══════════════════════════════════════════════════ */}
         <path
-          fill="#4A2E22"
-          opacity="0.84"
+          fill="#1A2540"
+          opacity="0.82"
           d="
             M 602 310 L 602 238
             C 616 228 632 210 640 194
@@ -195,11 +195,11 @@ export default function HeroSection() {
             Antenne emblématique + bâtiments scientifiques discrets.
         ══════════════════════════════════════════════════ */}
         {/* Antenne fine et verticale */}
-        <rect x="460" y="6" width="2" height="22" rx="1" fill="#2A2240" opacity="0.88" />
+        <rect x="460" y="6" width="2" height="22" rx="1" fill="#1A2540" opacity="0.88" />
         {/* Bâtiment principal (observatoire) */}
-        <rect x="443" y="24" width="14" height="5" rx="1" fill="#2A2240" opacity="0.82" />
+        <rect x="443" y="24" width="14" height="5" rx="1" fill="#1A2540" opacity="0.82" />
         {/* Bâtiment secondaire */}
-        <rect x="466" y="25" width="10" height="4" rx="0.5" fill="#2A2240" opacity="0.75" />
+        <rect x="466" y="25" width="10" height="4" rx="0.5" fill="#1A2540" opacity="0.75" />
 
         {/* ══════════════════════════════════════════════════
             COUCHE 7 — Brume légère au pied des volcans
