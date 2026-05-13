@@ -10,99 +10,201 @@ export default function HeroSection() {
       }}
     >
       {/*
-        Puy de Dôme — dôme trachytique (forme caractéristique : sommet LARGE et aplati,
-        pentes en S-curve douces, très différent d'un cône ou d'un pic alpin).
-        Chaîne des Puys visible sur les flancs avec des cônes volcaniques individuels.
+        Vue depuis Clermont-Ferrand en direction de la Chaîne des Puys, lumière de fin d'après-midi.
+
+        Couches (arrière → avant) :
+          1. Puy de Sancy — massif alpin lointain, silhouette découpée, bleu-gris atmosphérique
+          2. Puy de Côme — masse irrégulière de dômes fusionnés
+          3. Puy de Pariou — cône presque parfait avec cratère circulaire creusé au sommet
+          4. Puy de la Vache + Puy de Lassolas — deux cônes sombres abrupts (scories)
+          5. Puy de Dôme — grand dôme trachytique, sommet APLATI et allongé (pas un pic)
+          6. Antenne et bâtiments scientifiques au sommet
+          7. Voile de brume à la base
+
         viewBox 860×310, SVG positionné bottom-0 right-0.
+        Sommet du dôme : plateau plat y=28, de x=425 à x=498 (73 px larges).
       */}
       <svg
         className="absolute bottom-0 right-0 pointer-events-none select-none"
-        style={{ opacity: 0.52, width: 'min(88vw, 860px)', height: 'auto' }}
+        style={{ opacity: 0.54, width: 'min(88vw, 860px)', height: 'auto' }}
         viewBox="0 0 860 310"
         aria-hidden
       >
         <defs>
-          {/*
-            Gradient vertical du sommet vers la base :
-            basalte violet-indigo (trachyte foncé) → flancs terracotta (roche volcanique exposée)
-            → ocre chaud (sol volcanique) → vert forestier (forêts du plateau).
-          */}
-          <linearGradient id="puydomeGrad" x1="0" y1="0" x2="0" y2="310" gradientUnits="userSpaceOnUse">
-            <stop offset="0%"   stopColor="#242048" />
-            <stop offset="16%"  stopColor="#5E3E72" />
-            <stop offset="40%"  stopColor="#C26A42" />
-            <stop offset="68%"  stopColor="#9A7B50" />
-            <stop offset="100%" stopColor="#548848" />
+          {/* Gradient principal dôme : basalte violet → roche volcanique orange → ocre solaire → vert forestier */}
+          <linearGradient id="domeGrad" x1="0" y1="0" x2="0" y2="310" gradientUnits="userSpaceOnUse">
+            <stop offset="0%"   stopColor="#2A244E" />
+            <stop offset="20%"  stopColor="#5C3C60" />
+            <stop offset="46%"  stopColor="#BE5E3A" />
+            <stop offset="72%"  stopColor="#967240" />
+            <stop offset="100%" stopColor="#4C7A3A" />
           </linearGradient>
 
-          {/* Halo atmosphérique au sommet : lumière rasante sur la roche trachytique */}
-          <radialGradient id="summitHaze" cx="508" cy="4" r="130" gradientUnits="userSpaceOnUse">
-            <stop offset="0%"   stopColor="#C87050" stopOpacity="0.32" />
-            <stop offset="100%" stopColor="#C87050" stopOpacity="0"   />
+          {/* Lumière dorée de coucher de soleil sur le flanc droit */}
+          <radialGradient id="sunsetGlow" cx="620" cy="100" r="220" gradientUnits="userSpaceOnUse">
+            <stop offset="0%"   stopColor="#F0A040" stopOpacity="0.20" />
+            <stop offset="100%" stopColor="#F0A040" stopOpacity="0"   />
           </radialGradient>
+
+          {/* Brume légère à la base */}
+          <linearGradient id="mistGrad" x1="0" y1="255" x2="0" y2="310" gradientUnits="userSpaceOnUse">
+            <stop offset="0%"   stopColor="#EEF2F8" stopOpacity="0"   />
+            <stop offset="100%" stopColor="#EEF2F8" stopOpacity="0.60" />
+          </linearGradient>
         </defs>
 
-        {/*
-          CHAÎNE DES PUYS — cônes secondaires, second plan.
-          Cônes distincts visibles sur le flanc gauche (x≈120 et x≈240) et droit (x≈705 et x≈810).
-          Pics à y≈168-195 → clairement visibles au-dessus des pentes du dôme principal
-          dans ces zones (pente gauche y≈270 à x=120, pente droite y≈254 à x=810).
-          La partie centrale est naturellement masquée derrière le dôme principal.
-        */}
+        {/* ══════════════════════════════════════════════════
+            COUCHE 1 — Puy de Sancy (massif alpin lointain)
+            Silhouette découpée et accidentée, arêtes agressives,
+            couleur bleu-gris très pâle (perspective atmosphérique).
+        ══════════════════════════════════════════════════ */}
         <path
-          fill="#8090BC"
-          opacity="0.52"
+          fill="#9AAABB"
+          opacity="0.34"
           d="
-            M 0 310 L 0 278
-            C 32 271 62 261 90 248
-            C 104 239 115 212 122 192 C 124 184 126 178 127 175 C 128 174 130 174 131 175 C 133 179 136 190 142 205
-            C 150 222 160 236 174 243
-            C 188 249 204 252 218 249
-            C 228 246 238 228 242 215 C 244 207 246 199 247 196 C 248 195 249 196 250 199 C 253 207 259 222 268 234
-            C 278 244 294 250 316 251
-            C 350 252 390 251 432 250
-            C 468 250 504 251 536 251
-            C 562 251 584 248 602 243 C 614 238 624 231 632 224
-            C 642 217 652 211 660 208
-            C 670 198 682 185 690 178 C 696 173 702 169 706 168 C 708 168 710 169 712 172 C 717 180 724 194 736 206
-            C 748 218 764 226 782 228
-            C 792 225 800 220 808 217 C 810 216 812 216 814 218 C 817 222 822 229 832 235
-            C 840 239 850 241 860 241
-            L 860 310 Z
+            M 0 310 L 0 260
+            C 12 254 24 248 35 242
+            C 39 238 43 235 46 234 C 49 233 52 234 55 238
+            C 62 245 72 256 88 261
+            C 104 265 120 262 134 255
+            C 140 250 146 244 151 240 C 155 237 158 235 161 234 C 164 233 168 235 172 239
+            C 180 248 194 260 214 263
+            L 860 263 L 860 310 Z
           "
         />
 
-        {/*
-          PUY DE DÔME — dôme principal.
-          Forme clé : sommet APLATI sur ~130px (x≈448 à x≈570, y≈2-10).
-          Pentes gauche et droite en S-curve larges et douces (caractère bouclier).
-          Le gradient vertical crée les strates géologiques visibles sur la silhouette.
-        */}
+        {/* ══════════════════════════════════════════════════
+            COUCHE 2 — Puy de Côme (masse volcanique irrégulière)
+            Plusieurs dômes fusionnés, bosses inégales, forme massive.
+            Couleur : gris-brun volcanique chaud.
+        ══════════════════════════════════════════════════ */}
         <path
-          fill="url(#puydomeGrad)"
+          fill="#6C6452"
+          opacity="0.60"
           d="
-            M 0 310 L 0 292
-            C 52 284 108 270 162 252
-            C 212 234 256 210 296 184
-            C 328 162 352 136 370 106
-            C 384 82 392 60 402 42
-            C 408 32 413 24 420 18
-            C 426 13 433 9 442 7
-            C 450 5 458 3 468 2
-            C 478 1 488 1 498 1
-            C 508 1 520 2 532 3
-            C 544 5 556 7 564 11
-            C 572 15 578 22 582 32
-            C 588 46 594 64 606 86
-            C 620 114 640 144 664 170
-            C 688 196 716 218 748 234
-            C 778 248 812 259 845 265
-            L 860 268 L 860 310 Z
+            M 0 310 L 0 280
+            C 34 272 68 260 100 245
+            C 114 237 128 222 136 208
+            C 140 200 144 194 146 191 C 148 189 151 190 154 194
+            C 158 202 164 216 174 226
+            C 184 236 200 242 216 240
+            C 226 237 234 226 240 212
+            C 244 202 248 193 251 190 C 254 188 257 189 260 194
+            C 266 206 274 222 288 232
+            C 304 241 324 244 344 243
+            L 860 243 L 860 310 Z
           "
         />
 
-        {/* Halo chaud au sommet */}
-        <ellipse cx="508" cy="12" rx="128" ry="56" fill="url(#summitHaze)" />
+        {/* ══════════════════════════════════════════════════
+            COUCHE 3 — Puy de Pariou (cône avec cratère)
+            Cône quasi-parfait dont le sommet est CREUSÉ :
+            deux lèvres de cratère avec un dip concave entre elles.
+            Point clé : lèvres à y=148, fond de cratère à y=172.
+        ══════════════════════════════════════════════════ */}
+        <path
+          fill="#6A8250"
+          opacity="0.76"
+          d="
+            M 178 310 L 178 240
+            C 192 230 208 212 220 194
+            C 230 178 236 160 238 150
+            C 238 148 238 148 238 148
+            C 242 152 252 168 257 172
+            C 262 168 270 152 276 150
+            C 278 154 284 168 294 188
+            C 304 206 320 228 342 238
+            L 860 238 L 860 310 Z
+          "
+        />
+
+        {/* ══════════════════════════════════════════════════
+            COUCHE 4 — Puy de la Vache + Puy de Lassolas
+            Deux cônes jumeaux sombres, formes abruptes,
+            composés de scories rouges et noires.
+            La Vache : pic à (648, 180). Lassolas : pic à (694, 178).
+        ══════════════════════════════════════════════════ */}
+        <path
+          fill="#4A2E22"
+          opacity="0.84"
+          d="
+            M 602 310 L 602 238
+            C 616 228 632 210 640 194
+            C 644 184 647 180 648 179
+            C 649 180 652 188 660 202
+            C 668 216 680 228 692 232
+            C 694 228 694 216 694 202
+            C 694 188 694 180 694 178
+            C 695 179 698 188 704 202
+            C 712 220 728 232 750 238
+            L 860 238 L 860 310 Z
+          "
+        />
+
+        {/* ══════════════════════════════════════════════════
+            COUCHE 5 — Puy de Dôme (dôme trachytique principal)
+
+            Forme essentielle : sommet LARGE et PLAT (pas un pic),
+            pentes douces et régulières en S-curve, quasi-symétrique.
+            Le plateau plat y=28 de x=425 à x=498 est la signature
+            du dôme trachytique, à l'inverse d'un volcan explosif.
+        ══════════════════════════════════════════════════ */}
+        <path
+          fill="url(#domeGrad)"
+          d="
+            M 0 310 L 0 290
+            C 55 283 110 270 165 252
+            C 215 234 256 210 294 182
+            C 325 158 348 130 364 102
+            C 378 78 388 58 396 44
+            C 402 36 408 30 416 28
+            C 420 27 423 27 425 28
+            L 498 28
+            C 500 28 504 30 510 36
+            C 518 46 528 62 542 86
+            C 560 118 582 152 610 180
+            C 638 208 672 228 714 244
+            C 746 256 784 264 822 268
+            L 860 270 L 860 310 Z
+          "
+        />
+
+        {/* Lumière de coucher de soleil sur le flanc droit du dôme */}
+        <path
+          fill="url(#sunsetGlow)"
+          d="
+            M 0 310 L 0 290
+            C 55 283 110 270 165 252
+            C 215 234 256 210 294 182
+            C 325 158 348 130 364 102
+            C 378 78 388 58 396 44
+            C 402 36 408 30 416 28
+            C 420 27 423 27 425 28
+            L 498 28
+            C 500 28 504 30 510 36
+            C 518 46 528 62 542 86
+            C 560 118 582 152 610 180
+            C 638 208 672 228 714 244
+            C 746 256 784 264 822 268
+            L 860 270 L 860 310 Z
+          "
+        />
+
+        {/* ══════════════════════════════════════════════════
+            COUCHE 6 — Détails au sommet
+            Antenne emblématique + bâtiments scientifiques discrets.
+        ══════════════════════════════════════════════════ */}
+        {/* Antenne fine et verticale */}
+        <rect x="460" y="6" width="2" height="22" rx="1" fill="#2A2240" opacity="0.88" />
+        {/* Bâtiment principal (observatoire) */}
+        <rect x="443" y="24" width="14" height="5" rx="1" fill="#2A2240" opacity="0.82" />
+        {/* Bâtiment secondaire */}
+        <rect x="466" y="25" width="10" height="4" rx="0.5" fill="#2A2240" opacity="0.75" />
+
+        {/* ══════════════════════════════════════════════════
+            COUCHE 7 — Brume légère au pied des volcans
+        ══════════════════════════════════════════════════ */}
+        <rect x="0" y="0" width="860" height="310" fill="url(#mistGrad)" />
       </svg>
 
       <div className="relative z-10 px-8 sm:px-12 py-12 sm:py-16">
