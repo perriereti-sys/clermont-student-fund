@@ -70,6 +70,7 @@ export default function BucketSection({ bucket, positions, eurUsd = 1.09 }: Prop
   const fmtPrice = (n: number, cur: string) =>
     new Intl.NumberFormat('en-US', { style: 'currency', currency: cur, maximumFractionDigits: 2 }).format(n);
 
+  const sorted = [...positions].sort((a, b) => b.weight - a.weight);
   const targets = BUCKET_TARGETS[bucket.id];
   const positionTickers = new Set(positions.map(p => p.ticker));
   const emptySlots = targets.filter(t => !positionTickers.has(t.ticker));
@@ -198,7 +199,7 @@ export default function BucketSection({ bucket, positions, eurUsd = 1.09 }: Prop
               </tr>
             </thead>
             <tbody>
-              {positions.map((pos) => {
+              {sorted.map((pos) => {
                 const isPos = pos.pnlEUR >= 0;
                 return (
                   <tr key={pos.id}>
