@@ -9,87 +9,104 @@ export default function HeroSection() {
         boxShadow: '0 2px 12px rgba(26,37,64,0.07)',
       }}
     >
-      {/* Puy de Dôme — strates géologiques par couleur */}
+      {/*
+        Puy de Dôme — dôme trachytique (forme caractéristique : sommet LARGE et aplati,
+        pentes en S-curve douces, très différent d'un cône ou d'un pic alpin).
+        Chaîne des Puys visible sur les flancs avec des cônes volcaniques individuels.
+        viewBox 860×310, SVG positionné bottom-0 right-0.
+      */}
       <svg
         className="absolute bottom-0 right-0 pointer-events-none select-none"
-        style={{ opacity: 0.46, width: 'min(88vw, 860px)', height: 'auto' }}
+        style={{ opacity: 0.52, width: 'min(88vw, 860px)', height: 'auto' }}
         viewBox="0 0 860 310"
         aria-hidden
       >
         <defs>
-          {/* Gradient principal : basalte sombre → trachyte terracotta → ocre volcanique → vert forestier */}
+          {/*
+            Gradient vertical du sommet vers la base :
+            basalte violet-indigo (trachyte foncé) → flancs terracotta (roche volcanique exposée)
+            → ocre chaud (sol volcanique) → vert forestier (forêts du plateau).
+          */}
           <linearGradient id="puydomeGrad" x1="0" y1="0" x2="0" y2="310" gradientUnits="userSpaceOnUse">
-            <stop offset="0%"   stopColor="#272050" />
-            <stop offset="14%"  stopColor="#68447A" />
-            <stop offset="38%"  stopColor="#C4704A" />
-            <stop offset="66%"  stopColor="#9C7E52" />
-            <stop offset="100%" stopColor="#578A4E" />
+            <stop offset="0%"   stopColor="#242048" />
+            <stop offset="16%"  stopColor="#5E3E72" />
+            <stop offset="40%"  stopColor="#C26A42" />
+            <stop offset="68%"  stopColor="#9A7B50" />
+            <stop offset="100%" stopColor="#548848" />
           </linearGradient>
 
-          {/* Gradient second plan : bleu-acier atmosphérique, perspective aérienne */}
-          <linearGradient id="chainPuysGrad" x1="0" y1="190" x2="0" y2="310" gradientUnits="userSpaceOnUse">
-            <stop offset="0%"   stopColor="#7A8EBA" />
-            <stop offset="100%" stopColor="#9AAECE" />
-          </linearGradient>
-
-          {/* Voile atmosphérique au sommet */}
-          <radialGradient id="peakHaze" cx="414" cy="8" r="120" gradientUnits="userSpaceOnUse">
-            <stop offset="0%"   stopColor="#C07050" stopOpacity="0.28" />
-            <stop offset="100%" stopColor="#C07050" stopOpacity="0"   />
+          {/* Halo atmosphérique au sommet : lumière rasante sur la roche trachytique */}
+          <radialGradient id="summitHaze" cx="508" cy="4" r="130" gradientUnits="userSpaceOnUse">
+            <stop offset="0%"   stopColor="#C87050" stopOpacity="0.32" />
+            <stop offset="100%" stopColor="#C87050" stopOpacity="0"   />
           </radialGradient>
         </defs>
 
-        {/* Chaîne des Puys — cônes secondaires, second plan bleuté */}
+        {/*
+          CHAÎNE DES PUYS — cônes secondaires, second plan.
+          Cônes distincts visibles sur le flanc gauche (x≈120 et x≈240) et droit (x≈705 et x≈810).
+          Pics à y≈168-195 → clairement visibles au-dessus des pentes du dôme principal
+          dans ces zones (pente gauche y≈270 à x=120, pente droite y≈254 à x=810).
+          La partie centrale est naturellement masquée derrière le dôme principal.
+        */}
         <path
-          fill="url(#chainPuysGrad)"
-          opacity="0.58"
-          d="M 0 310 L 0 278
-             C 38 274 72 268 108 262
-             C 142 256 168 246 192 235
-             C 214 225 232 211 248 200
-             Q 259 191 270 192
-             Q 281 193 292 203
-             C 308 216 326 235 355 246
-             C 388 257 427 262 470 264
-             C 510 266 552 265 593 262
-             C 630 259 666 253 700 245
-             Q 715 241 730 242
-             Q 745 243 760 250
-             C 782 261 806 275 835 284
-             C 848 288 856 290 860 291
-             L 860 310 Z"
+          fill="#8090BC"
+          opacity="0.52"
+          d="
+            M 0 310 L 0 278
+            C 32 271 62 261 90 248
+            C 104 239 115 212 122 192 C 124 184 126 178 127 175 C 128 174 130 174 131 175 C 133 179 136 190 142 205
+            C 150 222 160 236 174 243
+            C 188 249 204 252 218 249
+            C 228 246 238 228 242 215 C 244 207 246 199 247 196 C 248 195 249 196 250 199 C 253 207 259 222 268 234
+            C 278 244 294 250 316 251
+            C 350 252 390 251 432 250
+            C 468 250 504 251 536 251
+            C 562 251 584 248 602 243 C 614 238 624 231 632 224
+            C 642 217 652 211 660 208
+            C 670 198 682 185 690 178 C 696 173 702 169 706 168 C 708 168 710 169 712 172 C 717 180 724 194 736 206
+            C 748 218 764 226 782 228
+            C 792 225 800 220 808 217 C 810 216 812 216 814 218 C 817 222 822 229 832 235
+            C 840 239 850 241 860 241
+            L 860 310 Z
+          "
         />
 
-        {/* Puy de Dôme — dôme principal, large et arrondi comme en réalité */}
+        {/*
+          PUY DE DÔME — dôme principal.
+          Forme clé : sommet APLATI sur ~130px (x≈448 à x≈570, y≈2-10).
+          Pentes gauche et droite en S-curve larges et douces (caractère bouclier).
+          Le gradient vertical crée les strates géologiques visibles sur la silhouette.
+        */}
         <path
           fill="url(#puydomeGrad)"
-          d="M 0 310 L 0 296
-             C 40 292 78 286 115 278
-             C 160 269 200 255 238 239
-             C 274 223 306 203 334 180
-             C 360 158 378 131 390 103
-             C 400 79 404 56 406 37
-             C 407 24 408 13 409 7
-             Q 410 2 414 0
-             Q 418 -1 422 2
-             Q 426 6 427 14
-             C 429 26 431 42 434 62
-             C 438 86 444 114 456 143
-             C 469 174 489 204 515 228
-             C 542 253 574 270 612 280
-             C 648 290 688 294 730 296
-             C 768 298 808 298 845 297
-             L 860 297
-             L 860 310 Z"
+          d="
+            M 0 310 L 0 292
+            C 52 284 108 270 162 252
+            C 212 234 256 210 296 184
+            C 328 162 352 136 370 106
+            C 384 82 392 60 402 42
+            C 408 32 413 24 420 18
+            C 426 13 433 9 442 7
+            C 450 5 458 3 468 2
+            C 478 1 488 1 498 1
+            C 508 1 520 2 532 3
+            C 544 5 556 7 564 11
+            C 572 15 578 22 582 32
+            C 588 46 594 64 606 86
+            C 620 114 640 144 664 170
+            C 688 196 716 218 748 234
+            C 778 248 812 259 845 265
+            L 860 268 L 860 310 Z
+          "
         />
 
-        {/* Halo chaud au sommet — lumière rasante sur la roche trachytique */}
-        <ellipse cx="414" cy="18" rx="110" ry="52" fill="url(#peakHaze)" />
+        {/* Halo chaud au sommet */}
+        <ellipse cx="508" cy="12" rx="128" ry="56" fill="url(#summitHaze)" />
       </svg>
 
       <div className="relative z-10 px-8 sm:px-12 py-12 sm:py-16">
 
-        {/* Label */}
         <p
           className="text-xs font-semibold tracking-[0.15em] uppercase mb-6"
           style={{ color: '#8496B2' }}
@@ -97,7 +114,6 @@ export default function HeroSection() {
           Association étudiante · Clermont-Ferrand · Est. 2025
         </p>
 
-        {/* Heading */}
         <h1
           className="font-display font-bold leading-[1.05] mb-5"
           style={{ fontSize: 'clamp(2rem, 5vw, 3.5rem)', color: '#1A2540' }}
@@ -106,13 +122,11 @@ export default function HeroSection() {
           <span style={{ color: '#B8963A' }}>Student Fund</span>
         </h1>
 
-        {/* Separator */}
         <div className="flex items-center gap-2 mb-6">
           <div style={{ width: 48, height: 2, background: 'rgba(184,150,58,0.5)', borderRadius: 1 }} />
           <div style={{ width: 20, height: 2, background: 'rgba(26,37,64,0.18)', borderRadius: 1 }} />
         </div>
 
-        {/* Description */}
         <p
           className="text-base leading-relaxed mb-8 max-w-lg"
           style={{ color: '#5C6E8A' }}
@@ -121,7 +135,6 @@ export default function HeroSection() {
           financiers. On analyse, on débat, on investit — ensemble.
         </p>
 
-        {/* CTAs */}
         <div className="flex flex-wrap items-center gap-3 mb-12">
           <a
             href="#portfolio"
@@ -142,7 +155,6 @@ export default function HeroSection() {
           </a>
         </div>
 
-        {/* Stats row */}
         <div
           className="flex flex-wrap items-center gap-x-8 gap-y-4 pt-8"
           style={{ borderTop: '2px solid rgba(26,37,64,0.10)' }}
