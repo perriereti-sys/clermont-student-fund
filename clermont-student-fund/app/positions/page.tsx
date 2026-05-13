@@ -16,6 +16,7 @@ const BUCKETS: BucketConfig[] = [
     description:
       'Positions de long terme qui ancrent le portefeuille. Faible rotation, volatilité maîtrisée, exposition diversifiée géographiquement et sectoriellement.',
     targetCount: 9,
+    maxWeight: 50,
   },
   {
     id: 'conviction',
@@ -24,6 +25,7 @@ const BUCKETS: BucketConfig[] = [
     description:
       'Paris à fort potentiel sur 12 à 24 mois. Sociétés positionnées sur des thématiques de rupture (IA, spatial, quantique). Volatilité acceptée et assumée.',
     targetCount: 2,
+    maxWeight: 30,
   },
   {
     id: 'opportunite',
@@ -32,6 +34,7 @@ const BUCKETS: BucketConfig[] = [
     description:
       "Positions tactiques sur des catalyseurs identifiés. Horizon court à moyen terme, taille de position limitée, sortie dès l'objectif atteint.",
     targetCount: 3,
+    maxWeight: 20,
   },
 ];
 
@@ -80,10 +83,13 @@ export default async function PositionsPage() {
       <AnimateIn delay={60} y={16}>
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
           {BUCKETS.map((bucket) => {
-            const positions = grouped[bucket.id];
-            const pnl      = positions.reduce((s, p) => s + p.pnlEUR, 0);
-            const weight   = positions.reduce((s, p) => s + p.weight, 0);
-            const isPnlPos = pnl >= 0;
+            const positions  = grouped[bucket.id];
+            const pnl        = positions.reduce((s, p) => s + p.pnlEUR, 0);
+            const weight     = positions.reduce((s, p) => s + p.weight, 0);
+            const valueUSD   = positions.reduce((s, p) => s + p.currentValueEUR, 0);
+            const isPnlPos   = pnl >= 0;
+            const wRatio     = bucket.maxWeight > 0 ? weight / bucket.maxWeight : 0;
+            const barColor   = wRatio > 0.9 ? '#C93048' : wRatio > 0.75 ? '#B8963A' : bucket.color;
 
             return (
               <a
@@ -102,22 +108,47 @@ export default async function PositionsPage() {
                 >
                   {bucket.label}
                 </span>
-                <div className="grid grid-cols-2 gap-x-4 gap-y-1 mb-2">
-                  <div>
-                    <p className="section-label mb-0.5">Poids</p>
-                    <p className="font-mono font-bold text-xl text-navy">{weight.toFixed(1)}%</p>
-                  </div>
+
+                {/* Valeur totale */}
+                <div className="mb-3">
+                  <p className="section-label mb-0.5">Valeur totale</p>
+                  <p className="font-mono font-bold text-xl text-navy">{fmtUsd(valueUSD)}</p>
+                  <p className="font-mono text-xs mt-0.5" style={{ color: '#8496B2' }}>{fmtEur(valueUSD / eurUsd)}</p>
+                </div>
+
+                <div className="grid grid-cols-2 gap-x-4 gap-y-1 mb-3">
                   <div>
                     <p className="section-label mb-0.5">P&amp;L</p>
-                    <p className={`font-mono font-bold text-xl ${isPnlPos ? 'text-gain' : 'text-loss'}`}>
+                    <p className={`font-mono font-bold text-base ${isPnlPos ? 'text-gain' : 'text-loss'}`}>
                       {isPnlPos ? '+' : ''}{fmtEur(pnl / eurUsd)}
                     </p>
                     <p className="font-mono text-xs mt-0.5" style={{ color: '#8496B2' }}>
                       {isPnlPos ? '+' : ''}{fmtUsd(pnl)}
                     </p>
                   </div>
+                  <div>
+                    <p className="section-label mb-0.5">Allocation</p>
+                    <div className="flex items-baseline gap-1">
+                      <p className="font-mono font-bold text-base" style={{ color: barColor }}>{weight.toFixed(1)}%</p>
+                      <p className="text-xs" style={{ color: '#8496B2' }}>/ {bucket.maxWeight}%</p>
+                    </div>
+                  </div>
                 </div>
-                <div className="flex items-center justify-between mt-1">
+
+                {/* Barre règlement */}
+                <div className="mb-3">
+                  <div className="h-1.5 rounded-full overflow-hidden" style={{ background: 'rgba(26,37,64,0.08)' }}>
+                    <div
+                      className="h-1.5 rounded-full transition-all duration-700"
+                      style={{ width: `${Math.min(wRatio * 100, 100)}%`, background: barColor }}
+                    />
+                  </div>
+                  <p className="text-xs mt-1" style={{ color: '#8496B2' }}>
+                    Règlement : max {bucket.maxWeight}% du portefeuille
+                  </p>
+                </div>
+
+                <div className="flex items-center justify-between">
                   <p className="text-xs" style={{ color: '#8496B2' }}>
                     {positions.length} / {bucket.targetCount} positions
                   </p>

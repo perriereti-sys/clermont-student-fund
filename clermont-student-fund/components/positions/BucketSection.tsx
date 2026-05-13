@@ -11,6 +11,7 @@ export interface BucketConfig {
   color: string;
   description: string;
   targetCount: number;
+  maxWeight: number;
 }
 
 interface Props {
@@ -72,10 +73,15 @@ export default function BucketSection({ bucket, positions, eurUsd = 1.09 }: Prop
   const positionTickers = new Set(positions.map(p => p.ticker));
   const emptySlots = targets.filter(t => !positionTickers.has(t.ticker));
 
-  const bucketPnlUSD  = positions.reduce((s, p) => s + p.pnlEUR, 0);
-  const bucketCostUSD = positions.reduce((s, p) => s + p.costBasisEUR, 0);
-  const bucketPnlPct  = bucketCostUSD > 0 ? (bucketPnlUSD / bucketCostUSD) * 100 : 0;
-  const isPnlPos      = bucketPnlUSD >= 0;
+  const bucketPnlUSD   = positions.reduce((s, p) => s + p.pnlEUR, 0);
+  const bucketCostUSD  = positions.reduce((s, p) => s + p.costBasisEUR, 0);
+  const bucketValueUSD = positions.reduce((s, p) => s + p.currentValueEUR, 0);
+  const bucketWeight   = positions.reduce((s, p) => s + p.weight, 0);
+  const bucketPnlPct   = bucketCostUSD > 0 ? (bucketPnlUSD / bucketCostUSD) * 100 : 0;
+  const isPnlPos       = bucketPnlUSD >= 0;
+
+  const weightRatio = bucket.maxWeight > 0 ? bucketWeight / bucket.maxWeight : 0;
+  const barColor    = weightRatio > 0.9 ? '#C93048' : weightRatio > 0.75 ? '#B8963A' : bucket.color;
 
   return (
     <div
@@ -123,6 +129,37 @@ export default function BucketSection({ bucket, positions, eurUsd = 1.09 }: Prop
               </span>
             )}
           </div>
+          {/* Valeur totale + allocation vs règlement */}
+          {positions.length > 0 && (
+            <div className="mt-3 mb-2">
+              <div className="flex items-end justify-between gap-4 mb-1.5">
+                <div>
+                  <p className="section-label mb-0.5">Valeur totale</p>
+                  <div className="flex items-baseline gap-2">
+                    <span className="font-mono font-bold text-navy">{fmtUsd(bucketValueUSD)}</span>
+                    <span className="font-mono text-xs" style={{ color: '#8496B2' }}>{fmtEur(bucketValueUSD / eurUsd)}</span>
+                  </div>
+                </div>
+                <div className="text-right shrink-0">
+                  <p className="section-label mb-0.5">Allocation règlement</p>
+                  <div className="flex items-baseline gap-1 justify-end">
+                    <span className="font-mono font-bold text-sm" style={{ color: barColor }}>{bucketWeight.toFixed(1)}%</span>
+                    <span className="text-xs" style={{ color: '#8496B2' }}>/ max {bucket.maxWeight}%</span>
+                  </div>
+                </div>
+              </div>
+              <div className="h-1.5 rounded-full overflow-hidden" style={{ background: 'rgba(26,37,64,0.08)' }}>
+                <div
+                  className="h-1.5 rounded-full transition-all duration-700"
+                  style={{
+                    width: `${Math.min(weightRatio * 100, 100)}%`,
+                    background: barColor,
+                  }}
+                />
+              </div>
+            </div>
+          )}
+
           <p className="text-sm italic leading-relaxed" style={{ color: '#5C6E8A' }}>
             {bucket.description}
           </p>
