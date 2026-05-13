@@ -184,9 +184,33 @@
       "avgBuyPrice": 548.74,
       "currency": "USD",
       "buyDate": "2026-05-13"
+    },
+    {
+      "id": "16",
+      "name": "Micron Technology",
+      "ticker": "MU",
+      "type": "action",
+      "sector": "Technologie",
+      "category": "opportunite",
+      "quantity": 2,
+      "avgBuyPrice": 794.35,
+      "currency": "USD",
+      "buyDate": "2026-05-13"
+    },
+    {
+      "id": "17",
+      "name": "AMD",
+      "ticker": "AMD",
+      "type": "action",
+      "sector": "Technologie",
+      "category": "opportunite",
+      "quantity": 5,
+      "avgBuyPrice": 446.43,
+      "currency": "USD",
+      "buyDate": "2026-05-13"
     }
   ],
-  "cashUSD": 32938.30,
+  "cashUSD": 29117.45,
   "initialValueUSD": 100000,
   "startDate": "2026-01-01",
   "baseCurrency": "USD"

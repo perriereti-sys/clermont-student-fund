@@ -229,6 +229,30 @@
       "justification": "Ouverture d'une position sur Safran, champion français de l'aéronautique et de la défense. Leader mondial des moteurs d'avions civils via CFM International (JV avec GE), bénéficiaire direct du supercycle de la MRO (maintenance, réparation, révision) avec des marges en forte expansion. Carnet de commandes record, visibilité à 10 ans sur les revenus de services, et positionnement sur la défense européenne en phase d'accélération budgétaire."
     }
     ,{
+      "id": "22",
+      "date": "2026-05-13",
+      "type": "BUY",
+      "ticker": "MU",
+      "name": "Micron Technology",
+      "quantity": 2,
+      "price": 794.35,
+      "currency": "USD",
+      "totalEUR": 1418,
+      "justification": "Ouverture d'une position tactique sur Micron Technology, leader mondial de la mémoire DRAM et NAND. Catalyseur identifié : cycle de renouvellement de la mémoire HBM (High Bandwidth Memory) porté par la demande IA des centres de données. Micron est le seul fabricant américain de mémoire avancée, bénéficiant du CHIPS Act et d'une demande structurelle croissante pour les GPU d'entraînement."
+    }
+    ,{
+      "id": "23",
+      "date": "2026-05-13",
+      "type": "BUY",
+      "ticker": "AMD",
+      "name": "AMD",
+      "quantity": 5,
+      "price": 446.43,
+      "currency": "USD",
+      "totalEUR": 1993,
+      "justification": "Ouverture d'une position tactique sur AMD, concurrent direct de Nvidia sur le marché des GPU IA. La gamme MI300/MI350 gagne des parts de marché auprès des hyperscalers (Microsoft, Meta, Oracle) cherchant à diversifier leurs fournisseurs. Valorisation plus raisonnable que Nvidia pour une exposition équivalente au thème IA."
+    }
+    ,{
       "id": "21",
       "date": "2026-05-13",
       "type": "BUY",
