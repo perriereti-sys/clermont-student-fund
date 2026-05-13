@@ -9,17 +9,40 @@ export default function HeroSection() {
         boxShadow: '0 2px 12px rgba(26,37,64,0.07)',
       }}
     >
-      {/* Puy de Dôme silhouette — clin d'œil à Clermont */}
+      {/* Puy de Dôme — strates géologiques par couleur */}
       <svg
         className="absolute bottom-0 right-0 pointer-events-none select-none"
-        style={{ opacity: 0.10, width: 'min(88vw, 860px)', height: 'auto' }}
+        style={{ opacity: 0.46, width: 'min(88vw, 860px)', height: 'auto' }}
         viewBox="0 0 860 310"
         aria-hidden
       >
-        {/* Chaîne des Puys — secondary volcanic cones creating depth */}
+        <defs>
+          {/* Gradient principal : basalte sombre → trachyte terracotta → ocre volcanique → vert forestier */}
+          <linearGradient id="puydomeGrad" x1="0" y1="0" x2="0" y2="310" gradientUnits="userSpaceOnUse">
+            <stop offset="0%"   stopColor="#272050" />
+            <stop offset="14%"  stopColor="#68447A" />
+            <stop offset="38%"  stopColor="#C4704A" />
+            <stop offset="66%"  stopColor="#9C7E52" />
+            <stop offset="100%" stopColor="#578A4E" />
+          </linearGradient>
+
+          {/* Gradient second plan : bleu-acier atmosphérique, perspective aérienne */}
+          <linearGradient id="chainPuysGrad" x1="0" y1="190" x2="0" y2="310" gradientUnits="userSpaceOnUse">
+            <stop offset="0%"   stopColor="#7A8EBA" />
+            <stop offset="100%" stopColor="#9AAECE" />
+          </linearGradient>
+
+          {/* Voile atmosphérique au sommet */}
+          <radialGradient id="peakHaze" cx="414" cy="8" r="120" gradientUnits="userSpaceOnUse">
+            <stop offset="0%"   stopColor="#C07050" stopOpacity="0.28" />
+            <stop offset="100%" stopColor="#C07050" stopOpacity="0"   />
+          </radialGradient>
+        </defs>
+
+        {/* Chaîne des Puys — cônes secondaires, second plan bleuté */}
         <path
-          fill="#1A2540"
-          opacity="0.38"
+          fill="url(#chainPuysGrad)"
+          opacity="0.58"
           d="M 0 310 L 0 278
              C 38 274 72 268 108 262
              C 142 256 168 246 192 235
@@ -37,9 +60,9 @@ export default function HeroSection() {
              L 860 310 Z"
         />
 
-        {/* Main Puy de Dôme — broad rounded dome, characteristic shield shape */}
+        {/* Puy de Dôme — dôme principal, large et arrondi comme en réalité */}
         <path
-          fill="#1A2540"
+          fill="url(#puydomeGrad)"
           d="M 0 310 L 0 296
              C 40 292 78 286 115 278
              C 160 269 200 255 238 239
@@ -59,6 +82,9 @@ export default function HeroSection() {
              L 860 297
              L 860 310 Z"
         />
+
+        {/* Halo chaud au sommet — lumière rasante sur la roche trachytique */}
+        <ellipse cx="414" cy="18" rx="110" ry="52" fill="url(#peakHaze)" />
       </svg>
 
       <div className="relative z-10 px-8 sm:px-12 py-12 sm:py-16">
