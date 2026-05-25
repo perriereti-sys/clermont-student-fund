@@ -180,7 +180,7 @@
       "type": "action",
       "sector": "Technologie",
       "category": "conviction",
-      "quantity": 5,
+      "quantity": 2,
       "avgBuyPrice": 548.74,
       "currency": "USD",
       "buyDate": "2026-05-13"
@@ -210,7 +210,7 @@
       "buyDate": "2026-05-13"
     }
   ],
-  "cashUSD": 29117.45,
+  "cashUSD": 31119.02,
   "initialValueUSD": 100000,
   "startDate": "2026-01-01",
   "baseCurrency": "USD"
