@@ -164,6 +164,7 @@
       "name": "Argent (Silver)",
       "quantity": 27,
       "price": 106.00,
+      "buyPrice": 71.80,
       "currency": "USD",
       "totalEUR": 2862,
       "justification": "Cession de la totalité de la position argent après une hausse de +47.6% en moins d'un mois. Objectif de cours atteint, prise de bénéfices de +$923. Le ratio or/argent s'étant normalisé, le catalyseur principal de la thèse est épuisé."
@@ -272,9 +273,23 @@
       "name": "CrowdStrike Holdings",
       "quantity": 3,
       "price": 667.19,
+      "buyPrice": 548.74,
       "currency": "USD",
       "totalEUR": 1787,
       "justification": "Prise de bénéfices partielle sur CrowdStrike après une hausse de +21.6% depuis l'entrée (de $548.74 à $667.19). Cession de 3 des 5 titres pour cristalliser la plus-value de +$354 tout en maintenant une exposition résiduelle à la thèse cybersécurité. Les 2 actions restantes permettent de participer à une éventuelle poursuite de la hausse."
+    }
+    ,{
+      "id": "25",
+      "date": "2026-05-26",
+      "type": "SELL",
+      "ticker": "KRKNF",
+      "name": "Kraken Robotics",
+      "quantity": 139,
+      "price": 5.84,
+      "buyPrice": 7.28,
+      "currency": "USD",
+      "totalEUR": 725,
+      "justification": "Cession totale de la position Kraken Robotics en moins-value (-19.8%, -$200). La thèse sous-marine/défense reste solide sur le long terme mais le titre n'a pas offert le momentum attendu sur cet horizon. Réallocation du capital vers des positions au meilleur profil risque/rendement actuel."
     }
     ,{
       "id": "18",

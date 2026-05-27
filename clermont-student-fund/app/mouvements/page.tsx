@@ -2,6 +2,7 @@ import MovementsTable from '@/components/movements/MovementsTable';
 import FundCurveChart from '@/components/movements/FundCurveChart';
 import DeployedCurveChart from '@/components/movements/DeployedCurveChart';
 import DeployedPerformance from '@/components/positions/DeployedPerformance';
+import RealizedPnL from '@/components/movements/RealizedPnL';
 import movementsData from '@/data/movements.json';
 import { Movement, ChartPoint, EnrichedPosition } from '@/lib/types';
 import { getPortfolioMetrics } from '@/lib/getPortfolioMetrics';
@@ -123,6 +124,8 @@ export default async function MouvementsPage() {
       {chartData.length >= 2 && (
         <FundCurveChart chartData={chartData} movements={movements} />
       )}
+
+      <RealizedPnL movements={movements} />
 
       <MovementsTable movements={movements} />
 

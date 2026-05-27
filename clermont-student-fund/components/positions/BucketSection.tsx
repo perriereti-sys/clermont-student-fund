@@ -38,7 +38,6 @@ const BUCKET_TARGETS: Record<BucketId, { ticker: string; name: string }[]> = {
     { ticker: 'CRWD', name: 'CrowdStrike Holdings' },
   ],
   opportunite: [
-    { ticker: 'KRKNF',   name: 'Kraken Robotics' },
     { ticker: 'BTC-USD', name: 'Bitcoin' },
     { ticker: 'META',    name: 'Meta Platforms' },
     { ticker: 'MU',      name: 'Micron Technology' },

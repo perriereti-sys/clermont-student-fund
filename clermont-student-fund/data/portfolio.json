@@ -1,18 +1,6 @@
 {
   "positions": [
     {
-      "id": "1",
-      "name": "Kraken Robotics",
-      "ticker": "KRKNF",
-      "type": "action",
-      "sector": "Aéronautique & Défense",
-      "category": "opportunite",
-      "quantity": 139,
-      "avgBuyPrice": 7.28,
-      "currency": "USD",
-      "buyDate": "2026-01-01"
-    },
-    {
       "id": "2",
       "name": "IonQ",
       "ticker": "IONQ",
@@ -210,7 +198,7 @@
       "buyDate": "2026-05-13"
     }
   ],
-  "cashUSD": 31119.02,
+  "cashUSD": 31930.78,
   "initialValueUSD": 100000,
   "startDate": "2026-01-01",
   "baseCurrency": "USD"

@@ -33,6 +33,7 @@ export interface Movement {
   name: string;
   quantity: number;
   price: number;
+  buyPrice?: number;
   currency: string;
   totalEUR: number;
   justification: string;
