@@ -192,13 +192,13 @@
       "type": "action",
       "sector": "Technologie",
       "category": "opportunite",
-      "quantity": 5,
+      "quantity": 2,
       "avgBuyPrice": 446.43,
       "currency": "USD",
       "buyDate": "2026-05-13"
     }
   ],
-  "cashUSD": 31930.78,
+  "cashUSD": 33404.44,
   "initialValueUSD": 100000,
   "startDate": "2026-01-01",
   "baseCurrency": "USD"

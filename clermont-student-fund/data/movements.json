@@ -292,6 +292,19 @@
       "justification": "Cession totale de la position Kraken Robotics en moins-value (-19.8%, -$200). La thèse sous-marine/défense reste solide sur le long terme mais le titre n'a pas offert le momentum attendu sur cet horizon. Réallocation du capital vers des positions au meilleur profil risque/rendement actuel."
     }
     ,{
+      "id": "26",
+      "date": "2026-05-27",
+      "type": "SELL",
+      "ticker": "AMD",
+      "name": "AMD",
+      "quantity": 3,
+      "price": 491.22,
+      "buyPrice": 446.43,
+      "currency": "USD",
+      "totalEUR": 1316,
+      "justification": "Prise de bénéfices partielle sur AMD après une hausse de +10% depuis l'entrée. Cession de 3 des 5 titres pour sécuriser +$134. Les 2 actions restantes maintiennent l'exposition au thème IA/GPU."
+    }
+    ,{
       "id": "18",
       "date": "2026-05-04",
       "type": "BUY",
