@@ -33,7 +33,6 @@ const CustomTooltip = ({ active, payload, label }: any) => {
   if (!active || !payload?.length) return null;
   const csf    = payload.find((e: any) => e.name === 'CSF Portfolio');
   const msci   = payload.find((e: any) => e.name === 'MSCI World');
-  const nasdaq = payload.find((e: any) => e.name === 'Nasdaq 100');
   const delta  = csf?.value != null && msci?.value != null ? csf.value - msci.value : null;
 
   return (
@@ -45,7 +44,7 @@ const CustomTooltip = ({ active, payload, label }: any) => {
         {new Date(label).toLocaleDateString('fr-FR', { weekday: 'short', day: '2-digit', month: 'short', year: 'numeric' })}
       </p>
 
-      {[csf, msci, nasdaq].filter(Boolean).map((e: any) => (
+      {[csf, msci].filter(Boolean).map((e: any) => (
         <div key={e.name} className="flex items-center justify-between gap-6 mb-1.5">
           <div className="flex items-center gap-1.5">
             <span className="w-2 h-2 rounded-full flex-shrink-0" style={{ background: e.color }} />
@@ -167,7 +166,6 @@ export default function PerformanceChart({ data }: Props) {
   const lastPt   = displayed[displayed.length - 1];
   const portPerf = lastPt?.portfolio != null ? lastPt.portfolio - 100 : null;
   const msciPerf = lastPt?.msciWorld  != null ? lastPt.msciWorld  - 100 : null;
-  const nsdqPerf = lastPt?.nasdaq100  != null ? lastPt.nasdaq100  - 100 : null;
   const alpha    = portPerf != null && msciPerf != null ? portPerf - msciPerf : null;
 
   const portMax = useMemo(() => {
@@ -278,7 +276,6 @@ export default function PerformanceChart({ data }: Props) {
           {([
             { label: 'CSF Portfolio', value: portPerf, color: GOLD },
             { label: 'MSCI World',    value: msciPerf, color: BLUE },
-            { label: 'Nasdaq 100',    value: nsdqPerf, color: TEAL },
           ] as { label: string; value: number | null; color: string }[]).map(({ label, value, color }) => (
             <div key={label} className="flex items-center gap-2">
               <span className="w-2 h-2 rounded-full flex-shrink-0" style={{ background: color }} />
@@ -385,18 +382,6 @@ export default function PerformanceChart({ data }: Props) {
               connectNulls
             />
 
-            {/* Nasdaq 100 */}
-            <Line
-              type="monotone"
-              dataKey="nasdaq100"
-              name="Nasdaq 100"
-              stroke={TEAL}
-              strokeWidth={1.5}
-              strokeDasharray="5 3"
-              dot={false}
-              activeDot={{ r: 4, fill: TEAL, stroke: '#FFFFFF', strokeWidth: 2 }}
-              connectNulls
-            />
           </ComposedChart>
         </ResponsiveContainer>
       </div>
