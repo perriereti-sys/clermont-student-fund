@@ -8,6 +8,8 @@ import { EnrichedPosition } from '@/lib/types';
 
 interface Props {
   positions: EnrichedPosition[];
+  realizedPnl?: number;
+  soldCostBasis?: number;
 }
 
 const GAIN  = '#0A8E62';
@@ -42,13 +44,17 @@ const CustomTooltip = ({ active, payload }: any) => {
   );
 };
 
-export default function DeployedPerformance({ positions }: Props) {
+export default function DeployedPerformance({ positions, realizedPnl = 0, soldCostBasis = 0 }: Props) {
   // All fields (costBasisEUR / currentValueEUR / pnlEUR) are in USD — historical naming
-  const deployedUSD    = positions.reduce((s, p) => s + p.costBasisEUR, 0);
-  const currentUSD     = positions.reduce((s, p) => s + p.currentValueEUR, 0);
-  const deployedPnl    = currentUSD - deployedUSD;
-  const deployedPnlPct = deployedUSD > 0 ? (deployedPnl / deployedUSD) * 100 : 0;
-  const isUp           = deployedPnl >= 0;
+  const deployedUSD = positions.reduce((s, p) => s + p.costBasisEUR, 0);
+  const currentUSD  = positions.reduce((s, p) => s + p.currentValueEUR, 0);
+
+  // Total since inception: open positions + realized gains/losses from closed positions
+  const unrealizedPnl  = currentUSD - deployedUSD;
+  const totalPnl       = unrealizedPnl + realizedPnl;
+  const totalCostBasis = deployedUSD + soldCostBasis;
+  const totalPnlPct    = totalCostBasis > 0 ? (totalPnl / totalCostBasis) * 100 : 0;
+  const isUp           = totalPnl >= 0;
 
   const data = [...positions]
     .sort((a, b) => b.pnlPercent - a.pnlPercent)
@@ -63,10 +69,10 @@ export default function DeployedPerformance({ positions }: Props) {
   const chartHeight = data.length * 40 + 32;
 
   const STATS = [
-    { label: 'Capital déployé',  value: fmtUsd(deployedUSD),  color: '#5C6E8A' },
-    { label: 'Valeur déployée',  value: fmtUsd(currentUSD),   color: '#1A2540' },
-    { label: 'P&L déployé',      value: `${isUp ? '+' : ''}${fmtUsd(deployedPnl)}`,      color: isUp ? GAIN : LOSS },
-    { label: 'Perf. déployée',   value: `${isUp ? '+' : ''}${deployedPnlPct.toFixed(2)}%`, color: isUp ? GAIN : LOSS },
+    { label: 'Capital déployé',  value: fmtUsd(totalCostBasis), color: '#5C6E8A' },
+    { label: 'Valeur déployée',  value: fmtUsd(currentUSD),     color: '#1A2540' },
+    { label: 'P&L total',        value: `${isUp ? '+' : ''}${fmtUsd(totalPnl)}`,       color: isUp ? GAIN : LOSS },
+    { label: 'Perf. déployée',   value: `${isUp ? '+' : ''}${totalPnlPct.toFixed(2)}%`, color: isUp ? GAIN : LOSS },
   ];
 
   return (
@@ -78,7 +84,7 @@ export default function DeployedPerformance({ positions }: Props) {
           Performance sur capital déployé
         </h2>
         <p className="text-xs mt-0.5" style={{ color: '#8496B2' }}>
-          Sans liquidités · positions ouvertes uniquement
+          Sans liquidités · gains réalisés inclus depuis l'origine
         </p>
       </div>
 

@@ -23,6 +23,10 @@ export default async function MouvementsPage() {
     // stays at defaults
   }
 
+  const sellsWithBuyPrice = movements.filter(m => m.type === 'SELL' && m.buyPrice != null);
+  const realizedPnl   = sellsWithBuyPrice.reduce((s, m) => s + (m.price - m.buyPrice!) * m.quantity, 0);
+  const soldCostBasis = sellsWithBuyPrice.reduce((s, m) => s + m.buyPrice! * m.quantity, 0);
+
   const buys     = movements.filter(m => m.type === 'BUY');
   const sells    = movements.filter(m => m.type === 'SELL');
   const invested = buys.reduce((s, m) => s + m.totalEUR, 0);
@@ -136,7 +140,7 @@ export default async function MouvementsPage() {
 
       {/* Performance par position */}
       {positions.length > 0 && (
-        <DeployedPerformance positions={positions} />
+        <DeployedPerformance positions={positions} realizedPnl={realizedPnl} soldCostBasis={soldCostBasis} />
       )}
     </div>
   );
