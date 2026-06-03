@@ -8,8 +8,6 @@ import { EnrichedPosition } from '@/lib/types';
 
 interface Props {
   positions: EnrichedPosition[];
-  totalValue?: number;
-  totalCost?: number;
 }
 
 const GAIN  = '#0A8E62';
@@ -44,22 +42,13 @@ const CustomTooltip = ({ active, payload }: any) => {
   );
 };
 
-export default function DeployedPerformance({ positions, totalValue, totalCost }: Props) {
+export default function DeployedPerformance({ positions }: Props) {
   // All fields (costBasisEUR / currentValueEUR / pnlEUR) are in USD — historical naming
-  const deployedUSD = positions.reduce((s, p) => s + p.costBasisEUR, 0);
-  const currentUSD  = positions.reduce((s, p) => s + p.currentValueEUR, 0);
-
-  // Overall fund P&L: total portfolio value (positions + cash) vs initial capital
-  const fundValue    = totalValue ?? currentUSD;
-  const fundCost     = totalCost  ?? deployedUSD;
-  const pnlUSD       = fundValue - fundCost;
-  const pnlPct       = fundCost > 0 ? (pnlUSD / fundCost) * 100 : 0;
-  const isUp         = pnlUSD >= 0;
-
-  // Deployed-only P&L: positions performance ignoring cash drag
+  const deployedUSD    = positions.reduce((s, p) => s + p.costBasisEUR, 0);
+  const currentUSD     = positions.reduce((s, p) => s + p.currentValueEUR, 0);
   const deployedPnl    = currentUSD - deployedUSD;
   const deployedPnlPct = deployedUSD > 0 ? (deployedPnl / deployedUSD) * 100 : 0;
-  const isDeployedUp   = deployedPnl >= 0;
+  const isUp           = deployedPnl >= 0;
 
   const data = [...positions]
     .sort((a, b) => b.pnlPercent - a.pnlPercent)
@@ -74,10 +63,10 @@ export default function DeployedPerformance({ positions, totalValue, totalCost }
   const chartHeight = data.length * 40 + 32;
 
   const STATS = [
-    { label: 'Capital initial',  value: fmtUsd(fundCost),  color: '#5C6E8A' },
-    { label: 'Valeur du fonds',  value: fmtUsd(fundValue), color: '#1A2540' },
-    { label: 'Perf. fonds',      value: `${isUp ? '+' : ''}${pnlPct.toFixed(2)}%`,       color: isUp ? GAIN : LOSS },
-    { label: 'Perf. déployée',   value: `${isDeployedUp ? '+' : ''}${deployedPnlPct.toFixed(2)}%`, color: isDeployedUp ? GAIN : LOSS },
+    { label: 'Capital déployé',  value: fmtUsd(deployedUSD),  color: '#5C6E8A' },
+    { label: 'Valeur déployée',  value: fmtUsd(currentUSD),   color: '#1A2540' },
+    { label: 'P&L déployé',      value: `${isUp ? '+' : ''}${fmtUsd(deployedPnl)}`,      color: isUp ? GAIN : LOSS },
+    { label: 'Perf. déployée',   value: `${isUp ? '+' : ''}${deployedPnlPct.toFixed(2)}%`, color: isUp ? GAIN : LOSS },
   ];
 
   return (
@@ -86,10 +75,10 @@ export default function DeployedPerformance({ positions, totalValue, totalCost }
       <div>
         <p className="section-label mb-1">Rendement</p>
         <h2 className="font-display font-bold text-xl" style={{ color: '#1A2540' }}>
-          Performance du portefeuille
+          Performance sur capital déployé
         </h2>
         <p className="text-xs mt-0.5" style={{ color: '#8496B2' }}>
-          Perf. fonds = cash inclus / capital initial · Perf. déployée = positions uniquement
+          Sans liquidités · positions ouvertes uniquement
         </p>
       </div>
 

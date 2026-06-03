@@ -15,14 +15,10 @@ export default async function MouvementsPage() {
 
   let chartData: ChartPoint[]       = [];
   let positions: EnrichedPosition[] = [];
-  let totalValue = 0;
-  let totalCost  = 0;
   try {
     const portfolio = await getPortfolioMetrics();
-    chartData  = portfolio.chartData;
-    positions  = portfolio.positions;
-    totalValue = portfolio.totalValue;
-    totalCost  = portfolio.totalCost;
+    chartData = portfolio.chartData;
+    positions = portfolio.positions;
   } catch {
     // stays at defaults
   }
@@ -140,7 +136,7 @@ export default async function MouvementsPage() {
 
       {/* Performance par position */}
       {positions.length > 0 && (
-        <DeployedPerformance positions={positions} totalValue={totalValue} totalCost={totalCost} />
+        <DeployedPerformance positions={positions} />
       )}
     </div>
   );

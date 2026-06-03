@@ -231,11 +231,13 @@ export async function getPortfolioMetrics(): Promise<PortfolioMetrics> {
 
     // Anchor last point to actual live prices (removes stale-cache drift)
     if (history.length > 0) {
-      const last = history[history.length - 1];
+      const last        = history[history.length - 1];
+      const deployedCost = positions.reduce((s, p) => s + p.costBasisEUR, 0);
       history[history.length - 1] = {
         ...last,
         value:         totalValue,
         investedValue: totalInvested,
+        costBasis:     deployedCost,
       };
     }
 
