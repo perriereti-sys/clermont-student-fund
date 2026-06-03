@@ -33,7 +33,7 @@ const BUCKETS: BucketConfig[] = [
     color: '#70AD47',
     description:
       "Positions tactiques sur des catalyseurs identifiés. Horizon court à moyen terme, taille de position limitée, sortie dès l'objectif atteint.",
-    targetCount: 5,
+    targetCount: 4,
     maxWeight: 20,
   },
 ];
@@ -87,6 +87,7 @@ export default async function PositionsPage() {
             const pnl        = positions.reduce((s, p) => s + p.pnlEUR, 0);
             const weight     = positions.reduce((s, p) => s + p.weight, 0);
             const valueUSD   = positions.reduce((s, p) => s + p.currentValueEUR, 0);
+            const costUSD    = positions.reduce((s, p) => s + p.costBasisEUR, 0);
             const isPnlPos   = pnl >= 0;
             const wRatio     = bucket.maxWeight > 0 ? weight / bucket.maxWeight : 0;
             const barColor   = wRatio > 0.9 ? '#C93048' : wRatio > 0.75 ? '#B8963A' : bucket.color;
@@ -109,11 +110,18 @@ export default async function PositionsPage() {
                   {bucket.label}
                 </span>
 
-                {/* Valeur totale */}
-                <div className="mb-3">
-                  <p className="section-label mb-0.5">Valeur totale</p>
-                  <p className="font-mono font-bold text-xl text-navy">{fmtUsd(valueUSD)}</p>
-                  <p className="font-mono text-xs mt-0.5" style={{ color: '#8496B2' }}>{fmtEur(valueUSD / eurUsd)}</p>
+                {/* Capital déployé + Valeur actuelle */}
+                <div className="mb-3 flex gap-4">
+                  <div>
+                    <p className="section-label mb-0.5">Capital déployé</p>
+                    <p className="font-mono font-bold text-lg text-navy">{fmtUsd(costUSD)}</p>
+                    <p className="font-mono text-xs mt-0.5" style={{ color: '#8496B2' }}>{fmtEur(costUSD / eurUsd)}</p>
+                  </div>
+                  <div>
+                    <p className="section-label mb-0.5">Valeur actuelle</p>
+                    <p className="font-mono font-bold text-lg text-navy">{fmtUsd(valueUSD)}</p>
+                    <p className="font-mono text-xs mt-0.5" style={{ color: '#8496B2' }}>{fmtEur(valueUSD / eurUsd)}</p>
+                  </div>
                 </div>
 
                 <div className="grid grid-cols-2 gap-x-4 gap-y-1 mb-3">

@@ -132,15 +132,24 @@ export default function BucketSection({ bucket, positions, eurUsd = 1.09 }: Prop
               </span>
             )}
           </div>
-          {/* Valeur totale + allocation vs règlement */}
+          {/* Valeur totale + capital déployé + allocation vs règlement */}
           {positions.length > 0 && (
             <div className="mt-3 mb-2">
               <div className="flex items-end justify-between gap-4 mb-1.5">
-                <div>
-                  <p className="section-label mb-0.5">Valeur totale</p>
-                  <div className="flex items-baseline gap-2">
-                    <span className="font-mono font-bold text-navy">{fmtUsd(bucketValueUSD)}</span>
-                    <span className="font-mono text-xs" style={{ color: '#8496B2' }}>{fmtEur(bucketValueUSD / eurUsd)}</span>
+                <div className="flex gap-5">
+                  <div>
+                    <p className="section-label mb-0.5">Capital déployé</p>
+                    <div className="flex items-baseline gap-2">
+                      <span className="font-mono font-bold text-navy">{fmtUsd(bucketCostUSD)}</span>
+                      <span className="font-mono text-xs" style={{ color: '#8496B2' }}>{fmtEur(bucketCostUSD / eurUsd)}</span>
+                    </div>
+                  </div>
+                  <div>
+                    <p className="section-label mb-0.5">Valeur actuelle</p>
+                    <div className="flex items-baseline gap-2">
+                      <span className="font-mono font-bold text-navy">{fmtUsd(bucketValueUSD)}</span>
+                      <span className="font-mono text-xs" style={{ color: '#8496B2' }}>{fmtEur(bucketValueUSD / eurUsd)}</span>
+                    </div>
                   </div>
                 </div>
                 <div className="text-right shrink-0">
