@@ -49,12 +49,12 @@ export default function DeployedPerformance({ positions, realizedPnl = 0, soldCo
   const deployedUSD = positions.reduce((s, p) => s + p.costBasisEUR, 0);
   const currentUSD  = positions.reduce((s, p) => s + p.currentValueEUR, 0);
 
-  // Total since inception: open positions + realized gains/losses from closed positions
-  const unrealizedPnl  = currentUSD - deployedUSD;
-  const totalPnl       = unrealizedPnl + realizedPnl;
-  const totalCostBasis = deployedUSD + soldCostBasis;
-  const totalPnlPct    = totalCostBasis > 0 ? (totalPnl / totalCostBasis) * 100 : 0;
-  const isUp           = totalPnl >= 0;
+  // Total since inception: open positions unrealized + all realized gains/losses
+  // Denominator = current deployed capital (arbitrages rotate capital, base stays current)
+  const unrealizedPnl = currentUSD - deployedUSD;
+  const totalPnl      = unrealizedPnl + realizedPnl;
+  const totalPnlPct   = deployedUSD > 0 ? (totalPnl / deployedUSD) * 100 : 0;
+  const isUp          = totalPnl >= 0;
 
   const data = [...positions]
     .sort((a, b) => b.pnlPercent - a.pnlPercent)
@@ -69,7 +69,7 @@ export default function DeployedPerformance({ positions, realizedPnl = 0, soldCo
   const chartHeight = data.length * 40 + 32;
 
   const STATS = [
-    { label: 'Capital déployé',  value: fmtUsd(totalCostBasis), color: '#5C6E8A' },
+    { label: 'Capital déployé',  value: fmtUsd(deployedUSD),    color: '#5C6E8A' },
     { label: 'Valeur déployée',  value: fmtUsd(currentUSD),     color: '#1A2540' },
     { label: 'P&L total',        value: `${isUp ? '+' : ''}${fmtUsd(totalPnl)}`,       color: isUp ? GAIN : LOSS },
     { label: 'Perf. déployée',   value: `${isUp ? '+' : ''}${totalPnlPct.toFixed(2)}%`, color: isUp ? GAIN : LOSS },
