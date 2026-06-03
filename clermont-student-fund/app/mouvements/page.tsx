@@ -1,5 +1,6 @@
 import MovementsTable from '@/components/movements/MovementsTable';
 import FundCurveChart from '@/components/movements/FundCurveChart';
+import DeployedCurveChart from '@/components/movements/DeployedCurveChart';
 import DeployedPerformance from '@/components/positions/DeployedPerformance';
 import RealizedPnL from '@/components/movements/RealizedPnL';
 import movementsData from '@/data/movements.json';
@@ -131,6 +132,11 @@ export default async function MouvementsPage() {
       <RealizedPnL movements={movements} />
 
       <MovementsTable movements={movements} />
+
+      {/* Courbe capital investi (sans liquidités) */}
+      {chartData.length >= 2 && (
+        <DeployedCurveChart chartData={chartData} />
+      )}
 
       {/* Performance par position */}
       {positions.length > 0 && (
