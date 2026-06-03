@@ -1,6 +1,5 @@
 import MovementsTable from '@/components/movements/MovementsTable';
 import FundCurveChart from '@/components/movements/FundCurveChart';
-import DeployedCurveChart from '@/components/movements/DeployedCurveChart';
 import DeployedPerformance from '@/components/positions/DeployedPerformance';
 import RealizedPnL from '@/components/movements/RealizedPnL';
 import movementsData from '@/data/movements.json';
@@ -15,10 +14,14 @@ export default async function MouvementsPage() {
 
   let chartData: ChartPoint[]       = [];
   let positions: EnrichedPosition[] = [];
+  let totalValue = 0;
+  let totalCost  = 0;
   try {
     const portfolio = await getPortfolioMetrics();
-    chartData = portfolio.chartData;
-    positions = portfolio.positions;
+    chartData  = portfolio.chartData;
+    positions  = portfolio.positions;
+    totalValue = portfolio.totalValue;
+    totalCost  = portfolio.totalCost;
   } catch {
     // stays at defaults
   }
@@ -129,14 +132,9 @@ export default async function MouvementsPage() {
 
       <MovementsTable movements={movements} />
 
-      {/* Courbe capital investi (sans liquidités) */}
-      {chartData.length >= 2 && (
-        <DeployedCurveChart chartData={chartData} />
-      )}
-
-      {/* Performance par position sur fonds déployés */}
+      {/* Performance par position */}
       {positions.length > 0 && (
-        <DeployedPerformance positions={positions} />
+        <DeployedPerformance positions={positions} totalValue={totalValue} totalCost={totalCost} />
       )}
     </div>
   );
