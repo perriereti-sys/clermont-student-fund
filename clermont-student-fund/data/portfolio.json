@@ -1,6 +1,18 @@
 {
   "positions": [
     {
+      "id": "18",
+      "name": "Ondas Holdings",
+      "ticker": "ONDS",
+      "type": "action",
+      "sector": "Robotique & Défense",
+      "category": "conviction",
+      "quantity": 165,
+      "avgBuyPrice": 12.24,
+      "currency": "USD",
+      "buyDate": "2026-06-03"
+    },
+    {
       "id": "2",
       "name": "IonQ",
       "ticker": "IONQ",
@@ -198,7 +210,7 @@
       "buyDate": "2026-05-13"
     }
   ],
-  "cashUSD": 33404.44,
+  "cashUSD": 31384.84,
   "initialValueUSD": 100000,
   "startDate": "2026-01-01",
   "baseCurrency": "USD"

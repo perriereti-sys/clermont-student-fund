@@ -305,6 +305,18 @@
       "justification": "Prise de bénéfices partielle sur AMD après une hausse de +10% depuis l'entrée. Cession de 3 des 5 titres pour sécuriser +$134. Les 2 actions restantes maintiennent l'exposition au thème IA/GPU."
     }
     ,{
+      "id": "27",
+      "date": "2026-06-03",
+      "type": "BUY",
+      "ticker": "ONDS",
+      "name": "Ondas Holdings",
+      "quantity": 165,
+      "price": 12.24,
+      "currency": "USD",
+      "totalEUR": 1854,
+      "justification": "Ouverture d'une position sur Ondas Holdings, spécialiste américain des drones autonomes industriels et systèmes ferroviaires intelligents. La filiale American Robotics déploie des drones autonomes pour l'inspection d'infrastructure (énergie, agriculture) avec des contrats récurrents. Positionnement sur la montée en puissance de l'automatisation des infrastructures critiques aux États-Unis, soutenue par l'IRA et le CHIPS Act. Valorisation de small cap offrant un levier asymétrique sur l'industrialisation des drones."
+    }
+    ,{
       "id": "18",
       "date": "2026-05-04",
       "type": "BUY",
