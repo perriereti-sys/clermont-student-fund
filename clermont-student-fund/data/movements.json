@@ -317,6 +317,18 @@
       "justification": "Ouverture d'une position sur Ondas Holdings, spécialiste américain des drones autonomes industriels et systèmes ferroviaires intelligents. La filiale American Robotics déploie des drones autonomes pour l'inspection d'infrastructure (énergie, agriculture) avec des contrats récurrents. Positionnement sur la montée en puissance de l'automatisation des infrastructures critiques aux États-Unis, soutenue par l'IRA et le CHIPS Act. Valorisation de small cap offrant un levier asymétrique sur l'industrialisation des drones."
     }
     ,{
+      "id": "28",
+      "date": "2026-06-09",
+      "type": "BUY",
+      "ticker": "COHR",
+      "name": "Coherent Corp",
+      "quantity": 6,
+      "price": 367.86,
+      "currency": "USD",
+      "totalEUR": 2025,
+      "justification": "Ouverture d'une position sur Coherent Corp, leader mondial de la photonique et des composants optiques pour réseaux à très haut débit. L'essor des data centers IA génère une demande structurelle en transceivers et lasers 800G/1.6T pour lesquels Coherent détient des positions technologiques clés. Bénéficiaire direct de la montée en puissance des interconnexions optiques dans les clusters GPU de Microsoft, Google et AWS. Valorisation encore décotée par rapport au cycle haussier attendu sur les composants photoniques."
+    }
+    ,{
       "id": "18",
       "date": "2026-05-04",
       "type": "BUY",

@@ -1,6 +1,18 @@
 {
   "positions": [
     {
+      "id": "19",
+      "name": "Coherent Corp",
+      "ticker": "COHR",
+      "type": "action",
+      "sector": "Technologie",
+      "category": "conviction",
+      "quantity": 6,
+      "avgBuyPrice": 367.86,
+      "currency": "USD",
+      "buyDate": "2026-06-09"
+    },
+    {
       "id": "18",
       "name": "Ondas Holdings",
       "ticker": "ONDS",
@@ -210,7 +222,7 @@
       "buyDate": "2026-05-13"
     }
   ],
-  "cashUSD": 31384.84,
+  "cashUSD": 29177.68,
   "initialValueUSD": 100000,
   "startDate": "2026-01-01",
   "baseCurrency": "USD"

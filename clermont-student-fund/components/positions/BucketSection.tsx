@@ -37,6 +37,7 @@ const BUCKET_TARGETS: Record<BucketId, { ticker: string; name: string }[]> = {
     { ticker: 'IONQ', name: 'IonQ' },
     { ticker: 'CRWD', name: 'CrowdStrike Holdings' },
     { ticker: 'ONDS', name: 'Ondas Holdings' },
+    { ticker: 'COHR', name: 'Coherent Corp' },
   ],
   opportunite: [
     { ticker: 'BTC-USD', name: 'Bitcoin' },
