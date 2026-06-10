@@ -317,6 +317,30 @@
       "justification": "Ouverture d'une position sur Ondas Holdings, spécialiste américain des drones autonomes industriels et systèmes ferroviaires intelligents. La filiale American Robotics déploie des drones autonomes pour l'inspection d'infrastructure (énergie, agriculture) avec des contrats récurrents. Positionnement sur la montée en puissance de l'automatisation des infrastructures critiques aux États-Unis, soutenue par l'IRA et le CHIPS Act. Valorisation de small cap offrant un levier asymétrique sur l'industrialisation des drones."
     }
     ,{
+      "id": "29",
+      "date": "2026-06-09",
+      "type": "BUY",
+      "ticker": "ONDS",
+      "name": "Ondas Holdings",
+      "quantity": 110,
+      "price": 9.48,
+      "currency": "USD",
+      "totalEUR": 957,
+      "justification": "Renforcement d'Ondas Holdings sur repli significatif de -22%. La thèse sur l'automatisation des infrastructures critiques reste intacte avec la montée en charge de la filiale American Robotics. Le recul du titre offre un point d'entrée opportuniste permettant d'abaisser le PRU de $12.24 à $11.14 sur une position portant désormais 275 actions."
+    }
+    ,{
+      "id": "30",
+      "date": "2026-06-09",
+      "type": "BUY",
+      "ticker": "NVTS",
+      "name": "Navitas Semiconductor",
+      "quantity": 460,
+      "price": 21.78,
+      "currency": "USD",
+      "totalEUR": 9192,
+      "justification": "Ouverture d'une position sur Navitas Semiconductor, pionnier des semi-conducteurs de puissance GaN (nitrure de gallium) et SiC nouvelle génération. La technologie GaN de Navitas permet des chargeurs et onduleurs 3 à 20 fois plus rapides et 40% plus efficaces que le silicium traditionnel. Bénéficiaire direct de l'électrification (VE, data centers IA, solaire) et des normes d'efficacité énergétique croissantes. Catalogue de design-wins en forte progression chez les équipementiers tier-1 mondiaux, avec une valorisation de small cap offrant un levier important sur la montée en puissance du GaN."
+    }
+    ,{
       "id": "28",
       "date": "2026-06-09",
       "type": "BUY",

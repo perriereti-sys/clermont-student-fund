@@ -1,6 +1,18 @@
 {
   "positions": [
     {
+      "id": "20",
+      "name": "Navitas Semiconductor",
+      "ticker": "NVTS",
+      "type": "action",
+      "sector": "Technologie",
+      "category": "conviction",
+      "quantity": 460,
+      "avgBuyPrice": 21.78,
+      "currency": "USD",
+      "buyDate": "2026-06-09"
+    },
+    {
       "id": "19",
       "name": "Coherent Corp",
       "ticker": "COHR",
@@ -19,10 +31,11 @@
       "type": "action",
       "sector": "Aéronautique & Défense",
       "category": "conviction",
-      "quantity": 165,
-      "avgBuyPrice": 12.24,
+      "quantity": 275,
+      "avgBuyPrice": 11.136,
       "currency": "USD",
-      "buyDate": "2026-06-03"
+      "buyDate": "2026-06-03",
+      "lastBuyDate": "2026-06-09"
     },
     {
       "id": "2",
@@ -222,7 +235,7 @@
       "buyDate": "2026-05-13"
     }
   ],
-  "cashUSD": 29177.68,
+  "cashUSD": 18116.08,
   "initialValueUSD": 100000,
   "startDate": "2026-01-01",
   "baseCurrency": "USD"

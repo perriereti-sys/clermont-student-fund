@@ -24,7 +24,7 @@ const BUCKETS: BucketConfig[] = [
     color: '#D4AF37',
     description:
       'Paris à fort potentiel sur 12 à 24 mois. Sociétés positionnées sur des thématiques de rupture (IA, spatial, quantique). Volatilité acceptée et assumée.',
-    targetCount: 5,
+    targetCount: 6,
     maxWeight: 30,
   },
   {
