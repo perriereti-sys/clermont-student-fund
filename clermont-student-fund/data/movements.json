@@ -353,6 +353,19 @@
       "justification": "Ouverture d'une position sur Coherent Corp, leader mondial de la photonique et des composants optiques pour réseaux à très haut débit. L'essor des data centers IA génère une demande structurelle en transceivers et lasers 800G/1.6T pour lesquels Coherent détient des positions technologiques clés. Bénéficiaire direct de la montée en puissance des interconnexions optiques dans les clusters GPU de Microsoft, Google et AWS. Valorisation encore décotée par rapport au cycle haussier attendu sur les composants photoniques."
     }
     ,{
+      "id": "31",
+      "date": "2026-06-11",
+      "type": "SELL",
+      "ticker": "NVTS",
+      "name": "Navitas Semiconductor",
+      "quantity": 404,
+      "price": 22.26,
+      "buyPrice": 21.78,
+      "currency": "USD",
+      "totalEUR": 8251,
+      "justification": "Prise de bénéfices partielle sur Navitas Semiconductor après une hausse de +2.2% depuis l'entrée ($21.78 → $22.26). Cession de 404 des 460 titres pour sécuriser +$194. Les 56 actions restantes maintiennent une exposition résiduelle à la thèse GaN/SiC et au supercycle de l'électrification."
+    }
+    ,{
       "id": "18",
       "date": "2026-05-04",
       "type": "BUY",
