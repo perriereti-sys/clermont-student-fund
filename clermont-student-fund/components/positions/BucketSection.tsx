@@ -39,6 +39,7 @@ const BUCKET_TARGETS: Record<BucketId, { ticker: string; name: string }[]> = {
     { ticker: 'ONDS', name: 'Ondas Holdings' },
     { ticker: 'COHR', name: 'Coherent Corp' },
     { ticker: 'NVTS', name: 'Navitas Semiconductor' },
+    { ticker: 'GLW',  name: 'Corning' },
   ],
   opportunite: [
     { ticker: 'BTC-USD', name: 'Bitcoin' },

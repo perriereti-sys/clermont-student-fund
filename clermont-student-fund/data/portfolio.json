@@ -1,6 +1,18 @@
 {
   "positions": [
     {
+      "id": "21",
+      "name": "Corning",
+      "ticker": "GLW",
+      "type": "action",
+      "sector": "Technologie",
+      "category": "conviction",
+      "quantity": 15,
+      "avgBuyPrice": 195.14,
+      "currency": "USD",
+      "buyDate": "2026-07-02"
+    },
+    {
       "id": "20",
       "name": "Navitas Semiconductor",
       "ticker": "NVTS",
@@ -223,7 +235,7 @@
       "buyDate": "2026-05-13"
     }
   ],
-  "cashUSD": 33071.12,
+  "cashUSD": 30144.02,
   "initialValueUSD": 100000,
   "startDate": "2026-01-01",
   "baseCurrency": "USD"

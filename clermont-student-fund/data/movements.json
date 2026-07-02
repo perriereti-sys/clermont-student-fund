@@ -379,6 +379,18 @@
       "justification": "Cession totale de la position Meta Platforms en légère moins-value (-1.8%, -$109.5). Prise de bénéfices sur le thème IA/réseaux sociaux jugée insuffisante par rapport à d'autres convictions du portefeuille ; réallocation du capital vers des positions au meilleur profil risque/rendement."
     }
     ,{
+      "id": "33",
+      "date": "2026-07-02",
+      "type": "BUY",
+      "ticker": "GLW",
+      "name": "Corning",
+      "quantity": 15,
+      "price": 195.14,
+      "currency": "USD",
+      "totalEUR": 2685,
+      "justification": "Ouverture d'une position sur Corning, leader mondial du verre spécialisé et des technologies de fibre optique. L'essor des data centers IA impose une refonte massive des interconnexions réseau, où la photonique (fibre optique, connectivité optique) devient un goulot d'étranglement critique. Corning est un fournisseur clé des hyperscalers pour ces solutions de connectivité haute performance, complétant l'exposition photonique du portefeuille aux côtés de Coherent Corp."
+    }
+    ,{
       "id": "18",
       "date": "2026-05-04",
       "type": "BUY",
