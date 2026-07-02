@@ -24,5 +24,13 @@
       "period": "Mai 2026",
       "filename": "CSF_Rapport_Mai_2026.pdf"
     }
+    ,{
+      "id": "4",
+      "title": "Rapport de Performance Juin 2026",
+      "date": "2026-06-30",
+      "type": "Compte de résultats",
+      "period": "Juin 2026",
+      "filename": "CSF_Rapport_Juin_2026.pdf"
+    }
   ]
 }
