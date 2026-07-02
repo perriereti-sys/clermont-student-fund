@@ -151,18 +151,6 @@
       "buyDate": "2026-04-23"
     },
     {
-      "id": "11",
-      "name": "Meta Platforms",
-      "ticker": "META",
-      "type": "action",
-      "sector": "Technologie",
-      "category": "opportunite",
-      "quantity": 10,
-      "avgBuyPrice": 607.15,
-      "currency": "USD",
-      "buyDate": "2026-04-30"
-    },
-    {
       "id": "12",
       "name": "Banco Santander",
       "ticker": "SAN.MC",
@@ -235,7 +223,7 @@
       "buyDate": "2026-05-13"
     }
   ],
-  "cashUSD": 27109.12,
+  "cashUSD": 33071.12,
   "initialValueUSD": 100000,
   "startDate": "2026-01-01",
   "baseCurrency": "USD"

@@ -42,7 +42,6 @@ const BUCKET_TARGETS: Record<BucketId, { ticker: string; name: string }[]> = {
   ],
   opportunite: [
     { ticker: 'BTC-USD', name: 'Bitcoin' },
-    { ticker: 'META',    name: 'Meta Platforms' },
     { ticker: 'MU',      name: 'Micron Technology' },
     { ticker: 'AMD',     name: 'AMD' },
   ],

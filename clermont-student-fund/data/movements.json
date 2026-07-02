@@ -366,6 +366,19 @@
       "justification": "Prise de bénéfices partielle sur Navitas Semiconductor après une hausse de +2.2% depuis l'entrée ($21.78 → $22.26). Cession de 404 des 460 titres pour sécuriser +$194. Les 56 actions restantes maintiennent une exposition résiduelle à la thèse GaN/SiC et au supercycle de l'électrification."
     }
     ,{
+      "id": "32",
+      "date": "2026-07-02",
+      "type": "SELL",
+      "ticker": "META",
+      "name": "Meta Platforms",
+      "quantity": 10,
+      "price": 596.2,
+      "buyPrice": 607.15,
+      "currency": "USD",
+      "totalEUR": 5470,
+      "justification": "Cession totale de la position Meta Platforms en légère moins-value (-1.8%, -$109.5). Prise de bénéfices sur le thème IA/réseaux sociaux jugée insuffisante par rapport à d'autres convictions du portefeuille ; réallocation du capital vers des positions au meilleur profil risque/rendement."
+    }
+    ,{
       "id": "18",
       "date": "2026-05-04",
       "type": "BUY",
