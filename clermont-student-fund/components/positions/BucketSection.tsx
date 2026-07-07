@@ -31,6 +31,7 @@ const BUCKET_TARGETS: Record<BucketId, { ticker: string; name: string }[]> = {
     { ticker: 'SAN.MC',   name: 'Banco Santander' },
     { ticker: '0700.HK',  name: 'Tencent Holdings' },
     { ticker: 'SAF.PA',   name: 'Safran' },
+    { ticker: 'AMZN',     name: 'Amazon' },
   ],
   conviction: [
     { ticker: 'ASTS', name: 'AST SpaceMobile' },

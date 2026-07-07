@@ -1,6 +1,18 @@
 {
   "positions": [
     {
+      "id": "22",
+      "name": "Amazon",
+      "ticker": "AMZN",
+      "type": "action",
+      "sector": "Consommation discrétionnaire",
+      "category": "socle",
+      "quantity": 13,
+      "avgBuyPrice": 243.86,
+      "currency": "USD",
+      "buyDate": "2026-07-07"
+    },
+    {
       "id": "21",
       "name": "Corning",
       "ticker": "GLW",
@@ -235,7 +247,7 @@
       "buyDate": "2026-05-13"
     }
   ],
-  "cashUSD": 30144.02,
+  "cashUSD": 26973.84,
   "initialValueUSD": 100000,
   "startDate": "2026-01-01",
   "baseCurrency": "USD"

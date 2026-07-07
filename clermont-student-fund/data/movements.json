@@ -391,6 +391,18 @@
       "justification": "Ouverture d'une position sur Corning, leader mondial du verre spécialisé et des technologies de fibre optique. L'essor des data centers IA impose une refonte massive des interconnexions réseau, où la photonique (fibre optique, connectivité optique) devient un goulot d'étranglement critique. Corning est un fournisseur clé des hyperscalers pour ces solutions de connectivité haute performance, complétant l'exposition photonique du portefeuille aux côtés de Coherent Corp."
     }
     ,{
+      "id": "34",
+      "date": "2026-07-07",
+      "type": "BUY",
+      "ticker": "AMZN",
+      "name": "Amazon",
+      "quantity": 13,
+      "price": 243.86,
+      "currency": "USD",
+      "totalEUR": 2908,
+      "justification": "Ouverture d'une position sur Amazon dans le socle du portefeuille. Croissance soutenue des ventes e-commerce et d'AWS, acquisitions ciblées qui renforcent le positionnement stratégique du groupe, et exposition diversifiée aux meilleurs secteurs (cloud, IA, publicité, logistique). Profil défensif et cash-flow solide adaptés à une position de long terme."
+    }
+    ,{
       "id": "18",
       "date": "2026-05-04",
       "type": "BUY",
