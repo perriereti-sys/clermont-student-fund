@@ -220,7 +220,7 @@ export default function HeroSection() {
           className="font-display font-bold leading-[1.05] mb-5"
           style={{ fontSize: 'clamp(2rem, 5vw, 3.5rem)', color: '#1A2540' }}
         >
-          Catherine<br />
+          Clermont<br />
           <span style={{ color: '#B8963A' }}>Student Fund</span>
         </h1>
 
