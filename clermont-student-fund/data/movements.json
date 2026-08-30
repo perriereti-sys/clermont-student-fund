@@ -259,11 +259,11 @@
       "type": "BUY",
       "ticker": "CRWD",
       "name": "CrowdStrike Holdings",
-      "quantity": 5,
-      "price": 548.74,
+      "quantity": 20,
+      "price": 137.185,
       "currency": "USD",
       "totalEUR": 2508,
-      "justification": "Ouverture d'une position sur CrowdStrike, leader mondial de la cybersécurité cloud-native (plateforme Falcon). Croissance annuelle récurrente supérieure à 30%, modèle ARR en forte expansion, adoption massive par les entreprises suite aux incidents de sécurité majeurs. Positionnement idéal sur la consolidation du marché EDR/XDR avec une plateforme IA intégrée qui renforce les effets réseau et la rétention client."
+      "justification": "Ouverture d'une position sur CrowdStrike, leader mondial de la cybersécurité cloud-native (plateforme Falcon). Croissance annuelle récurrente supérieure à 30%, modèle ARR en forte expansion, adoption massive par les entreprises suite aux incidents de sécurité majeurs. Positionnement idéal sur la consolidation du marché EDR/XDR avec une plateforme IA intégrée qui renforce les effets réseau et la rétention client. [Prix ajustés pour le split 4:1 du 02/07/2026]"
     }
     ,{
       "id": "24",
@@ -271,12 +271,12 @@
       "type": "SELL",
       "ticker": "CRWD",
       "name": "CrowdStrike Holdings",
-      "quantity": 3,
-      "price": 667.19,
-      "buyPrice": 548.74,
+      "quantity": 12,
+      "price": 166.80,
+      "buyPrice": 137.185,
       "currency": "USD",
       "totalEUR": 1787,
-      "justification": "Prise de bénéfices partielle sur CrowdStrike après une hausse de +21.6% depuis l'entrée (de $548.74 à $667.19). Cession de 3 des 5 titres pour cristalliser la plus-value de +$354 tout en maintenant une exposition résiduelle à la thèse cybersécurité. Les 2 actions restantes permettent de participer à une éventuelle poursuite de la hausse."
+      "justification": "Prise de bénéfices partielle sur CrowdStrike après une hausse de +21.6% depuis l'entrée (de $137.185 à $166.80). Cession de 12 des 20 titres pour cristalliser la plus-value de +$354 tout en maintenant une exposition résiduelle à la thèse cybersécurité. Les 8 actions restantes permettent de participer à une éventuelle poursuite de la hausse. [Prix ajustés pour le split 4:1 du 02/07/2026]"
     }
     ,{
       "id": "25",
