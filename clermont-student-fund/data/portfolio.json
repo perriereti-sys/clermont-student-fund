@@ -217,10 +217,12 @@
       "type": "action",
       "sector": "Technologie",
       "category": "conviction",
-      "quantity": 2,
-      "avgBuyPrice": 548.74,
+      "quantity": 8,
+      "avgBuyPrice": 137.185,
       "currency": "USD",
-      "buyDate": "2026-05-13"
+      "buyDate": "2026-05-13",
+      "splitDate": "2026-07-02",
+      "splitRatio": "4:1"
     },
     {
       "id": "16",
