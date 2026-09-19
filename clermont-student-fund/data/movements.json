@@ -414,5 +414,44 @@
       "totalEUR": 4235,
       "justification": "Ouverture d'une position sur Banco Santander, première banque de la zone euro par actifs. Valorisation attractive (P/E < 8x) et ROE en forte amélioration (>12%). La thèse repose sur la diversification géographique unique du groupe : le Brésil, le Mexique, l'Argentine et la Colombie représentent plus de 50% des bénéfices, offrant une exposition aux marchés émergents latino-américains à travers un titre européen coté sur le BME de Madrid. Double vecteur de création de valeur : redressement européen + croissance LatAm."
     }
+    ,{
+      "id": "35",
+      "date": "2026-09-18",
+      "type": "SELL",
+      "ticker": "EL.PA",
+      "name": "EssilorLuxottica",
+      "quantity": 15,
+      "price": 139.7,
+      "buyPrice": 236.067,
+      "currency": "EUR",
+      "totalEUR": 2096,
+      "justification": "Cession partielle d'EssilorLuxottica (15 des 30 titres) en moins-value (-40.8%). Réduction de l'exposition aux valeurs françaises face à l'incertitude politique grandissante autour des élections présidentielles de 2027."
+    }
+    ,{
+      "id": "36",
+      "date": "2026-09-18",
+      "type": "SELL",
+      "ticker": "SGO.PA",
+      "name": "Saint-Gobain",
+      "quantity": 40,
+      "price": 70.56,
+      "buyPrice": 74.775,
+      "currency": "EUR",
+      "totalEUR": 2822,
+      "justification": "Cession partielle de Saint-Gobain (40 des 80 titres) en légère moins-value (-5.6%). Réduction de l'exposition aux valeurs françaises dans un contexte d'incertitude politique liée aux élections présidentielles de 2027."
+    }
+    ,{
+      "id": "37",
+      "date": "2026-09-18",
+      "type": "SELL",
+      "ticker": "AMD",
+      "name": "AMD",
+      "quantity": 2,
+      "price": 536.99,
+      "buyPrice": 446.43,
+      "currency": "USD",
+      "totalEUR": 937,
+      "justification": "Cession totale de la position AMD (bucket Opportunités) en plus-value (+20.3%). Fin de l'opportunité tactique, clôture de la poche et redéploiement du capital."
+    }
   ]
 }

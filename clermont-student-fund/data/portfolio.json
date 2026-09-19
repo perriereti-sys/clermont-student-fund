@@ -106,7 +106,7 @@
       "type": "action",
       "sector": "Matériaux",
       "category": "socle",
-      "quantity": 80,
+      "quantity": 40,
       "avgBuyPrice": 74.775,
       "currency": "EUR",
       "buyDate": "2026-01-01",
@@ -119,7 +119,7 @@
       "type": "action",
       "sector": "Santé",
       "category": "socle",
-      "quantity": 30,
+      "quantity": 15,
       "avgBuyPrice": 236.067,
       "currency": "EUR",
       "buyDate": "2026-02-17",
@@ -235,21 +235,9 @@
       "avgBuyPrice": 794.35,
       "currency": "USD",
       "buyDate": "2026-05-13"
-    },
-    {
-      "id": "17",
-      "name": "AMD",
-      "ticker": "AMD",
-      "type": "action",
-      "sector": "Technologie",
-      "category": "opportunite",
-      "quantity": 2,
-      "avgBuyPrice": 446.43,
-      "currency": "USD",
-      "buyDate": "2026-05-13"
     }
   ],
-  "cashUSD": 27686.32,
+  "cashUSD": 34396.70,
   "initialValueUSD": 100000,
   "startDate": "2026-01-01",
   "baseCurrency": "USD"
