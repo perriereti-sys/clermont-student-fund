@@ -452,6 +452,19 @@
       "currency": "USD",
       "totalEUR": 937,
       "justification": "Cession totale de la position AMD (bucket Opportunités) en plus-value (+20.3%). Fin de l'opportunité tactique, clôture de la poche et redéploiement du capital."
+    },
+    {
+      "id": "38",
+      "date": "2026-09-21",
+      "type": "SELL",
+      "ticker": "SAP.DE",
+      "name": "SAP",
+      "quantity": 28,
+      "price": 184.09,
+      "buyPrice": 150.20,
+      "currency": "EUR",
+      "totalEUR": 5155,
+      "justification": "Cession totale de SAP en plus-value (+22.6%). Profité du rebond du titre après une dévaluation jugée abusive du marché ; fin de thèse."
     }
   ]
 }

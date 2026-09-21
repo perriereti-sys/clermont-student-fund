@@ -27,7 +27,6 @@ const BUCKET_TARGETS: Record<BucketId, { ticker: string; name: string }[]> = {
     { ticker: 'SGO.PA',   name: 'Saint-Gobain' },
     { ticker: 'EL.PA',    name: 'EssilorLuxottica' },
     { ticker: 'VIE.PA',   name: 'Veolia Environnement' },
-    { ticker: 'SAP.DE',   name: 'SAP' },
     { ticker: 'SAN.MC',   name: 'Banco Santander' },
     { ticker: '0700.HK',  name: 'Tencent Holdings' },
     { ticker: 'SAF.PA',   name: 'Safran' },
