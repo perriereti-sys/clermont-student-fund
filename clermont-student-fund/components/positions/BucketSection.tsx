@@ -31,6 +31,7 @@ const BUCKET_TARGETS: Record<BucketId, { ticker: string; name: string }[]> = {
     { ticker: '0700.HK',  name: 'Tencent Holdings' },
     { ticker: 'SAF.PA',   name: 'Safran' },
     { ticker: 'AMZN',     name: 'Amazon' },
+    { ticker: 'VST',      name: 'Vistra Corp' },
   ],
   conviction: [
     { ticker: 'ASTS', name: 'AST SpaceMobile' },
@@ -40,6 +41,7 @@ const BUCKET_TARGETS: Record<BucketId, { ticker: string; name: string }[]> = {
     { ticker: 'COHR', name: 'Coherent Corp' },
     { ticker: 'NVTS', name: 'Navitas Semiconductor' },
     { ticker: 'GLW',  name: 'Corning' },
+    { ticker: 'VRT',  name: 'Vertiv Holdings' },
   ],
   opportunite: [
     { ticker: 'BTC-USD', name: 'Bitcoin' },

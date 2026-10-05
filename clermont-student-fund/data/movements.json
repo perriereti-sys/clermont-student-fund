@@ -465,6 +465,42 @@
       "currency": "EUR",
       "totalEUR": 5155,
       "justification": "Cession totale de SAP en plus-value (+22.6%). Profité du rebond du titre après une dévaluation jugée abusive du marché ; fin de thèse."
+    },
+    {
+      "id": "39",
+      "date": "2026-10-05",
+      "type": "BUY",
+      "ticker": "AMZN",
+      "name": "Amazon",
+      "quantity": 10,
+      "price": 253.60,
+      "currency": "USD",
+      "totalEUR": 2255,
+      "justification": "Renforcement de la position Amazon (socle) : 10 titres supplémentaires, nouveau prix moyen 248,095$. Conviction inchangée sur le cloud (AWS) et la résilience du modèle e-commerce."
+    },
+    {
+      "id": "40",
+      "date": "2026-10-05",
+      "type": "BUY",
+      "ticker": "VRT",
+      "name": "Vertiv Holdings",
+      "quantity": 6,
+      "price": 255.32,
+      "currency": "USD",
+      "totalEUR": 1362,
+      "justification": "Entrée sur Vertiv (bucket Convictions), acteur clé de l'infrastructure IA et des data centers, encore abordable, avec une forte exposition au refroidissement sans eau (liquid cooling) pour les infrastructures IA."
+    },
+    {
+      "id": "41",
+      "date": "2026-10-05",
+      "type": "BUY",
+      "ticker": "VST",
+      "name": "Vistra Corp",
+      "quantity": 10,
+      "price": 144.79,
+      "currency": "USD",
+      "totalEUR": 1287,
+      "justification": "Entrée sur Vistra (bucket Socle), producteur d'électricité américain doté d'un parc nucléaire significatif, appelé à bénéficier de la hausse de la demande électrique liée à l'IA et aux data centers aux États-Unis."
     }
   ]
 }

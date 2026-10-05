@@ -7,10 +7,35 @@
       "type": "action",
       "sector": "Consommation discrétionnaire",
       "category": "socle",
-      "quantity": 13,
-      "avgBuyPrice": 243.86,
+      "quantity": 23,
+      "avgBuyPrice": 248.095,
       "currency": "USD",
-      "buyDate": "2026-07-07"
+      "buyDate": "2026-07-07",
+      "lastBuyDate": "2026-10-05"
+    },
+    {
+      "id": "23",
+      "name": "Vertiv Holdings",
+      "ticker": "VRT",
+      "type": "action",
+      "sector": "Technologie",
+      "category": "conviction",
+      "quantity": 6,
+      "avgBuyPrice": 255.32,
+      "currency": "USD",
+      "buyDate": "2026-10-05"
+    },
+    {
+      "id": "24",
+      "name": "Vistra Corp",
+      "ticker": "VST",
+      "type": "action",
+      "sector": "Utilities",
+      "category": "socle",
+      "quantity": 10,
+      "avgBuyPrice": 144.79,
+      "currency": "USD",
+      "buyDate": "2026-10-05"
     },
     {
       "id": "21",
@@ -225,7 +250,7 @@
       "buyDate": "2026-05-13"
     }
   ],
-  "cashUSD": 40317.18,
+  "cashUSD": 34801.36,
   "initialValueUSD": 100000,
   "startDate": "2026-01-01",
   "baseCurrency": "USD"
