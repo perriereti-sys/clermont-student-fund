@@ -501,6 +501,19 @@
       "currency": "USD",
       "totalEUR": 1287,
       "justification": "Entrée sur Vistra (bucket Socle), producteur d'électricité américain doté d'un parc nucléaire significatif, appelé à bénéficier de la hausse de la demande électrique liée à l'IA et aux data centers aux États-Unis."
+    },
+    {
+      "id": "42",
+      "date": "2026-10-13",
+      "type": "SELL",
+      "ticker": "NVTS",
+      "name": "Navitas Semiconductor",
+      "quantity": 56,
+      "price": 10.46,
+      "buyPrice": 21.78,
+      "currency": "USD",
+      "totalEUR": 524,
+      "justification": "Cession totale de la position Navitas Semiconductor (bucket Convictions) en moins-value (-52.0%). Thèse jugée trop décevante ; clôture de la ligne."
     }
   ]
 }

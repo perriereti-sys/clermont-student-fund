@@ -50,18 +50,6 @@
       "buyDate": "2026-07-02"
     },
     {
-      "id": "20",
-      "name": "Navitas Semiconductor",
-      "ticker": "NVTS",
-      "type": "action",
-      "sector": "Technologie",
-      "category": "conviction",
-      "quantity": 56,
-      "avgBuyPrice": 21.78,
-      "currency": "USD",
-      "buyDate": "2026-06-09"
-    },
-    {
       "id": "19",
       "name": "Coherent Corp",
       "ticker": "COHR",
@@ -250,7 +238,7 @@
       "buyDate": "2026-05-13"
     }
   ],
-  "cashUSD": 34801.36,
+  "cashUSD": 35387.12,
   "initialValueUSD": 100000,
   "startDate": "2026-01-01",
   "baseCurrency": "USD"
