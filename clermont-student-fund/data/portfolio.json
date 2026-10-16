@@ -236,9 +236,21 @@
       "avgBuyPrice": 794.35,
       "currency": "USD",
       "buyDate": "2026-05-13"
+    },
+    {
+      "id": "25",
+      "name": "F/m US Treasury 12 Month Bill ETF",
+      "ticker": "OBIL",
+      "type": "etf",
+      "sector": "Obligations",
+      "category": "socle",
+      "quantity": 100,
+      "avgBuyPrice": 49.97,
+      "currency": "USD",
+      "buyDate": "2026-10-16"
     }
   ],
-  "cashUSD": 35387.12,
+  "cashUSD": 30390.12,
   "initialValueUSD": 100000,
   "startDate": "2026-01-01",
   "baseCurrency": "USD"

@@ -514,6 +514,18 @@
       "currency": "USD",
       "totalEUR": 524,
       "justification": "Cession totale de la position Navitas Semiconductor (bucket Convictions) en moins-value (-52.0%). Thèse jugée trop décevante ; clôture de la ligne."
+    },
+    {
+      "id": "43",
+      "date": "2026-10-16",
+      "type": "BUY",
+      "ticker": "OBIL",
+      "name": "F/m US Treasury 12 Month Bill ETF",
+      "quantity": 100,
+      "price": 49.97,
+      "currency": "USD",
+      "totalEUR": 4440,
+      "justification": "Entrée sur OBIL (bucket Socle), ETF détenant le T-Bill américain à 12 mois : poche obligataire défensive, sans risque de crédit et quasi sans duration, qui rémunère une partie du cash au taux court US via des distributions mensuelles."
     }
   ]
 }

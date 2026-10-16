@@ -32,6 +32,7 @@ const BUCKET_TARGETS: Record<BucketId, { ticker: string; name: string }[]> = {
     { ticker: 'SAF.PA',   name: 'Safran' },
     { ticker: 'AMZN',     name: 'Amazon' },
     { ticker: 'VST',      name: 'Vistra Corp' },
+    { ticker: 'OBIL',     name: 'US Treasury 12M Bill ETF' },
   ],
   conviction: [
     { ticker: 'ASTS', name: 'AST SpaceMobile' },
