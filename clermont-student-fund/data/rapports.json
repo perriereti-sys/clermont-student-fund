@@ -40,5 +40,13 @@
       "period": "Septembre 2026",
       "filename": "CSF_Rapport_Septembre_2026.pdf"
     }
+    ,{
+      "id": "6",
+      "title": "Rapport de Performance Octobre 2026",
+      "date": "2026-10-31",
+      "type": "Compte de résultats",
+      "period": "Octobre 2026",
+      "filename": "CSF_Rapport_Octobre_2026.pdf"
+    }
   ]
 }
