@@ -81,10 +81,11 @@
       "type": "action",
       "sector": "Technologie",
       "category": "conviction",
-      "quantity": 30,
-      "avgBuyPrice": 36.15,
+      "quantity": 60,
+      "avgBuyPrice": 30.765,
       "currency": "USD",
-      "buyDate": "2026-01-01"
+      "buyDate": "2026-01-01",
+      "lastBuyDate": "2026-11-17"
     },
     {
       "id": "3",
@@ -248,9 +249,21 @@
       "avgBuyPrice": 49.97,
       "currency": "USD",
       "buyDate": "2026-10-16"
+    },
+    {
+      "id": "26",
+      "name": "Rocket Lab",
+      "ticker": "RKLB",
+      "type": "action",
+      "sector": "Aéronautique & Défense",
+      "category": "conviction",
+      "quantity": 30,
+      "avgBuyPrice": 56.8,
+      "currency": "USD",
+      "buyDate": "2026-11-17"
     }
   ],
-  "cashUSD": 30390.12,
+  "cashUSD": 27924.72,
   "initialValueUSD": 100000,
   "startDate": "2026-01-01",
   "baseCurrency": "USD"

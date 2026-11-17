@@ -67,7 +67,7 @@
       "ticker": "EL.PA",
       "name": "EssilorLuxottica",
       "quantity": 20,
-      "price": 248.90,
+      "price": 248.9,
       "currency": "EUR",
       "totalEUR": 4978,
       "justification": "EssilorLuxottica, leader mondial de l'optique avec un quasi-monopole sur la chaîne de valeur (verres + montures + distribution). Pricing power structurel, expansion en Asie et lancement des lunettes connectées (Ray-Ban Meta). Correction récente jugée excessive."
@@ -127,7 +127,7 @@
       "ticker": "EL.PA",
       "name": "EssilorLuxottica",
       "quantity": 10,
-      "price": 210.40,
+      "price": 210.4,
       "currency": "EUR",
       "totalEUR": 2104,
       "justification": "Renforcement EssilorLuxottica profitant d'une nouvelle correction. Fondamentaux inchangés : monopole sur la chaîne optique, expansion Asie en cours. Le recul du titre offre un point d'entrée améliorant le PRU à €236.07."
@@ -143,33 +143,33 @@
       "currency": "EUR",
       "totalEUR": 4365,
       "justification": "Ouverture d'une position sur Veolia, leader mondial du traitement de l'eau et des déchets. Positionnement sur les infrastructures essentielles dans un contexte de raréfaction des ressources. Dividende solide, visibilité long terme grâce aux contrats de concession, et exposition défensive dans un marché volatile."
-    }
-    ,{
+    },
+    {
       "id": "14",
       "date": "2025-12-29",
       "type": "BUY",
       "ticker": "SI=F",
       "name": "Argent (Silver)",
       "quantity": 27,
-      "price": 71.80,
+      "price": 71.8,
       "currency": "USD",
       "totalEUR": 1939,
       "justification": "Ouverture d'une position sur l'argent métal dans un contexte de demande industrielle soutenue (transition énergétique, photovoltaïque, électronique). Ratio or/argent historiquement élevé, laissant anticiper un rattrapage. Position tactique court/moyen terme sur un actif tangible avec un profil risque/rendement asymétrique."
-    }
-    ,{
+    },
+    {
       "id": "15",
       "date": "2026-01-27",
       "type": "SELL",
       "ticker": "SI=F",
       "name": "Argent (Silver)",
       "quantity": 27,
-      "price": 106.00,
-      "buyPrice": 71.80,
+      "price": 106.0,
+      "buyPrice": 71.8,
       "currency": "USD",
       "totalEUR": 2862,
       "justification": "Cession de la totalité de la position argent après une hausse de +47.6% en moins d'un mois. Objectif de cours atteint, prise de bénéfices de +$923. Le ratio or/argent s'étant normalisé, le catalyseur principal de la thèse est épuisé."
-    }
-    ,{
+    },
+    {
       "id": "16",
       "date": "2026-04-30",
       "type": "BUY",
@@ -180,8 +180,8 @@
       "currency": "USD",
       "totalEUR": 6072,
       "justification": "Ouverture d'une position tactique sur Meta Platforms dans un contexte de correction du secteur tech. Monétisation publicitaire en accélération grâce à l'IA (Advantage+), croissance de Reels et début de monétisation de WhatsApp. Valorisation revenue sur des niveaux attractifs avec un profil FCF très solide."
-    }
-    ,{
+    },
+    {
       "id": "17",
       "date": "2026-04-30",
       "type": "BUY",
@@ -192,20 +192,20 @@
       "currency": "USD",
       "totalEUR": 1067,
       "justification": "Renforcement AST SpaceMobile sur repli. Déploiement commercial en cours avec les premiers abonnés sur le réseau spatial. Partenariats opérateurs confirmés (AT&T, Vodafone, Rakuten). La baisse du titre offre un point d'entrée améliorant le PRU de $89.67 à $79.38."
-    }
-    ,{
+    },
+    {
       "id": "13",
       "date": "2026-04-23",
       "type": "BUY",
       "ticker": "SAP.DE",
       "name": "SAP",
       "quantity": 28,
-      "price": 150.20,
+      "price": 150.2,
       "currency": "EUR",
       "totalEUR": 4206,
       "justification": "Ouverture d'une position sur SAP, leader européen du logiciel d'entreprise (ERP, cloud). Transition cloud en forte accélération avec RISE with SAP, croissance récurrente des revenus SaaS. Positionnement défensif sur la tech européenne avec un pricing power élevé et une base client très fidélisée."
-    }
-    ,{
+    },
+    {
       "id": "19",
       "date": "2026-05-13",
       "type": "BUY",
@@ -216,8 +216,8 @@
       "currency": "HKD",
       "totalEUR": 4098,
       "justification": "Ouverture d'une position sur Tencent Holdings, leader chinois des services numériques (WeChat, jeux vidéo, cloud, fintech). Valorisation revenue sur des niveaux historiquement bas après les régulations chinoises. La reprise progressive du secteur tech en Chine, le programme massif de rachat d'actions et la diversification internationale via les participations (Epic Games, Spotify, Meituan) constituent les principaux catalyseurs. Exposition directe au marché actions de Hong Kong (HKEX)."
-    }
-    ,{
+    },
+    {
       "id": "20",
       "date": "2026-05-13",
       "type": "BUY",
@@ -228,8 +228,8 @@
       "currency": "EUR",
       "totalEUR": 4203,
       "justification": "Ouverture d'une position sur Safran, champion français de l'aéronautique et de la défense. Leader mondial des moteurs d'avions civils via CFM International (JV avec GE), bénéficiaire direct du supercycle de la MRO (maintenance, réparation, révision) avec des marges en forte expansion. Carnet de commandes record, visibilité à 10 ans sur les revenus de services, et positionnement sur la défense européenne en phase d'accélération budgétaire."
-    }
-    ,{
+    },
+    {
       "id": "22",
       "date": "2026-05-13",
       "type": "BUY",
@@ -240,8 +240,8 @@
       "currency": "USD",
       "totalEUR": 1418,
       "justification": "Ouverture d'une position tactique sur Micron Technology, leader mondial de la mémoire DRAM et NAND. Catalyseur identifié : cycle de renouvellement de la mémoire HBM (High Bandwidth Memory) porté par la demande IA des centres de données. Micron est le seul fabricant américain de mémoire avancée, bénéficiant du CHIPS Act et d'une demande structurelle croissante pour les GPU d'entraînement."
-    }
-    ,{
+    },
+    {
       "id": "23",
       "date": "2026-05-13",
       "type": "BUY",
@@ -252,8 +252,8 @@
       "currency": "USD",
       "totalEUR": 1993,
       "justification": "Ouverture d'une position tactique sur AMD, concurrent direct de Nvidia sur le marché des GPU IA. La gamme MI300/MI350 gagne des parts de marché auprès des hyperscalers (Microsoft, Meta, Oracle) cherchant à diversifier leurs fournisseurs. Valorisation plus raisonnable que Nvidia pour une exposition équivalente au thème IA."
-    }
-    ,{
+    },
+    {
       "id": "21",
       "date": "2026-05-13",
       "type": "BUY",
@@ -264,21 +264,21 @@
       "currency": "USD",
       "totalEUR": 2508,
       "justification": "Ouverture d'une position sur CrowdStrike, leader mondial de la cybersécurité cloud-native (plateforme Falcon). Croissance annuelle récurrente supérieure à 30%, modèle ARR en forte expansion, adoption massive par les entreprises suite aux incidents de sécurité majeurs. Positionnement idéal sur la consolidation du marché EDR/XDR avec une plateforme IA intégrée qui renforce les effets réseau et la rétention client. [Prix ajustés pour le split 4:1 du 02/07/2026]"
-    }
-    ,{
+    },
+    {
       "id": "24",
       "date": "2026-05-22",
       "type": "SELL",
       "ticker": "CRWD",
       "name": "CrowdStrike Holdings",
       "quantity": 12,
-      "price": 166.80,
+      "price": 166.8,
       "buyPrice": 137.185,
       "currency": "USD",
       "totalEUR": 1787,
       "justification": "Prise de bénéfices partielle sur CrowdStrike après une hausse de +21.6% depuis l'entrée (de $137.185 à $166.80). Cession de 12 des 20 titres pour cristalliser la plus-value de +$354 tout en maintenant une exposition résiduelle à la thèse cybersécurité. Les 8 actions restantes permettent de participer à une éventuelle poursuite de la hausse. [Prix ajustés pour le split 4:1 du 02/07/2026]"
-    }
-    ,{
+    },
+    {
       "id": "25",
       "date": "2026-05-26",
       "type": "SELL",
@@ -290,8 +290,8 @@
       "currency": "USD",
       "totalEUR": 725,
       "justification": "Cession totale de la position Kraken Robotics en moins-value (-19.8%, -$200). La thèse sous-marine/défense reste solide sur le long terme mais le titre n'a pas offert le momentum attendu sur cet horizon. Réallocation du capital vers des positions au meilleur profil risque/rendement actuel."
-    }
-    ,{
+    },
+    {
       "id": "26",
       "date": "2026-05-27",
       "type": "SELL",
@@ -303,8 +303,8 @@
       "currency": "USD",
       "totalEUR": 1316,
       "justification": "Prise de bénéfices partielle sur AMD après une hausse de +10% depuis l'entrée. Cession de 3 des 5 titres pour sécuriser +$134. Les 2 actions restantes maintiennent l'exposition au thème IA/GPU."
-    }
-    ,{
+    },
+    {
       "id": "27",
       "date": "2026-06-03",
       "type": "BUY",
@@ -315,8 +315,8 @@
       "currency": "USD",
       "totalEUR": 1854,
       "justification": "Ouverture d'une position sur Ondas Holdings, spécialiste américain des drones autonomes industriels et systèmes ferroviaires intelligents. La filiale American Robotics déploie des drones autonomes pour l'inspection d'infrastructure (énergie, agriculture) avec des contrats récurrents. Positionnement sur la montée en puissance de l'automatisation des infrastructures critiques aux États-Unis, soutenue par l'IRA et le CHIPS Act. Valorisation de small cap offrant un levier asymétrique sur l'industrialisation des drones."
-    }
-    ,{
+    },
+    {
       "id": "29",
       "date": "2026-06-09",
       "type": "BUY",
@@ -327,8 +327,8 @@
       "currency": "USD",
       "totalEUR": 957,
       "justification": "Renforcement d'Ondas Holdings sur repli significatif de -22%. La thèse sur l'automatisation des infrastructures critiques reste intacte avec la montée en charge de la filiale American Robotics. Le recul du titre offre un point d'entrée opportuniste permettant d'abaisser le PRU de $12.24 à $11.14 sur une position portant désormais 275 actions."
-    }
-    ,{
+    },
+    {
       "id": "30",
       "date": "2026-06-09",
       "type": "BUY",
@@ -339,8 +339,8 @@
       "currency": "USD",
       "totalEUR": 9192,
       "justification": "Ouverture d'une position sur Navitas Semiconductor, pionnier des semi-conducteurs de puissance GaN (nitrure de gallium) et SiC nouvelle génération. La technologie GaN de Navitas permet des chargeurs et onduleurs 3 à 20 fois plus rapides et 40% plus efficaces que le silicium traditionnel. Bénéficiaire direct de l'électrification (VE, data centers IA, solaire) et des normes d'efficacité énergétique croissantes. Catalogue de design-wins en forte progression chez les équipementiers tier-1 mondiaux, avec une valorisation de small cap offrant un levier important sur la montée en puissance du GaN."
-    }
-    ,{
+    },
+    {
       "id": "28",
       "date": "2026-06-09",
       "type": "BUY",
@@ -351,8 +351,8 @@
       "currency": "USD",
       "totalEUR": 2025,
       "justification": "Ouverture d'une position sur Coherent Corp, leader mondial de la photonique et des composants optiques pour réseaux à très haut débit. L'essor des data centers IA génère une demande structurelle en transceivers et lasers 800G/1.6T pour lesquels Coherent détient des positions technologiques clés. Bénéficiaire direct de la montée en puissance des interconnexions optiques dans les clusters GPU de Microsoft, Google et AWS. Valorisation encore décotée par rapport au cycle haussier attendu sur les composants photoniques."
-    }
-    ,{
+    },
+    {
       "id": "31",
       "date": "2026-06-11",
       "type": "SELL",
@@ -364,8 +364,8 @@
       "currency": "USD",
       "totalEUR": 8251,
       "justification": "Prise de bénéfices partielle sur Navitas Semiconductor après une hausse de +2.2% depuis l'entrée ($21.78 → $22.26). Cession de 404 des 460 titres pour sécuriser +$194. Les 56 actions restantes maintiennent une exposition résiduelle à la thèse GaN/SiC et au supercycle de l'électrification."
-    }
-    ,{
+    },
+    {
       "id": "32",
       "date": "2026-07-02",
       "type": "SELL",
@@ -377,8 +377,8 @@
       "currency": "USD",
       "totalEUR": 5470,
       "justification": "Cession totale de la position Meta Platforms en légère moins-value (-1.8%, -$109.5). Prise de bénéfices sur le thème IA/réseaux sociaux jugée insuffisante par rapport à d'autres convictions du portefeuille ; réallocation du capital vers des positions au meilleur profil risque/rendement."
-    }
-    ,{
+    },
+    {
       "id": "33",
       "date": "2026-07-02",
       "type": "BUY",
@@ -389,8 +389,8 @@
       "currency": "USD",
       "totalEUR": 2685,
       "justification": "Ouverture d'une position sur Corning, leader mondial du verre spécialisé et des technologies de fibre optique. L'essor des data centers IA impose une refonte massive des interconnexions réseau, où la photonique (fibre optique, connectivité optique) devient un goulot d'étranglement critique. Corning est un fournisseur clé des hyperscalers pour ces solutions de connectivité haute performance, complétant l'exposition photonique du portefeuille aux côtés de Coherent Corp."
-    }
-    ,{
+    },
+    {
       "id": "34",
       "date": "2026-07-07",
       "type": "BUY",
@@ -401,8 +401,8 @@
       "currency": "USD",
       "totalEUR": 2908,
       "justification": "Ouverture d'une position sur Amazon dans le socle du portefeuille. Croissance soutenue des ventes e-commerce et d'AWS, acquisitions ciblées qui renforcent le positionnement stratégique du groupe, et exposition diversifiée aux meilleurs secteurs (cloud, IA, publicité, logistique). Profil défensif et cash-flow solide adaptés à une position de long terme."
-    }
-    ,{
+    },
+    {
       "id": "18",
       "date": "2026-05-04",
       "type": "BUY",
@@ -413,8 +413,8 @@
       "currency": "EUR",
       "totalEUR": 4235,
       "justification": "Ouverture d'une position sur Banco Santander, première banque de la zone euro par actifs. Valorisation attractive (P/E < 8x) et ROE en forte amélioration (>12%). La thèse repose sur la diversification géographique unique du groupe : le Brésil, le Mexique, l'Argentine et la Colombie représentent plus de 50% des bénéfices, offrant une exposition aux marchés émergents latino-américains à travers un titre européen coté sur le BME de Madrid. Double vecteur de création de valeur : redressement européen + croissance LatAm."
-    }
-    ,{
+    },
+    {
       "id": "35",
       "date": "2026-09-18",
       "type": "SELL",
@@ -426,8 +426,8 @@
       "currency": "EUR",
       "totalEUR": 2096,
       "justification": "Cession partielle d'EssilorLuxottica (15 des 30 titres) en moins-value (-40.8%). Réduction de l'exposition aux valeurs françaises face à l'incertitude politique grandissante autour des élections présidentielles de 2027."
-    }
-    ,{
+    },
+    {
       "id": "36",
       "date": "2026-09-18",
       "type": "SELL",
@@ -439,8 +439,8 @@
       "currency": "EUR",
       "totalEUR": 2822,
       "justification": "Cession partielle de Saint-Gobain (40 des 80 titres) en légère moins-value (-5.6%). Réduction de l'exposition aux valeurs françaises dans un contexte d'incertitude politique liée aux élections présidentielles de 2027."
-    }
-    ,{
+    },
+    {
       "id": "37",
       "date": "2026-09-18",
       "type": "SELL",
@@ -461,7 +461,7 @@
       "name": "SAP",
       "quantity": 28,
       "price": 184.09,
-      "buyPrice": 150.20,
+      "buyPrice": 150.2,
       "currency": "EUR",
       "totalEUR": 5155,
       "justification": "Cession totale de SAP en plus-value (+22.6%). Profité du rebond du titre après une dévaluation jugée abusive du marché ; fin de thèse."
@@ -473,7 +473,7 @@
       "ticker": "AMZN",
       "name": "Amazon",
       "quantity": 10,
-      "price": 253.60,
+      "price": 253.6,
       "currency": "USD",
       "totalEUR": 2255,
       "justification": "Renforcement de la position Amazon (socle) : 10 titres supplémentaires, nouveau prix moyen 248,095$. Conviction inchangée sur le cloud (AWS) et la résilience du modèle e-commerce."
@@ -526,6 +526,30 @@
       "currency": "USD",
       "totalEUR": 4440,
       "justification": "Entrée sur OBIL (bucket Socle), ETF détenant le T-Bill américain à 12 mois : poche obligataire défensive, sans risque de crédit et quasi sans duration, qui rémunère une partie du cash au taux court US via des distributions mensuelles."
+    },
+    {
+      "id": "44",
+      "date": "2026-11-17",
+      "type": "BUY",
+      "ticker": "IONQ",
+      "name": "IonQ",
+      "quantity": 30,
+      "price": 25.38,
+      "currency": "USD",
+      "totalEUR": 693,
+      "justification": "Renforcement d'IonQ (bucket Convictions) : 30 actions supplémentaires à 25,38 $, portant la ligne à 60 actions (PRU 30,77 $). Nous jugeons le titre sous-évalué après sa correction et profitons de ce point d'entrée pour abaisser notre prix de revient sur le leader de l'informatique quantique."
+    },
+    {
+      "id": "45",
+      "date": "2026-11-17",
+      "type": "BUY",
+      "ticker": "RKLB",
+      "name": "Rocket Lab",
+      "quantity": 30,
+      "price": 56.8,
+      "currency": "USD",
+      "totalEUR": 1550,
+      "justification": "Entrée sur Rocket Lab (bucket Convictions), acteur majeur des lanceurs et des systèmes spatiaux après SpaceX. Titre jugé sous-évalué au regard de son carnet de commandes et du potentiel du lanceur Neutron ; renforce notre exposition à la thématique spatiale aux côtés d'AST SpaceMobile."
     }
   ]
 }

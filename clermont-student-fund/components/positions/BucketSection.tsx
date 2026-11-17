@@ -42,6 +42,7 @@ const BUCKET_TARGETS: Record<BucketId, { ticker: string; name: string }[]> = {
     { ticker: 'COHR', name: 'Coherent Corp' },
     { ticker: 'GLW',  name: 'Corning' },
     { ticker: 'VRT',  name: 'Vertiv Holdings' },
+    { ticker: 'RKLB', name: 'Rocket Lab' },
   ],
   opportunite: [
     { ticker: 'BTC-USD', name: 'Bitcoin' },
